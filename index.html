@@ -341,6 +341,10 @@ footer a { color: #fff; }
 }
 form.rev-form { grid-template-columns: 1fr; }
 form.rev-form > * { grid-column: 1 / -1; }
+.rev-fold > summary { list-style: none; cursor: pointer; }
+.rev-fold > summary::-webkit-details-marker { display: none; }
+.rev-fold[open] > summary { margin-bottom: 16px; }
+.rev-fold .rev-form { margin-top: 0; }
 .legal h3 { margin: 28px 0 6px; font-size: 1.15rem; }
 .legal ul { margin: 0 0 14px 20px; padding: 0; max-width: 62ch; }
 .legal li { margin-bottom: 6px; }
@@ -453,6 +457,8 @@ form.rev-form > * { grid-column: 1 / -1; }
       <div id="revSum" class="rev-sum" hidden><b id="revAvg"></b><span class="stars" id="revStars" aria-hidden="true"></span><span id="revCount"></span></div>
       <p class="note" id="revEmpty"><span class="de">Noch keine Bewertungen. Du warst bei uns zu Gast? Wir freuen uns über deine Rückmeldung.</span><span class="en">No reviews yet. Have you stayed with us? We would love to hear from you.</span></p>
       <div class="rev-list" id="revList"></div>
+      <details class="rev-fold" id="revFold">
+        <summary class="btn"><span class="de">Bewertung abgeben</span><span class="en">Write a review</span></summary>
       <form class="rev-form" id="revForm">
         <h3><span class="de">Deine Bewertung</span><span class="en">Your review</span></h3>
         <div><span style="font-weight:600;font-size:.92rem"><span class="de">Sterne</span><span class="en">Stars</span></span>
@@ -468,6 +474,7 @@ form.rev-form > * { grid-column: 1 / -1; }
       </form>
       <div class="rev-form" id="revDone" hidden role="status"><h3><span class="de">Danke für deine Bewertung</span><span class="en">Thank you for your review</span></h3><p style="margin:0"><span class="de">Wir schauen sie uns an und veröffentlichen sie bald.</span><span class="en">We will look at it and publish it soon.</span></p></div>
       <div class="rev-form" id="revMail" hidden><h3><span class="de">Bewertung per E-Mail senden</span><span class="en">Send review by email</span></h3><p style="margin:0"><span class="de">Das Senden direkt aus der Seite ist noch nicht eingerichtet. Bitte schicke uns den Text per E-Mail.</span><span class="en">Sending from the page is not set up yet. Please email us the text.</span></p><div><a class="btn" id="revMailto" href="#"><span class="de">E-Mail öffnen</span><span class="en">Open email</span></a></div></div>
+      </details>
     </div>
   </section>
   </div>
