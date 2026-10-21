@@ -505,15 +505,20 @@ form.rev-form > * { grid-column: 1 / -1; }
     </div>
   </section>
 
-  <section class="sec tint" aria-label="Fotos">
+  <section class="sec tint" id="fotos" aria-label="Fotos">
     <div class="wrap">
       <h2><span class="de">Ein Blick hinein</span><span class="en">A look inside</span></h2>
       <div class="gal">
-        <button type="button" class="ph big" data-zoom><span class="fb"><svg class="ic"><use href="#i-image"/></svg><span><span class="de">Wohnzimmer</span><span class="en">Living room</span></span></span><img src="galerie-1.jpg" alt="Wohnzimmer / Living room" onerror="this.parentNode.classList.add('noimg');this.remove()"></button>
-        <button type="button" class="ph" data-zoom><span class="fb"><svg class="ic"><use href="#i-image"/></svg><span><span class="de">Küche</span><span class="en">Kitchen</span></span></span><img src="galerie-2.jpg" alt="Küche / Kitchen" onerror="this.parentNode.classList.add('noimg');this.remove()"></button>
-        <button type="button" class="ph" data-zoom><span class="fb"><svg class="ic"><use href="#i-image"/></svg><span><span class="de">Schlafzimmer 1</span><span class="en">Bedroom 1</span></span></span><img src="galerie-3.jpg" alt="Schlafzimmer 1 / Bedroom 1" onerror="this.parentNode.classList.add('noimg');this.remove()"></button>
-        <button type="button" class="ph" data-zoom><span class="fb"><svg class="ic"><use href="#i-image"/></svg><span><span class="de">Schlafzimmer 2</span><span class="en">Bedroom 2</span></span></span><img src="galerie-4.jpg" alt="Schlafzimmer 2 / Bedroom 2" onerror="this.parentNode.classList.add('noimg');this.remove()"></button>
-        <button type="button" class="ph" data-zoom><span class="fb"><svg class="ic"><use href="#i-image"/></svg><span><span class="de">Badezimmer</span><span class="en">Bathroom</span></span></span><img src="galerie-5.jpg" alt="Badezimmer / Bathroom" onerror="this.parentNode.classList.add('noimg');this.remove()"></button>
+        <button type="button" class="ph big" data-zoom><img src="esszimmer.jpg" alt="Esszimmer / Dining room" onerror="this.parentNode.remove()"></button>
+        <button type="button" class="ph" data-zoom><img src="kueche-1.jpg" alt="Küche / Kitchen" onerror="this.parentNode.remove()"></button>
+        <button type="button" class="ph" data-zoom><img src="kueche-2.jpg" alt="Küche / Kitchen" onerror="this.parentNode.remove()"></button>
+        <button type="button" class="ph" data-zoom><img src="schlafzimmer-1a.jpg" alt="Schlafzimmer 1 / Bedroom 1" onerror="this.parentNode.remove()"></button>
+        <button type="button" class="ph" data-zoom><img src="schlafzimmer-1b.jpg" alt="Schlafzimmer 1 / Bedroom 1" onerror="this.parentNode.remove()"></button>
+        <button type="button" class="ph" data-zoom><img src="schlafzimmer-2a.jpg" alt="Schlafzimmer 2 / Bedroom 2" onerror="this.parentNode.remove()"></button>
+        <button type="button" class="ph" data-zoom><img src="schlafzimmer-2b.jpg" alt="Schlafzimmer 2 / Bedroom 2" onerror="this.parentNode.remove()"></button>
+        <button type="button" class="ph" data-zoom><img src="bad-1.jpg" alt="Badezimmer / Bathroom" onerror="this.parentNode.remove()"></button>
+        <button type="button" class="ph" data-zoom><img src="bad-2.jpg" alt="Badezimmer / Bathroom" onerror="this.parentNode.remove()"></button>
+        <button type="button" class="ph" data-zoom><img src="gang.jpg" alt="Gang / Hallway" onerror="this.parentNode.remove()"></button>
       </div>
     </div>
   </section>
@@ -1350,6 +1355,7 @@ form.rev-form > * { grid-column: 1 / -1; }
     });
   });
 
+  window.addEventListener("load", function () { var g = document.querySelector(".gal"); if (g && !g.children.length) document.getElementById("fotos").hidden = true; });
   document.getElementById("year").textContent = new Date().getFullYear();
   setLang(lang);
   showPage();
