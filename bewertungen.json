@@ -1,3 +1,6 @@
 {
-  "bewertungen": []
+  "bewertungen": [
+    {"name": "Anna", "datum": "August 2026", "sterne": 5, "text": "Wunderschöne Wohnung, sehr freundliche Gastgeber."},
+    {"name": "Ben", "datum": "Juli 2026", "sterne": 4, "text": "Tolle Lage zum Wandern."}
+  ]
 }
