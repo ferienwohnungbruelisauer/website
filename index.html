@@ -73,10 +73,15 @@ a { color: var(--link); }
 .rev .who { color: var(--muted); font-size: .9rem; margin: 0; }
 .rev-form { background: var(--surface); border-radius: 12px; padding: clamp(18px, 3vw, 28px); box-shadow: 0 6px 24px rgba(8,30,28,.08); display: grid; gap: 14px; max-width: 640px; }
 .rev-form h3 { margin: 0; }
-.starpick { display: flex; gap: 4px; }
-.starpick button { background: none; border: 0; padding: 2px 4px; font-size: 2rem; line-height: 1; cursor: pointer; color: var(--line); }
-.starpick button.on { color: var(--gold); }
-.starpick button:focus-visible { outline: 2px solid var(--link); border-radius: 6px; }
+.st { display: inline-block; background: linear-gradient(90deg, var(--gold) var(--f, 0%), var(--line) var(--f, 0%)); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.stars { letter-spacing: 2px; }
+.starpick { display: flex; gap: 6px; }
+.pstar { position: relative; font-size: 2.2rem; line-height: 1; }
+.pstar button { position: absolute; top: 0; bottom: 0; width: 50%; background: none; border: 0; padding: 0; cursor: pointer; }
+.pstar .hl { left: 0; }
+.pstar .hr { right: 0; }
+.pstar button:focus-visible { outline: 2px solid var(--link); border-radius: 6px; }
+.pickval { margin-left: 10px; align-self: center; font-size: .95rem; color: var(--muted); }
 .mapbox { margin-top: 16px; border-radius: 12px; overflow: hidden; box-shadow: 0 6px 24px rgba(8,30,28,.08); background: var(--surface); }
 .mapbox iframe { display: block; width: 100%; height: clamp(300px, 55vw, 460px); border: 0; }
 .todo { background: color-mix(in srgb, var(--gold) 30%, transparent); border-radius: 3px; padding: 0 4px; }
@@ -334,6 +339,8 @@ footer a { color: #fff; }
   .grid { gap: 6px; }
   .day { font-size: 1.2rem; border-radius: 8px; }
 }
+form.rev-form { grid-template-columns: 1fr; }
+form.rev-form > * { grid-column: 1 / -1; }
 </style>
 </head>
 <body>
@@ -811,10 +818,12 @@ footer a { color: #fff; }
           <label><span><span class="de">Anreise</span><span class="en">Arrival</span></span><input id="f-from" type="date" required></label>
           <label><span><span class="de">Abreise</span><span class="en">Departure</span></span><input id="f-to" type="date" required></label>
           <p class="note full" style="margin:0"><a href="#kalender"><span class="de">Lieber im grossen Kalender auswählen</span><span class="en">Prefer the large calendar? Pick your dates there</span></a></p>
-          <label><span><span class="de">Anzahl Gäste</span><span class="en">Number of guests</span></span>
-            <select id="f-pers"><option>1</option><option>2</option><option selected>3</option><option>4</option><option>5</option><option>6</option><option>7</option></select></label>
-          <label><span><span class="de">Telefon (optional)</span><span class="en">Phone (optional)</span></span><input id="f-tel" type="tel" autocomplete="tel"></label>
+          <label><span><span class="de">Erwachsene</span><span class="en">Adults</span></span><input id="f-adults" type="number" inputmode="numeric" min="0" max="7" value="2"></label>
+          <label><span><span class="de">Kinder <small>6 bis 16 Jahre</small></span><span class="en">Children <small>aged 6 to 16</small></span></span><input id="f-kids" type="number" inputmode="numeric" min="0" max="6" value="0"></label>
+          <label class="full"><span><span class="de">Kinder unter 6 Jahren <small>gratis</small></span><span class="en">Children under 6 <small>free</small></span></span><input id="f-tod" type="number" inputmode="numeric" min="0" max="4" value="0"></label>
+          <label class="full"><span><span class="de">Telefon (optional)</span><span class="en">Phone (optional)</span></span><input id="f-tel" type="tel" autocomplete="tel"></label>
           <label class="full"><span><span class="de">Nachricht</span><span class="en">Message</span></span><textarea id="f-msg"></textarea></label>
+          <div class="full calc-out" id="formPrice" aria-live="polite" hidden></div>
           <p class="warn full" id="fBooked" hidden><span class="de">Dieser Zeitraum ist leider belegt. Bitte wähle andere Daten.</span><span class="en">Unfortunately these dates are booked. Please choose other dates.</span></p>
           <input type="checkbox" id="f-bot" tabindex="-1" autocomplete="off" style="display:none" aria-hidden="true">
           <div class="full"><button class="btn" id="submitBtn" type="submit"><span class="de">Anfrage vorbereiten</span><span class="en">Prepare enquiry</span></button></div>
@@ -973,7 +982,13 @@ footer a { color: #fff; }
     }
     updateSummary();
   }
+  function setEndMin() {
+    var m = arr ? parse(arr) : new Date(today);
+    m.setDate(m.getDate() + 1);
+    ["f-to", "c-to"].forEach(function (id) { document.getElementById(id).min = iso(m); });
+  }
   function syncForm() {
+    setEndMin();
     ["f-from", "c-from"].forEach(function (id) { document.getElementById(id).value = arr || ""; });
     ["f-to", "c-to"].forEach(function (id) { document.getElementById(id).value = dep || ""; });
     calc();
@@ -992,14 +1007,15 @@ footer a { color: #fff; }
     pair.forEach(function (id) {
       document.getElementById(id).addEventListener("change", function () {
         var a = document.getElementById(pair[0]).value, d = document.getElementById(pair[1]).value;
-        if (a && d && d <= a) { arr = a; dep = null; render(); calc(); return; }
+        if (a && d && d <= a) { arr = a; dep = null; syncForm(); render(); return; }
         arr = a || null; dep = (a && d) ? d : null;
         if (arr) view = new Date(parse(arr).getFullYear(), parse(arr).getMonth(), 1);
         syncForm(); render();
       });
     });
   });
-  ["f-from", "f-to", "c-from", "c-to"].forEach(function (id) { document.getElementById(id).min = iso(today); });
+  ["f-from", "c-from"].forEach(function (id) { document.getElementById(id).min = iso(today); });
+  setEndMin();
   window.addEventListener("resize", render);
 
   function setLang(l) {
@@ -1050,8 +1066,8 @@ footer a { color: #fff; }
     var v = function (id) { return document.getElementById(id).value.trim(); };
     var de = lang === "de";
     var lines = de
-      ? ["Anfrage Ferienwohnung Brülisauer", "", "Name: " + v("f-name"), "E-Mail: " + v("f-mail"), "Telefon: " + (v("f-tel") || "-"), "Anreise: " + v("f-from"), "Abreise: " + v("f-to"), "Gäste: " + v("f-pers")].concat(calcLine(true), ["", v("f-msg")])
-      : ["Enquiry Ferienwohnung Brülisauer", "", "Name: " + v("f-name"), "Email: " + v("f-mail"), "Phone: " + (v("f-tel") || "-"), "Arrival: " + v("f-from"), "Departure: " + v("f-to"), "Guests: " + v("f-pers")].concat(calcLine(false), ["", v("f-msg")]);
+      ? ["Anfrage Ferienwohnung Brülisauer", "", "Name: " + v("f-name"), "E-Mail: " + v("f-mail"), "Telefon: " + (v("f-tel") || "-"), "Anreise: " + v("f-from"), "Abreise: " + v("f-to"), "Erwachsene: " + v("f-adults") + ", Kinder (6 bis 16): " + v("f-kids") + ", Kinder unter 6: " + v("f-tod")].concat(calcLine(true), ["", v("f-msg")])
+      : ["Enquiry Ferienwohnung Brülisauer", "", "Name: " + v("f-name"), "Email: " + v("f-mail"), "Phone: " + (v("f-tel") || "-"), "Arrival: " + v("f-from"), "Departure: " + v("f-to"), "Adults: " + v("f-adults") + ", children (6 to 16): " + v("f-kids") + ", children under 6: " + v("f-tod")].concat(calcLine(false), ["", v("f-msg")]);
     var text = lines.join("\n");
     var subject = de ? "Anfrage Ferienwohnung" : "Enquiry holiday apartment";
     if (!keyReady) { showFallback(text, subject, false); return; }
@@ -1130,6 +1146,15 @@ footer a { color: #fff; }
     document.getElementById("fBooked").hidden = !rangeBooked(document.getElementById("f-from").value, document.getElementById("f-to").value);
   }
   function calc() {
+    calcInner();
+    var out = document.getElementById("calcOut"), fp = document.getElementById("formPrice");
+    if (lastCalc || out.querySelector(".warn")) {
+      fp.innerHTML = out.innerHTML;
+      var ac = fp.querySelector(".actions"); if (ac) ac.remove();
+      fp.hidden = false;
+    } else { fp.innerHTML = ""; fp.hidden = true; }
+  }
+  function calcInner() {
     var out = document.getElementById("calcOut");
     var a = document.getElementById("c-from").value, d = document.getElementById("c-to").value;
     var ad = num("c-adults"), ch = num("c-kids"), to = num("c-tod");
@@ -1192,31 +1217,53 @@ footer a { color: #fff; }
   }
   document.getElementById("calcOut").addEventListener("click", function (e) {
     if (!e.target.closest("[data-ask]") || !lastCalc) return;
-    document.getElementById("f-pers").value = String(Math.min(MAX_GUESTS, Math.max(1, lastCalc.adults + lastCalc.kids + lastCalc.toddlers)));
   });
-  ["c-adults", "c-kids", "c-tod"].forEach(function (id) { document.getElementById(id).addEventListener("input", calc); });
+  ["adults", "kids", "tod"].forEach(function (k) {
+    ["c-", "f-"].forEach(function (pre, i) {
+      var other = ["f-", "c-"][i];
+      document.getElementById(pre + k).addEventListener("input", function () {
+        document.getElementById(other + k).value = this.value;
+        calc();
+      });
+    });
+  });
   calc();
 
 
   // Bewertungen: angezeigt werden nur Einträge aus bewertungen.json (von uns geprüft).
   var revStars = 0;
+  function setFill(el, v) { el.style.setProperty("--f", v >= 1 ? "100%" : v >= 0.5 ? "50%" : "0%"); }
+  function starRow(value, el) {
+    el.textContent = "";
+    var r = Math.round(value * 2) / 2;
+    for (var i = 1; i <= 5; i++) { var s = document.createElement("span"); s.className = "st"; s.textContent = "★"; setFill(s, r - (i - 1)); el.appendChild(s); }
+  }
+  function fmtNum(n) { return String(n).replace(".", lang === "de" ? "," : "."); }
   (function () {
-    var box = document.getElementById("starpick");
+    var box = document.getElementById("starpick"), val = document.createElement("span"); val.className = "pickval";
+    var glyphs = [];
+    function paint(v) { glyphs.forEach(function (g, k) { setFill(g, v - k); }); val.textContent = v ? fmtNum(v) + " / 5" : ""; }
     for (var s = 1; s <= 5; s++) {
       (function (n) {
-        var b = document.createElement("button");
-        b.type = "button"; b.textContent = "★"; b.setAttribute("role", "radio"); b.setAttribute("aria-checked", "false"); b.setAttribute("aria-label", n + " / 5");
-        b.addEventListener("click", function () {
-          revStars = n;
-          Array.prototype.forEach.call(box.children, function (c, k) { c.classList.toggle("on", k < n); c.setAttribute("aria-checked", k === n - 1 ? "true" : "false"); });
+        var wrap = document.createElement("span"); wrap.className = "pstar";
+        var g = document.createElement("span"); g.className = "st"; g.textContent = "★"; g.setAttribute("aria-hidden", "true"); glyphs.push(g); wrap.appendChild(g);
+        [[n - 0.5, "hl"], [n, "hr"]].forEach(function (o) {
+          var b = document.createElement("button");
+          b.type = "button"; b.className = o[1]; b.setAttribute("aria-label", fmtNum(o[0]) + " / 5");
+          b.addEventListener("mouseenter", function () { paint(o[0]); });
+          b.addEventListener("focus", function () { paint(o[0]); });
+          b.addEventListener("click", function () { revStars = o[0]; paint(revStars); });
+          wrap.appendChild(b);
         });
-        box.appendChild(b);
+        box.appendChild(wrap);
       })(s);
     }
+    box.addEventListener("mouseleave", function () { paint(revStars); });
+    box.addEventListener("focusout", function () { paint(revStars); });
+    box.appendChild(val);
   })();
-  function starText(n) { var o = ""; for (var i = 1; i <= 5; i++) o += i <= Math.round(n) ? "★" : "☆"; return o; }
   function renderReviews(list) {
-    var ok = (list || []).filter(function (r) { return r && typeof r.text === "string" && r.text && +r.sterne >= 1 && +r.sterne <= 5; });
+    var ok = (list || []).filter(function (r) { return r && typeof r.text === "string" && r.text && +r.sterne >= 0.5 && +r.sterne <= 5; });
     var wrap = document.getElementById("revList"); wrap.innerHTML = "";
     document.getElementById("revEmpty").hidden = ok.length > 0;
     document.getElementById("revSum").hidden = ok.length === 0;
@@ -1225,14 +1272,14 @@ footer a { color: #fff; }
     ok.forEach(function (r) {
       sum += +r.sterne;
       var d = document.createElement("div"); d.className = "rev";
-      var st = document.createElement("div"); st.className = "stars"; st.textContent = starText(+r.sterne); st.setAttribute("aria-label", r.sterne + " / 5");
+      var st = document.createElement("div"); st.className = "stars"; starRow(+r.sterne, st); st.setAttribute("aria-label", r.sterne + " / 5");
       var p = document.createElement("p"); p.textContent = r.text;
       var w = document.createElement("p"); w.className = "who"; w.textContent = (r.name || "") + (r.datum ? ", " + r.datum : "");
       d.appendChild(st); d.appendChild(p); d.appendChild(w); wrap.appendChild(d);
     });
     var avg = sum / ok.length;
     document.getElementById("revAvg").textContent = avg.toFixed(1).replace(".", lang === "de" ? "," : ".");
-    document.getElementById("revStars").textContent = starText(avg);
+    starRow(avg, document.getElementById("revStars"));
     document.getElementById("revCount").textContent = "(" + ok.length + ")";
   }
   function loadReviews() {
