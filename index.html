@@ -213,8 +213,10 @@ details p { color: var(--muted); padding-bottom: 6px; }
 footer { background: var(--foot); color: rgba(255,255,255,.78); padding: 56px 0 40px; font-size: .95rem; }
 footer h3 { color: #fff; font-size: 1.1rem; }
 footer a { color: #fff; }
-.foot-grid { display: grid; grid-template-columns: 1.2fr 1fr 1.4fr; gap: 36px; }
+.foot-grid { display: grid; grid-template-columns: 1fr; gap: 36px; }
 .foot-grid p { max-width: 44ch; }
+.flinks { margin-left: 18px; display: inline-flex; gap: 18px; flex-wrap: wrap; }
+.flinks a { color: rgba(255,255,255,.85); }
 .copy { margin-top: 36px; padding-top: 18px; border-top: 1px solid rgba(255,255,255,.14); font-size: .85rem; color: rgba(255,255,255,.55); }
 
 
@@ -614,7 +616,7 @@ footer a { color: #fff; }
     <div class="wrap">
       <h2><span class="de">Appenzeller Ferienkarte</span><span class="en">Appenzeller holiday card</span></h2>
       <p class="lead"><span class="de">Mit der Ferienkarte erhältst du über 40 Angebote in der Region gratis. Dazu gehören Bergbahnen, Museen, Bäder und Ausflüge.</span><span class="en">With the holiday card you get over 40 offers in the region for free. They include cable cars, museums, pools and excursions.</span></p>
-      <p class="note" style="margin-top:-6px"><span class="de">Die Angaben auf dieser Seite stammen von Appenzellerland Tourismus (<a href="https://www.appenzell.ch/de/unterkunft/appenzeller-ferienkarte.html" target="_blank" rel="noopener">appenzell.ch</a>, Stand Oktober 2026). Verbindlich sind die Angaben des Tourismus.</span><span class="en">The information on this page comes from Appenzellerland Tourismus (<a href="https://www.appenzell.ch/de/unterkunft/appenzeller-ferienkarte.html" target="_blank" rel="noopener">appenzell.ch</a>, as of October 2026). The tourism office's information is binding.</span></p>
+      <p class="note" style="margin-top:-6px"><span class="de">Die Angaben auf dieser Seite stammen von Appenzellerland Tourismus AI (<a href="https://www.appenzell.ch/de/unterkunft/appenzeller-ferienkarte.html" target="_blank" rel="noopener">appenzell.ch</a>, Stand Oktober 2026). Verbindlich sind die Angaben des Tourismus.</span><span class="en">The information on this page comes from Appenzellerland Tourismus AI (<a href="https://www.appenzell.ch/de/unterkunft/appenzeller-ferienkarte.html" target="_blank" rel="noopener">appenzell.ch</a>, as of October 2026). The tourism office's information is binding.</span></p>
 
       <div class="gift">
         <div>
@@ -852,6 +854,25 @@ footer a { color: #fff; }
     </div>
   </section>
   </div>
+
+  <div class="page" data-page="impressum">
+  <section class="sec">
+    <div class="wrap">
+      <h2>Impressum</h2>
+      <p>Ferienwohnung Brülisauer<br><span class="de">Vermieter</span><span class="en">Landlord</span>: Thomas Brülisauer<br>Brülisauerstrasse 39<br>9058 Brülisau<br><span class="de">Schweiz</span><span class="en">Switzerland</span></p>
+      <p><span class="de">E-Mail</span><span class="en">Email</span>: <a href="mailto:ferienwohnungbruelisauer@gmail.com">ferienwohnungbruelisauer@gmail.com</a></p>
+    </div>
+  </section>
+  </div>
+
+  <div class="page" data-page="datenschutz">
+  <section class="sec">
+    <div class="wrap">
+      <h2><span class="de">Datenschutz</span><span class="en">Privacy</span></h2>
+      <p><span class="de">Angaben im Anfrageformular werden nur verwendet, um deine Anfrage zu beantworten. Das Formular wird über den Dienst Web3Forms übermittelt. Schriftarten werden von Google Fonts geladen, und auf der Seite «Lage» wird eine Karte von Google Maps eingebettet. Dabei wird deine IP-Adresse an Google übertragen. Die Website wird bei GitHub Pages gehostet. Bewertungen werden erst nach unserer Prüfung veröffentlicht, mit Vornamen. Für Fragen zum Datenschutz erreichst du uns unter der E-Mail-Adresse im Impressum.</span><span class="en">Details in the enquiry form are only used to answer your enquiry. The form is transmitted via the service Web3Forms. Fonts are loaded from Google Fonts, and the “Location” page embeds a Google Maps map. This transmits your IP address to Google. The website is hosted on GitHub Pages. Reviews are only published after we check them, with first name. For privacy questions, contact us at the email address in the legal notice.</span></p>
+    </div>
+  </section>
+  </div>
 </main>
 
 <footer>
@@ -861,17 +882,8 @@ footer a { color: #fff; }
         <h3>Ferienwohnung Brülisauer</h3>
         <p><span class="de">Brülisau, Appenzell Innerrhoden</span><span class="en">Brülisau, Appenzell Innerrhoden</span><br>ferienwohnungbruelisauer@gmail.com</p>
       </div>
-      <div id="impressum">
-        <h3>Impressum</h3>
-        <p>Ferienwohnung Brülisauer<br><span class="de">Vermieter</span><span class="en">Landlord</span>: Thomas Brülisauer<br>Brülisauerstrasse 39<br>9058 Brülisau<br><span class="de">Schweiz</span><span class="en">Switzerland</span></p>
-        <p><span class="de">E-Mail</span><span class="en">Email</span>: <a href="mailto:ferienwohnungbruelisauer@gmail.com">ferienwohnungbruelisauer@gmail.com</a></p>
-      </div>
-      <div id="datenschutz">
-        <h3><span class="de">Datenschutz</span><span class="en">Privacy</span></h3>
-        <p><span class="de">Angaben im Anfrageformular werden nur verwendet, um deine Anfrage zu beantworten. Das Formular wird über den Dienst Web3Forms übermittelt. Schriftarten werden von Google Fonts geladen, und auf der Seite «Lage» wird eine Karte von Google Maps eingebettet. Dabei wird deine IP-Adresse an Google übertragen. Die Website wird bei GitHub Pages gehostet. Bewertungen werden erst nach unserer Prüfung veröffentlicht, mit Vornamen. Für Fragen zum Datenschutz erreichst du uns unter der E-Mail-Adresse im Impressum.</span><span class="en">Details in the enquiry form are only used to answer your enquiry. The form is transmitted via the service Web3Forms. Fonts are loaded from Google Fonts, and the “Location” page embeds a Google Maps map. This transmits your IP address to Google. The website is hosted on GitHub Pages. Reviews are only published after we check them, with first name. For privacy questions, contact us at the email address in the legal notice.</span></p>
-      </div>
     </div>
-    <div class="copy">© <span id="year"></span> Ferienwohnung Brülisauer</div>
+    <div class="copy">© <span id="year"></span> Ferienwohnung Brülisauer<span class="flinks"><a href="#impressum">Impressum</a><a href="#datenschutz"><span class="de">Datenschutz</span><span class="en">Privacy</span></a></span></div>
   </div>
 </footer>
 
@@ -1069,7 +1081,7 @@ footer a { color: #fff; }
     try { navigator.clipboard.writeText(text).then(done, fallback); } catch (err) { fallback(); }
   });
 
-  var PAGES = ["start", "wohnung", "lage", "preise", "ferienkarte", "kalender", "anfrage"];
+  var PAGES = ["start", "wohnung", "lage", "preise", "ferienkarte", "kalender", "anfrage", "impressum", "datenschutz"];
   function showPage() {
     var id = (location.hash || "").replace("#", "");
     if (PAGES.indexOf(id) < 0) id = "start";
