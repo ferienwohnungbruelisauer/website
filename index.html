@@ -64,6 +64,8 @@ a { color: var(--link); }
 .sec.tint { background: var(--tint); }
 .lead { font-size: 1.15rem; color: var(--muted); }
 .note { font-size: .9rem; color: var(--muted); }
+.mapbox { margin-top: 16px; border-radius: 12px; overflow: hidden; box-shadow: 0 6px 24px rgba(8,30,28,.08); background: var(--surface); }
+.mapbox iframe { display: block; width: 100%; height: clamp(300px, 55vw, 460px); border: 0; }
 .todo { background: color-mix(in srgb, var(--gold) 30%, transparent); border-radius: 3px; padding: 0 4px; }
 .ic { width: 1.5em; height: 1.5em; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; flex: none; }
 
@@ -488,6 +490,9 @@ footer a { color: #fff; }
         <div class="spot"><svg class="ic"><use href="#i-village"/></svg><div><h3>Appenzell</h3><p><span class="de">Der Hauptort mit seinem Dorfkern ist rund 5 Kilometer entfernt.</span><span class="en">The main village with its historic centre is about 5 kilometres away.</span></p></div></div>
         <div class="spot"><svg class="ic"><use href="#i-snow"/></svg><div><h3><span class="de">Im Winter</span><span class="en">In winter</span></h3><p><span class="de">Winterwanderwege und Schneeschuhrouten in der Umgebung.</span><span class="en">Winter walking trails and snowshoe routes nearby.</span></p></div></div>
       </div>
+      <h2 style="margin-top:44px"><span class="de">So findest du uns</span><span class="en">How to find us</span></h2>
+      <div class="mapbox"><iframe title="Google Maps" src="https://www.google.com/maps?q=Br%C3%BClisauerstrasse+39%2C+9058+Br%C3%BClisau&amp;hl=de&amp;z=14&amp;output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe></div>
+      <p class="note" style="margin-top:10px"><a href="https://www.google.com/maps?q=Br%C3%BClisauerstrasse+39%2C+9058+Br%C3%BClisau&hl=de" target="_blank" rel="noopener"><span class="de">In Google Maps öffnen und Route planen</span><span class="en">Open in Google Maps and plan a route</span></a></p>
     </div>
   </section>
 
@@ -756,6 +761,7 @@ footer a { color: #fff; }
             <select id="f-pers"><option>1</option><option>2</option><option selected>3</option><option>4</option><option>5</option><option>6</option><option>7</option></select></label>
           <label><span><span class="de">Telefon (optional)</span><span class="en">Phone (optional)</span></span><input id="f-tel" type="tel" autocomplete="tel"></label>
           <label class="full"><span><span class="de">Nachricht</span><span class="en">Message</span></span><textarea id="f-msg"></textarea></label>
+          <p class="warn full" id="fBooked" hidden><span class="de">Dieser Zeitraum ist leider belegt. Bitte wähle andere Daten.</span><span class="en">Unfortunately these dates are booked. Please choose other dates.</span></p>
           <input type="checkbox" id="f-bot" tabindex="-1" autocomplete="off" style="display:none" aria-hidden="true">
           <div class="full"><button class="btn" id="submitBtn" type="submit"><span class="de">Anfrage vorbereiten</span><span class="en">Prepare enquiry</span></button></div>
           <p class="full note" style="margin:0"><span class="de">Deine Angaben nutzen wir nur, um deine Anfrage zu beantworten.</span><span class="en">We only use your details to answer your enquiry.</span></p>
@@ -805,11 +811,11 @@ footer a { color: #fff; }
       </div>
       <div id="impressum">
         <h3>Impressum</h3>
-        <p>Thomas Brülisauer<br><span class="todo">Strasse Nr.</span><br>9058 Brülisau</p>
+        <p>Thomas Brülisauer<br>Brülisauerstrasse 39<br>9058 Brülisau</p>
       </div>
       <div id="datenschutz">
         <h3><span class="de">Datenschutz</span><span class="en">Privacy</span></h3>
-        <p><span class="de">Angaben im Anfrageformular werden nur verwendet, um deine Anfrage zu beantworten. Das Formular wird über den Dienst Web3Forms übermittelt. Schriftarten werden von Google Fonts geladen, dabei wird deine IP-Adresse an Google übertragen. Die Website wird bei GitHub Pages gehostet.</span><span class="en">Details in the enquiry form are only used to answer your enquiry. The form is transmitted via the service Web3Forms. Fonts are loaded from Google Fonts, which transmits your IP address to Google. The website is hosted on GitHub Pages.</span></p>
+        <p><span class="de">Angaben im Anfrageformular werden nur verwendet, um deine Anfrage zu beantworten. Das Formular wird über den Dienst Web3Forms übermittelt. Schriftarten werden von Google Fonts geladen, und auf der Seite «Lage» wird eine Karte von Google Maps eingebettet. Dabei wird deine IP-Adresse an Google übertragen. Die Website wird bei GitHub Pages gehostet.</span><span class="en">Details in the enquiry form are only used to answer your enquiry. The form is transmitted via the service Web3Forms. Fonts are loaded from Google Fonts, and the “Location” page embeds a Google Maps map. This transmits your IP address to Google. The website is hosted on GitHub Pages.</span></p>
       </div>
     </div>
     <div class="copy">© <span id="year"></span> Ferienwohnung Brülisauer</div>
@@ -839,7 +845,7 @@ footer a { color: #fff; }
   function setBooked(list) {
     var set = {}, re = /^\d{4}-\d{2}-\d{2}$/;
     (list || []).forEach(function (r) {
-      if (!r || r.length !== 2 || !re.test(r[0]) || !re.test(r[1]) || r[1] <= r[0]) return;
+      if (!r || !Array.isArray(r) || r.length < 2 || !re.test(r[0]) || !re.test(r[1]) || r[1] <= r[0]) return;
       for (var d = parse(r[0]), end = parse(r[1]); d < end; d.setDate(d.getDate() + 1)) set[iso(d)] = true;
     });
     bookedSet = set;
@@ -850,7 +856,7 @@ footer a { color: #fff; }
       .then(function (r) { if (!r.ok) throw new Error("http"); return r.json(); })
       .then(function (data) {
         setBooked(Array.isArray(data) ? data : data.belegt);
-        err.hidden = true; render();
+        err.hidden = true; render(); calc();
       })
       .catch(function () { err.hidden = false; });
   }
@@ -975,6 +981,7 @@ footer a { color: #fff; }
   document.getElementById("form").addEventListener("submit", function (e) {
     e.preventDefault();
     if (document.getElementById("f-bot").checked) return;
+    if (rangeBooked(document.getElementById("f-from").value, document.getElementById("f-to").value)) { checkForm(); return; }
     var v = function (id) { return document.getElementById(id).value.trim(); };
     var de = lang === "de";
     var lines = de
@@ -1053,17 +1060,26 @@ footer a { color: #fff; }
   }
   function num(id) { var n = parseInt(document.getElementById(id).value, 10); return isNaN(n) || n < 0 ? 0 : n; }
   var lastCalc = null;
+  function rangeBooked(a, d) { return !!(a && d && d > a && hasBooked(a, d)); }
+  function checkForm() {
+    document.getElementById("fBooked").hidden = !rangeBooked(document.getElementById("f-from").value, document.getElementById("f-to").value);
+  }
   function calc() {
     var out = document.getElementById("calcOut");
     var a = document.getElementById("c-from").value, d = document.getElementById("c-to").value;
     var ad = num("c-adults"), ch = num("c-kids"), to = num("c-tod");
     lastCalc = null;
+    checkForm();
     if (!a || !d) {
       out.innerHTML = '<p class="empty">' + t("Wähle Anreise und Abreise, dann siehst du hier den Preis.", "Pick your arrival and departure and the price will appear here.") + '</p>';
       return;
     }
     if (d <= a) {
       out.innerHTML = '<p class="warn">' + t("Die Abreise muss nach der Anreise liegen.", "The departure must be after the arrival.") + '</p>';
+      return;
+    }
+    if (rangeBooked(a, d)) {
+      out.innerHTML = '<p class="warn">' + t("Dieser Zeitraum ist leider belegt. Bitte wähle andere Daten oder frag direkt bei uns an.", "Unfortunately these dates are booked. Please choose other dates or ask us directly.") + '</p>';
       return;
     }
     if (ad < 1) {
