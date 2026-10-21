@@ -64,6 +64,19 @@ a { color: var(--link); }
 .sec.tint { background: var(--tint); }
 .lead { font-size: 1.15rem; color: var(--muted); }
 .note { font-size: .9rem; color: var(--muted); }
+.rev-sum { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin: 6px 0 22px; }
+.rev-sum b { font-family: var(--font-display); font-size: 2rem; font-weight: 400; }
+.stars { color: var(--gold); letter-spacing: 2px; font-size: 1.15rem; white-space: nowrap; }
+.rev-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; margin: 0 0 30px; }
+.rev { background: var(--surface); border-radius: 12px; padding: 18px 20px; box-shadow: 0 6px 24px rgba(8,30,28,.08); }
+.rev p { margin: 8px 0; }
+.rev .who { color: var(--muted); font-size: .9rem; margin: 0; }
+.rev-form { background: var(--surface); border-radius: 12px; padding: clamp(18px, 3vw, 28px); box-shadow: 0 6px 24px rgba(8,30,28,.08); display: grid; gap: 14px; max-width: 640px; }
+.rev-form h3 { margin: 0; }
+.starpick { display: flex; gap: 4px; }
+.starpick button { background: none; border: 0; padding: 2px 4px; font-size: 2rem; line-height: 1; cursor: pointer; color: var(--line); }
+.starpick button.on { color: var(--gold); }
+.starpick button:focus-visible { outline: 2px solid var(--link); border-radius: 6px; }
 .mapbox { margin-top: 16px; border-radius: 12px; overflow: hidden; box-shadow: 0 6px 24px rgba(8,30,28,.08); background: var(--surface); }
 .mapbox iframe { display: block; width: 100%; height: clamp(300px, 55vw, 460px); border: 0; }
 .todo { background: color-mix(in srgb, var(--gold) 30%, transparent); border-radius: 3px; padding: 0 4px; }
@@ -408,6 +421,30 @@ footer a { color: #fff; }
         <a class="tile" href="#preise"><svg class="ic"><use href="#i-check"/></svg><h3><span class="de">Preise und Infos</span><span class="en">Prices and info</span></h3><p><span class="de">Preisrechner, Zeiten und Stornierung</span><span class="en">Price calculator, times and cancellation</span></p></a>
         <a class="tile" href="#kalender"><svg class="ic"><use href="#i-calendar"/></svg><h3><span class="de">Verfügbarkeit</span><span class="en">Availability</span></h3><p><span class="de">Freie Tage im Kalender</span><span class="en">Free dates in the calendar</span></p></a>
       </div>
+    </div>
+  </section>
+
+  <section class="sec tint" id="bewertungen">
+    <div class="wrap">
+      <h2><span class="de">Gästebewertungen</span><span class="en">Guest reviews</span></h2>
+      <div id="revSum" class="rev-sum" hidden><b id="revAvg"></b><span class="stars" id="revStars" aria-hidden="true"></span><span id="revCount"></span></div>
+      <p class="note" id="revEmpty"><span class="de">Noch keine Bewertungen. Du warst bei uns zu Gast? Wir freuen uns über deine Rückmeldung.</span><span class="en">No reviews yet. Have you stayed with us? We would love to hear from you.</span></p>
+      <div class="rev-list" id="revList"></div>
+      <form class="rev-form" id="revForm">
+        <h3><span class="de">Deine Bewertung</span><span class="en">Your review</span></h3>
+        <div><span style="font-weight:600;font-size:.92rem"><span class="de">Sterne</span><span class="en">Stars</span></span>
+          <div class="starpick" id="starpick" role="radiogroup" aria-label="Sterne / Stars"></div></div>
+        <label><span><span class="de">Vorname</span><span class="en">First name</span></span><input id="r-name" required autocomplete="given-name"></label>
+        <label><span><span class="de">Aufenthalt (Monat und Jahr, optional)</span><span class="en">Stay (month and year, optional)</span></span><input id="r-when" placeholder="z. B. August 2026 / e.g. August 2026"></label>
+        <label><span><span class="de">Deine Bewertung</span><span class="en">Your review</span></span><textarea id="r-text" required></textarea></label>
+        <label><span><span class="de">E-Mail (optional, wird nicht veröffentlicht)</span><span class="en">Email (optional, not published)</span></span><input id="r-mail" type="email" autocomplete="email"></label>
+        <input type="checkbox" id="r-bot" tabindex="-1" autocomplete="off" style="display:none" aria-hidden="true">
+        <p class="note" style="margin:0"><span class="de">Wir prüfen jede Bewertung, bevor wir sie veröffentlichen. Mit dem Absenden erlaubst du uns, sie mit deinem Vornamen auf dieser Seite zu zeigen.</span><span class="en">We check every review before publishing it. By submitting, you allow us to show it on this page with your first name.</span></p>
+        <p class="warn" id="revMsg" hidden></p>
+        <div><button class="btn" id="revBtn" type="submit"><span class="de">Bewertung senden</span><span class="en">Send review</span></button></div>
+      </form>
+      <div class="rev-form" id="revDone" hidden role="status"><h3><span class="de">Danke für deine Bewertung</span><span class="en">Thank you for your review</span></h3><p style="margin:0"><span class="de">Wir schauen sie uns an und veröffentlichen sie bald.</span><span class="en">We will look at it and publish it soon.</span></p></div>
+      <div class="rev-form" id="revMail" hidden><h3><span class="de">Bewertung per E-Mail senden</span><span class="en">Send review by email</span></h3><p style="margin:0"><span class="de">Das Senden direkt aus der Seite ist noch nicht eingerichtet. Bitte schicke uns den Text per E-Mail.</span><span class="en">Sending from the page is not set up yet. Please email us the text.</span></p><div><a class="btn" id="revMailto" href="#"><span class="de">E-Mail öffnen</span><span class="en">Open email</span></a></div></div>
     </div>
   </section>
   </div>
@@ -812,11 +849,12 @@ footer a { color: #fff; }
       </div>
       <div id="impressum">
         <h3>Impressum</h3>
-        <p>Thomas Brülisauer<br>Brülisauerstrasse 39<br>9058 Brülisau</p>
+        <p>Ferienwohnung Brülisauer<br><span class="de">Vermieter</span><span class="en">Landlord</span>: Thomas Brülisauer<br>Brülisauerstrasse 39<br>9058 Brülisau<br><span class="de">Schweiz</span><span class="en">Switzerland</span></p>
+        <p><span class="de">E-Mail</span><span class="en">Email</span>: <a href="mailto:ferienwohnungbruelisauer@gmail.com">ferienwohnungbruelisauer@gmail.com</a></p>
       </div>
       <div id="datenschutz">
         <h3><span class="de">Datenschutz</span><span class="en">Privacy</span></h3>
-        <p><span class="de">Angaben im Anfrageformular werden nur verwendet, um deine Anfrage zu beantworten. Das Formular wird über den Dienst Web3Forms übermittelt. Schriftarten werden von Google Fonts geladen, und auf der Seite «Lage» wird eine Karte von Google Maps eingebettet. Dabei wird deine IP-Adresse an Google übertragen. Die Website wird bei GitHub Pages gehostet.</span><span class="en">Details in the enquiry form are only used to answer your enquiry. The form is transmitted via the service Web3Forms. Fonts are loaded from Google Fonts, and the “Location” page embeds a Google Maps map. This transmits your IP address to Google. The website is hosted on GitHub Pages.</span></p>
+        <p><span class="de">Angaben im Anfrageformular werden nur verwendet, um deine Anfrage zu beantworten. Das Formular wird über den Dienst Web3Forms übermittelt. Schriftarten werden von Google Fonts geladen, und auf der Seite «Lage» wird eine Karte von Google Maps eingebettet. Dabei wird deine IP-Adresse an Google übertragen. Die Website wird bei GitHub Pages gehostet. Bewertungen werden erst nach unserer Prüfung veröffentlicht, mit Vornamen. Für Fragen zum Datenschutz erreichst du uns unter der E-Mail-Adresse im Impressum.</span><span class="en">Details in the enquiry form are only used to answer your enquiry. The form is transmitted via the service Web3Forms. Fonts are loaded from Google Fonts, and the “Location” page embeds a Google Maps map. This transmits your IP address to Google. The website is hosted on GitHub Pages. Reviews are only published after we check them, with first name. For privacy questions, contact us at the email address in the legal notice.</span></p>
       </div>
     </div>
     <div class="copy">© <span id="year"></span> Ferienwohnung Brülisauer</div>
@@ -1133,10 +1171,83 @@ footer a { color: #fff; }
   ["c-adults", "c-kids", "c-tod"].forEach(function (id) { document.getElementById(id).addEventListener("input", calc); });
   calc();
 
+
+  // Bewertungen: angezeigt werden nur Einträge aus bewertungen.json (von uns geprüft).
+  var revStars = 0;
+  (function () {
+    var box = document.getElementById("starpick");
+    for (var s = 1; s <= 5; s++) {
+      (function (n) {
+        var b = document.createElement("button");
+        b.type = "button"; b.textContent = "★"; b.setAttribute("role", "radio"); b.setAttribute("aria-checked", "false"); b.setAttribute("aria-label", n + " / 5");
+        b.addEventListener("click", function () {
+          revStars = n;
+          Array.prototype.forEach.call(box.children, function (c, k) { c.classList.toggle("on", k < n); c.setAttribute("aria-checked", k === n - 1 ? "true" : "false"); });
+        });
+        box.appendChild(b);
+      })(s);
+    }
+  })();
+  function starText(n) { var o = ""; for (var i = 1; i <= 5; i++) o += i <= Math.round(n) ? "★" : "☆"; return o; }
+  function renderReviews(list) {
+    var ok = (list || []).filter(function (r) { return r && typeof r.text === "string" && r.text && +r.sterne >= 1 && +r.sterne <= 5; });
+    var wrap = document.getElementById("revList"); wrap.innerHTML = "";
+    document.getElementById("revEmpty").hidden = ok.length > 0;
+    document.getElementById("revSum").hidden = ok.length === 0;
+    if (!ok.length) return;
+    var sum = 0;
+    ok.forEach(function (r) {
+      sum += +r.sterne;
+      var d = document.createElement("div"); d.className = "rev";
+      var st = document.createElement("div"); st.className = "stars"; st.textContent = starText(+r.sterne); st.setAttribute("aria-label", r.sterne + " / 5");
+      var p = document.createElement("p"); p.textContent = r.text;
+      var w = document.createElement("p"); w.className = "who"; w.textContent = (r.name || "") + (r.datum ? ", " + r.datum : "");
+      d.appendChild(st); d.appendChild(p); d.appendChild(w); wrap.appendChild(d);
+    });
+    var avg = sum / ok.length;
+    document.getElementById("revAvg").textContent = avg.toFixed(1).replace(".", lang === "de" ? "," : ".");
+    document.getElementById("revStars").textContent = starText(avg);
+    document.getElementById("revCount").textContent = "(" + ok.length + ")";
+  }
+  function loadReviews() {
+    fetch("bewertungen.json?t=" + Date.now(), { cache: "no-store" })
+      .then(function (r) { if (!r.ok) throw new Error("http"); return r.json(); })
+      .then(function (data) { renderReviews(Array.isArray(data) ? data : data.bewertungen); })
+      .catch(function () { renderReviews([]); });
+  }
+  document.getElementById("revForm").addEventListener("submit", function (e) {
+    e.preventDefault();
+    if (document.getElementById("r-bot").checked) return;
+    var msg = document.getElementById("revMsg"), de = lang === "de";
+    if (!revStars) { msg.textContent = de ? "Bitte wähle zuerst die Sterne." : "Please choose your stars first."; msg.hidden = false; return; }
+    msg.hidden = true;
+    var v = function (id) { return document.getElementById(id).value.trim(); };
+    var text = ["Bewertung Ferienwohnung Brülisauer", "", "Sterne: " + revStars + " / 5", "Vorname: " + v("r-name"), "Aufenthalt: " + (v("r-when") || "-"), "E-Mail: " + (v("r-mail") || "-"), "", v("r-text")].join("\n");
+    if (!keyReady) {
+      document.getElementById("revMailto").href = "mailto:" + MAIL + "?subject=" + encodeURIComponent("Bewertung Ferienwohnung") + "&body=" + encodeURIComponent(text);
+      document.getElementById("revMail").hidden = false;
+      return;
+    }
+    var btn = document.getElementById("revBtn"); btn.disabled = true;
+    fetch("https://api.web3forms.com/submit", {
+      method: "POST", headers: { "Content-Type": "application/json", "Accept": "application/json" },
+      body: JSON.stringify({ access_key: ACCESS_KEY, subject: "Bewertung " + revStars + "/5 - " + v("r-name"), from_name: v("r-name"), name: v("r-name"), message: text })
+    }).then(function (r) { return r.json(); }).then(function (res) {
+      btn.disabled = false;
+      if (res && res.success) { document.getElementById("revForm").hidden = true; document.getElementById("revMail").hidden = true; document.getElementById("revDone").hidden = false; }
+      else throw new Error("fail");
+    }).catch(function () {
+      btn.disabled = false;
+      document.getElementById("revMailto").href = "mailto:" + MAIL + "?subject=" + encodeURIComponent("Bewertung Ferienwohnung") + "&body=" + encodeURIComponent(text);
+      document.getElementById("revMail").hidden = false;
+    });
+  });
+
   document.getElementById("year").textContent = new Date().getFullYear();
   setLang(lang);
   showPage();
   loadBooked();
+  loadReviews();
 })();
 </script>
 </body>
