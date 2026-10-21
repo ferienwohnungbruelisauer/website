@@ -204,6 +204,14 @@ footer a { color: #fff; }
 
 
 
+
+/* Stornierung */
+.cancel { max-width: 800px; margin-top: 22px; border-top: 2px solid var(--fg); }
+.cancel > div { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 28px; padding: 15px 0; border-bottom: 1px solid var(--line); }
+.cancel b { font-weight: 700; }
+.cancel .res { color: var(--muted); }
+@media (max-width: 600px) { .cancel > div { grid-template-columns: 1fr; } }
+
 /* Preisrechner */
 .calc { display: grid; grid-template-columns: 1fr 1.15fr; gap: clamp(20px, 4vw, 40px); align-items: start; margin-top: 24px; }
 .calc-in, .calc-out { background: var(--surface); border-radius: 12px; padding: clamp(18px, 3vw, 28px); box-shadow: 0 6px 24px rgba(8,30,28,.08); min-width: 0; }
@@ -338,8 +346,8 @@ footer a { color: #fff; }
       <a href="#start">Start</a>
       <a href="#wohnung"><span class="de">Wohnung</span><span class="en">Apartment</span></a>
       <a href="#lage"><span class="de">Lage</span><span class="en">Location</span></a>
-      <a href="#preise"><span class="de">Preise und Infos</span><span class="en">Prices and info</span></a>
       <a href="#ferienkarte"><span class="de">Ferienkarte</span><span class="en">Holiday card</span></a>
+      <a href="#preise"><span class="de">Preise und Infos</span><span class="en">Prices and info</span></a>
       <a href="#kalender"><span class="de">Verfügbarkeit</span><span class="en">Availability</span></a>
       <span class="lang" role="group" aria-label="Sprache / Language">
         <button type="button" data-set="de" aria-pressed="true">DE</button>
@@ -394,8 +402,8 @@ footer a { color: #fff; }
       <div class="tiles">
         <a class="tile" href="#wohnung"><svg class="ic"><use href="#i-door"/></svg><h3><span class="de">Wohnung</span><span class="en">Apartment</span></h3><p><span class="de">Zimmer, Betten und Ausstattung</span><span class="en">Rooms, beds and amenities</span></p></a>
         <a class="tile" href="#lage"><svg class="ic"><use href="#i-mountain"/></svg><h3><span class="de">Lage</span><span class="en">Location</span></h3><p><span class="de">Wandern und Ausflüge im Alpstein</span><span class="en">Hiking and day trips in the Alpstein</span></p></a>
-        <a class="tile" href="#preise"><svg class="ic"><use href="#i-check"/></svg><h3><span class="de">Preise und Infos</span><span class="en">Prices and info</span></h3><p><span class="de">Preise, Zeiten und häufige Fragen</span><span class="en">Prices, times and FAQ</span></p></a>
         <a class="tile" href="#ferienkarte"><svg class="ic"><use href="#i-cable"/></svg><h3><span class="de">Ferienkarte</span><span class="en">Holiday card</span></h3><p><span class="de">Bergbahnen, Museen und Bäder gratis, ab 3 Nächten</span><span class="en">Cable cars, museums and pools for free, from 3 nights</span></p></a>
+        <a class="tile" href="#preise"><svg class="ic"><use href="#i-check"/></svg><h3><span class="de">Preise und Infos</span><span class="en">Prices and info</span></h3><p><span class="de">Preisrechner, Zeiten und Stornierung</span><span class="en">Price calculator, times and cancellation</span></p></a>
         <a class="tile" href="#kalender"><svg class="ic"><use href="#i-calendar"/></svg><h3><span class="de">Verfügbarkeit</span><span class="en">Availability</span></h3><p><span class="de">Freie Tage im Kalender</span><span class="en">Free dates in the calendar</span></p></a>
       </div>
     </div>
@@ -486,20 +494,35 @@ footer a { color: #fff; }
   </div>
 
   <div class="page" data-page="preise">
-  <section class="sec">
+  <section class="sec" id="rechner">
+    <div class="wrap">
+      <h2><span class="de">Preisrechner</span><span class="en">Price calculator</span></h2>
+      <p class="lead"><span class="de">Gib deine Reisedaten und die Anzahl Gäste ein. Der Preis wird sofort berechnet.</span><span class="en">Enter your dates and the number of guests. The price is calculated straight away.</span></p>
+      <div class="calc">
+        <div class="calc-in">
+          <label><span><span class="de">Anreise</span><span class="en">Arrival</span></span><input id="c-from" type="date"></label>
+          <label><span><span class="de">Abreise</span><span class="en">Departure</span></span><input id="c-to" type="date"></label>
+          <label><span><span class="de">Erwachsene</span><span class="en">Adults</span></span><input id="c-adults" type="number" inputmode="numeric" min="0" max="7" value="2"></label>
+          <label><span><span class="de">Kinder <small>6 bis 16 Jahre</small></span><span class="en">Children <small>aged 6 to 16</small></span></span><input id="c-kids" type="number" inputmode="numeric" min="0" max="6" value="0"></label>
+          <label class="full"><span><span class="de">Kinder unter 6 Jahren <small>gratis</small></span><span class="en">Children under 6 <small>free</small></span></span><input id="c-tod" type="number" inputmode="numeric" min="0" max="4" value="0"></label>
+        </div>
+        <div class="calc-out" id="calcOut" aria-live="polite"></div>
+      </div>
+    </div>
+  </section>
+  <section class="sec tint">
     <div class="wrap">
       <div class="two" style="align-items:start">
         <div>
-          <h2><span class="de">Preise</span><span class="en">Prices</span></h2>
-          <table class="price">
-            <tr><td><span class="de">Erwachsene, pro Nacht</span><span class="en">Adults, per night</span></td><td data-price="adult"></td></tr>
-            <tr><td><span class="de">Kinder von 6 bis 16 Jahren, pro Nacht</span><span class="en">Children aged 6 to 16, per night</span></td><td data-price="child"></td></tr>
-            <tr><td><span class="de">Kleinkinder bis 5 Jahre, pro Nacht</span><span class="en">Toddlers up to age 5, per night</span></td><td data-price="toddler"></td></tr>
-            <tr><td><span class="de">Kurtaxe, pro Person ab 6 Jahren und Nacht</span><span class="en">Tourist tax, per person aged 6 and over and night</span></td><td data-price="tax"></td></tr>
-            <tr><td><span class="de">Endreinigung, einmalig</span><span class="en">Final cleaning, one-off</span></td><td data-price="cleaning"></td></tr>
-            <tr><td><span class="de">Appenzeller Ferienkarte</span><span class="en">Appenzeller holiday card</span></td><td><span class="de">gratis ab 3 Nächten</span><span class="en">free from 3 nights</span></td></tr>
-          </table>
-          <p class="note" style="margin-top:12px"><span class="todo"><span class="de">Die Preise sind noch Beispielwerte.</span><span class="en">The prices are still example values.</span></span></p>
+          <h2><span class="de">Im Preis inbegriffen</span><span class="en">Included in the price</span></h2>
+          <ul class="rules">
+            <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Endreinigung</span><span class="en">Final cleaning</span></li>
+            <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Kurtaxe</span><span class="en">Tourist tax</span></li>
+            <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Appenzeller Ferienkarte ab 3 Nächten. <a href="#ferienkarte">Alle Angebote ansehen</a></span><span class="en">Appenzeller holiday card from 3 nights. <a href="#ferienkarte">See all offers</a></span></li>
+            <li><svg class="ic"><use href="#i-check"/></svg><span class="de">WLAN</span><span class="en">Wi-Fi</span></li>
+            <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Kostenloser Parkplatz beim Haus</span><span class="en">Free parking at the house</span></li>
+            <li><svg class="ic"><use href="#i-users"/></svg><span class="de">Kinder unter 6 Jahren (bis 5,99 Jahre) übernachten gratis</span><span class="en">Children under 6 (up to 5.99 years) stay free</span></li>
+          </ul>
         </div>
         <div>
           <h2><span class="de">Gut zu wissen</span><span class="en">Good to know</span></h2>
@@ -518,23 +541,17 @@ footer a { color: #fff; }
     </div>
   </section>
 
-  <section class="sec tint" id="rechner">
+  <section class="sec">
     <div class="wrap">
-      <h2><span class="de">Preisrechner</span><span class="en">Price calculator</span></h2>
-      <p class="lead"><span class="de">Gib deine Reisedaten und die Anzahl Gäste ein. Der Preis wird sofort berechnet.</span><span class="en">Enter your dates and the number of guests. The price is calculated straight away.</span></p>
-      <div class="calc">
-        <div class="calc-in">
-          <label><span><span class="de">Anreise</span><span class="en">Arrival</span></span><input id="c-from" type="date"></label>
-          <label><span><span class="de">Abreise</span><span class="en">Departure</span></span><input id="c-to" type="date"></label>
-          <label><span><span class="de">Erwachsene</span><span class="en">Adults</span></span><input id="c-adults" type="number" inputmode="numeric" min="0" max="7" value="2"></label>
-          <label><span><span class="de">Kinder <small>6 bis 16 Jahre</small></span><span class="en">Children <small>aged 6 to 16</small></span></span><input id="c-kids" type="number" inputmode="numeric" min="0" max="6" value="0"></label>
-          <label class="full"><span><span class="de">Kleinkinder <small>bis 5 Jahre</small></span><span class="en">Toddlers <small>up to age 5</small></span></span><input id="c-tod" type="number" inputmode="numeric" min="0" max="4" value="0"></label>
-        </div>
-        <div class="calc-out" id="calcOut" aria-live="polite"></div>
+      <h2><span class="de">Stornierung</span><span class="en">Cancellation</span></h2>
+      <p class="lead"><span class="de">Das gilt, wenn du als Mieter annullierst.</span><span class="en">This applies if you cancel as the tenant.</span></p>
+      <div class="cancel">
+        <div><b><span class="de">Bis 15 Tage vor Mietbeginn</span><span class="en">Up to 15 days before the start of the rental</span></b><span class="res"><span class="de">kostenlos, die Anzahlung wird zurückerstattet</span><span class="en">free of charge, the deposit is refunded</span></span></div>
+        <div><b><span class="de">Ab 14 Tage vor Mietbeginn</span><span class="en">From 14 days before the start of the rental</span></b><span class="res"><span class="de">50 % des Mietpreises</span><span class="en">50% of the rental price</span></span></div>
+        <div><b><span class="de">Ab 7 Tage vor Mietbeginn oder bei Nichterscheinen</span><span class="en">From 7 days before the start of the rental or if you do not show up</span></b><span class="res"><span class="de">100 % des Mietpreises</span><span class="en">100% of the rental price</span></span></div>
       </div>
     </div>
   </section>
-
   </div>
 
   <div class="page" data-page="ferienkarte">
@@ -769,6 +786,8 @@ footer a { color: #fff; }
         <details><summary><span><span class="de">Wie reserviere ich die Wohnung?</span><span class="en">How do I reserve the apartment?</span></span><svg class="ic"><use href="#i-chev"/></svg></summary><p><span class="de">Schicke uns über «Anfragen» eine Nachricht mit deinen Reisedaten. Wir antworten persönlich per E-Mail, und die Reservierung gilt, sobald du bestätigt hast.</span><span class="en">Send us an enquiry on the “Enquire” page with your dates. We reply personally by email, and the reservation applies once you have confirmed.</span></p></details>
         <details><summary><span><span class="de">Für wie viele Personen ist die Wohnung?</span><span class="en">How many people does the apartment sleep?</span></span><svg class="ic"><use href="#i-chev"/></svg></summary><p><span class="de">Bis zu sieben Gäste: fünf in Betten (zwei Doppelbetten und ein Einzelbett) und zwei auf der Couch. Auf Wunsch stellen wir zusätzlich ein Kinderbett auf.</span><span class="en">Up to seven guests: five in beds (two double beds and one single bed) and two on the sofa. A cot can also be set up on request.</span></p></details>
         <details><summary><span><span class="de">Wann ist Check-in und Check-out?</span><span class="en">When are check-in and check-out?</span></span><svg class="ic"><use href="#i-chev"/></svg></summary><p><span class="de">Check-in ist ab 16.00 Uhr, Check-out bis 11.00 Uhr.</span><span class="en">Check-in is from 4:00 pm, check-out by 11:00 am.</span></p></details>
+        <details><summary><span><span class="de">Wie viel zahlen Kinder?</span><span class="en">How much do children pay?</span></span><svg class="ic"><use href="#i-chev"/></svg></summary><p><span class="de">Kinder unter 6 Jahren übernachten gratis. Kinder von 6 bis 16 Jahren zahlen den Kinderpreis und die Kurtaxe. Den genauen Preis siehst du im <a href="#preise">Preisrechner</a>.</span><span class="en">Children under 6 stay free. Children aged 6 to 16 pay the child rate and the tourist tax. You can see the exact price in the <a href="#preise">price calculator</a>.</span></p></details>
+        <details><summary><span><span class="de">Kann ich stornieren?</span><span class="en">Can I cancel?</span></span><svg class="ic"><use href="#i-chev"/></svg></summary><p><span class="de">Bis 15 Tage vor Mietbeginn ist die Stornierung kostenlos, und die Anzahlung wird zurückerstattet. Ab 14 Tagen vorher zahlst du 50 % des Mietpreises, ab 7 Tagen vorher oder bei Nichterscheinen 100 %. Alle Fristen stehen bei <a href="#preise">Preise und Infos</a>.</span><span class="en">Up to 15 days before the start of the rental, cancellation is free and the deposit is refunded. From 14 days before you pay 50% of the rental price, from 7 days before or if you do not show up 100%. All deadlines are on the <a href="#preise">Prices and info</a> page.</span></p></details>
         <details><summary><span><span class="de">Was ist die Appenzeller Ferienkarte?</span><span class="en">What is the Appenzeller holiday card?</span></span><svg class="ic"><use href="#i-chev"/></svg></summary><p><span class="de">Als Gast erhältst du damit über 40 Angebote in der Region gratis, zum Beispiel Bergbahnen, Museen und Bäder. Bei uns bekommst du sie ab 3 Nächten dazu. Alle Angebote findest du auf der Seite <a href="#ferienkarte">Ferienkarte</a>.</span><span class="en">As a guest you get over 40 offers in the region for free, for example cable cars, museums and pools. With us you get it from 3 nights. You will find all offers on the <a href="#ferienkarte">holiday card</a> page.</span></p></details>
         <details><summary><span><span class="de">Sind Haustiere erlaubt?</span><span class="en">Are pets allowed?</span></span><svg class="ic"><use href="#i-chev"/></svg></summary><p><span class="de">Nein, Haustiere sind in der Wohnung nicht gestattet. Das Rauchen ist ebenfalls verboten. Auf dem Betrieb leben Katzen, Hunde und Kühe. Wenn du oder jemand in deiner Gruppe Allergien hat, schreib uns das bitte in deiner Anfrage.</span><span class="en">No, pets are not allowed in the apartment. Smoking is not allowed either. Cats, dogs and cows live on the farm. If you or anyone in your group has allergies, please tell us in your enquiry.</span></p></details>
       </div>
@@ -990,27 +1009,33 @@ footer a { color: #fff; }
   window.addEventListener("hashchange", showPage);
 
   // ---------- Preise und Preisrechner ----------
-  // HIER die Preise anpassen (in Franken). Tabelle und Rechner nutzen dieselben Werte.
+  // HIER die Preise anpassen (in Franken). Der Rechner nutzt diese Werte.
+  var SEASON = {
+    summer: { adult: 40, child: 25 },   // April bis Oktober, pro Person und Nacht
+    winter: { adult: 35, child: 20 }    // November bis März, pro Person und Nacht
+  };
   var P = {
-    adult: 40,      // Erwachsene, pro Nacht
-    child: 25,      // Kinder von 6 bis 16 Jahren, pro Nacht
-    toddler: 0,     // Kleinkinder bis 5 Jahre, pro Nacht (0 = gratis)
+    toddler: 0,     // Kinder unter 6 Jahren, pro Nacht (0 = gratis)
     tax: 2.5,       // Kurtaxe pro Person ab 6 Jahren und Nacht
     cleaning: 110   // Endreinigung, einmalig
   };
   var MAX_GUESTS = 7;
   function t(de, en) { return '<span class="de">' + de + '</span><span class="en">' + en + '</span>'; }
   function money(n) { return "CHF " + n.toLocaleString("de-CH", { minimumFractionDigits: 2, maximumFractionDigits: 2 }); }
-  function quote(nights, ad, ch, to) {
-    var a = ad * nights * P.adult, c = ch * nights * P.child, k = to * nights * P.toddler;
-    var tax = (ad + ch) * nights * P.tax, cl = P.cleaning;
-    return { adults: a, kids: c, toddlers: k, tax: tax, cleaning: cl, total: a + c + k + tax + cl };
+  function countNights(a, d) {   // zaehlt die Naechte je Jahreszeit (April bis Oktober = Sommer)
+    var c = { summer: 0, winter: 0 };
+    for (var x = parse(a), end = parse(d); x < end; x.setDate(x.getDate() + 1)) {
+      var m = x.getMonth() + 1;
+      if (m >= 4 && m <= 10) c.summer++; else c.winter++;
+    }
+    return c;
   }
-  function fillPrices() {
-    document.querySelectorAll("[data-price]").forEach(function (el) {
-      var v = P[el.getAttribute("data-price")];
-      el.innerHTML = v === 0 ? t("gratis", "free") : money(v);
-    });
+  function quote(cnt, ad, ch, to) {
+    var n = cnt.summer + cnt.winter;
+    var a = ad * (cnt.summer * SEASON.summer.adult + cnt.winter * SEASON.winter.adult);
+    var c = ch * (cnt.summer * SEASON.summer.child + cnt.winter * SEASON.winter.child);
+    var k = to * n * P.toddler, tax = (ad + ch) * n * P.tax, cl = P.cleaning;
+    return { adults: a, kids: c, toddlers: k, tax: tax, cleaning: cl, total: a + c + k + tax + cl };
   }
   function num(id) { var n = parseInt(document.getElementById(id).value, 10); return isNaN(n) || n < 0 ? 0 : n; }
   var lastCalc = null;
@@ -1031,16 +1056,23 @@ footer a { color: #fff; }
       out.innerHTML = '<p class="warn">' + t("Bitte gib mindestens einen Erwachsenen an.", "Please enter at least one adult.") + '</p>';
       return;
     }
-    var n = Math.round((parse(d) - parse(a)) / 86400000);
-    var q = quote(n, ad, ch, to);
-    var nT = n + " " + (n === 1 ? t("Nacht", "night") : t("Nächte", "nights"));
+    var cnt = countNights(a, d), n = cnt.summer + cnt.winter;
+    var q = quote(cnt, ad, ch, to);
+    function nightsT(k) { return k + " " + (k === 1 ? t("Nacht", "night") : t("Nächte", "nights")); }
+    var nT = nightsT(n);
+    function detail(count, key) {
+      var parts = [];
+      if (cnt.summer > 0) parts.push(count + " × " + nightsT(cnt.summer) + " × " + money(SEASON.summer[key]) + (cnt.winter > 0 ? " (" + t("April bis Oktober", "April to October") + ")" : ""));
+      if (cnt.winter > 0) parts.push(count + " × " + nightsT(cnt.winter) + " × " + money(SEASON.winter[key]) + (cnt.summer > 0 ? " (" + t("November bis März", "November to March") + ")" : ""));
+      return parts.join("<br>");
+    }
     var rows = "";
     function row(labelHtml, detailHtml, amountHtml) {
       rows += "<tr><td>" + labelHtml + '<span class="det">' + detailHtml + "</span></td><td>" + amountHtml + "</td></tr>";
     }
-    row(t("Erwachsene", "Adults"), ad + " × " + nT + " × " + money(P.adult), money(q.adults));
-    if (ch > 0) row(t("Kinder (6 bis 16 Jahre)", "Children (6 to 16)"), ch + " × " + nT + " × " + money(P.child), money(q.kids));
-    if (to > 0) row(t("Kleinkinder (bis 5 Jahre)", "Toddlers (up to 5)"), to + " × " + nT + (P.toddler === 0 ? "" : " × " + money(P.toddler)), P.toddler === 0 ? t("gratis", "free") : money(q.toddlers));
+    row(t("Erwachsene", "Adults"), detail(ad, "adult"), money(q.adults));
+    if (ch > 0) row(t("Kinder (6 bis 16 Jahre)", "Children (6 to 16)"), detail(ch, "child"), money(q.kids));
+    if (to > 0) row(t("Kinder unter 6 Jahren", "Children under 6"), to + " × " + nT, P.toddler === 0 ? t("gratis", "free") : money(q.toddlers));
     row(t("Kurtaxe", "Tourist tax"), (ad + ch) + " " + t("Personen ab 6 Jahren", "persons aged 6 and over") + " × " + nT + " × " + money(P.tax), money(q.tax));
     row(t("Endreinigung", "Final cleaning"), t("einmalig", "one-off"), money(q.cleaning));
     var warn = "";
@@ -1060,15 +1092,14 @@ footer a { color: #fff; }
     if (!lastCalc) return [];
     var c = lastCalc, tot = c.total.toLocaleString("de-CH", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
     return [de
-      ? "Preisrechner: Erwachsene " + c.adults + ", Kinder (6 bis 16) " + c.kids + ", Kleinkinder " + c.toddlers + ", Nächte " + c.nights + ", Preis CHF " + tot
-      : "Price calculator: adults " + c.adults + ", children (6 to 16) " + c.kids + ", toddlers " + c.toddlers + ", nights " + c.nights + ", price CHF " + tot];
+      ? "Preisrechner: Erwachsene " + c.adults + ", Kinder (6 bis 16) " + c.kids + ", Kinder unter 6 Jahren " + c.toddlers + ", Nächte " + c.nights + ", Preis CHF " + tot
+      : "Price calculator: adults " + c.adults + ", children (6 to 16) " + c.kids + ", children under 6 " + c.toddlers + ", nights " + c.nights + ", price CHF " + tot];
   }
   document.getElementById("calcOut").addEventListener("click", function (e) {
     if (!e.target.closest("[data-ask]") || !lastCalc) return;
     document.getElementById("f-pers").value = String(Math.min(MAX_GUESTS, Math.max(1, lastCalc.adults + lastCalc.kids + lastCalc.toddlers)));
   });
   ["c-adults", "c-kids", "c-tod"].forEach(function (id) { document.getElementById(id).addEventListener("input", calc); });
-  fillPrices();
   calc();
 
   document.getElementById("year").textContent = new Date().getFullYear();
