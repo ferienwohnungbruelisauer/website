@@ -281,7 +281,8 @@ footer a { color: #fff; }
 .js .page { display: none; }
 .js .page.active { display: block; }
 .page { min-height: 62vh; }
-.nav a:not(.btn)[aria-current="page"] { color: var(--link); box-shadow: 0 2px 0 var(--link); }
+.nav a:not(.btn) { box-shadow: 0 2px 0 transparent; transition: box-shadow .15s, color .15s; }
+.nav a:not(.btn):hover, .nav a:not(.btn):focus-visible, .nav a:not(.btn)[aria-current="page"] { color: var(--link); box-shadow: 0 2px 0 var(--link); }
 .tiles { display: grid; grid-template-columns: repeat(4, 1fr); margin-top: 34px; border-top: 2px solid var(--fg); }
 .tile { display: block; padding: 22px 22px 26px 0; color: inherit; text-decoration: none; }
 .tile + .tile { padding-left: 22px; border-left: 1px solid var(--line); }
@@ -321,6 +322,16 @@ footer a { color: #fff; }
   .glance-in > div { padding: 16px 14px; gap: 10px; }
 }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } summary .ic { transition: none; } }
+@media (min-width: 900px) {
+  .cal { padding: 36px 40px; }
+  .cal-head strong { font-size: 1.35rem; }
+  .cal-head button { padding: 10px 16px; }
+  .months { gap: 56px; }
+  .mon h3 { font-size: 1.25rem; margin-bottom: 14px; }
+  .dow { font-size: .95rem; padding: 8px 0; }
+  .grid { gap: 6px; }
+  .day { font-size: 1.2rem; border-radius: 8px; }
+}
 </style>
 </head>
 <body>
@@ -544,6 +555,7 @@ footer a { color: #fff; }
         <div class="calc-in">
           <label><span><span class="de">Anreise</span><span class="en">Arrival</span></span><input id="c-from" type="date"></label>
           <label><span><span class="de">Abreise</span><span class="en">Departure</span></span><input id="c-to" type="date"></label>
+          <p class="note full" style="margin:0"><a href="#kalender"><span class="de">Lieber im grossen Kalender auswählen</span><span class="en">Prefer the large calendar? Pick your dates there</span></a></p>
           <label><span><span class="de">Erwachsene</span><span class="en">Adults</span></span><input id="c-adults" type="number" inputmode="numeric" min="0" max="7" value="2"></label>
           <label><span><span class="de">Kinder <small>6 bis 16 Jahre</small></span><span class="en">Children <small>aged 6 to 16</small></span></span><input id="c-kids" type="number" inputmode="numeric" min="0" max="6" value="0"></label>
           <label class="full"><span><span class="de">Kinder unter 6 Jahren <small>gratis</small></span><span class="en">Children under 6 <small>free</small></span></span><input id="c-tod" type="number" inputmode="numeric" min="0" max="4" value="0"></label>
@@ -602,6 +614,7 @@ footer a { color: #fff; }
     <div class="wrap">
       <h2><span class="de">Appenzeller Ferienkarte</span><span class="en">Appenzeller holiday card</span></h2>
       <p class="lead"><span class="de">Mit der Ferienkarte erhältst du über 40 Angebote in der Region gratis. Dazu gehören Bergbahnen, Museen, Bäder und Ausflüge.</span><span class="en">With the holiday card you get over 40 offers in the region for free. They include cable cars, museums, pools and excursions.</span></p>
+      <p class="note" style="margin-top:-6px"><span class="de">Die Angaben auf dieser Seite stammen von Appenzellerland Tourismus (<a href="https://www.appenzell.ch/de/unterkunft/appenzeller-ferienkarte.html" target="_blank" rel="noopener">appenzell.ch</a>, Stand Oktober 2026). Verbindlich sind die Angaben des Tourismus.</span><span class="en">The information on this page comes from Appenzellerland Tourismus (<a href="https://www.appenzell.ch/de/unterkunft/appenzeller-ferienkarte.html" target="_blank" rel="noopener">appenzell.ch</a>, as of October 2026). The tourism office's information is binding.</span></p>
 
       <div class="gift">
         <div>
@@ -795,6 +808,7 @@ footer a { color: #fff; }
           <label><span>E-Mail</span><input id="f-mail" type="email" required autocomplete="email"></label>
           <label><span><span class="de">Anreise</span><span class="en">Arrival</span></span><input id="f-from" type="date" required></label>
           <label><span><span class="de">Abreise</span><span class="en">Departure</span></span><input id="f-to" type="date" required></label>
+          <p class="note full" style="margin:0"><a href="#kalender"><span class="de">Lieber im grossen Kalender auswählen</span><span class="en">Prefer the large calendar? Pick your dates there</span></a></p>
           <label><span><span class="de">Anzahl Gäste</span><span class="en">Number of guests</span></span>
             <select id="f-pers"><option>1</option><option>2</option><option selected>3</option><option>4</option><option>5</option><option>6</option><option>7</option></select></label>
           <label><span><span class="de">Telefon (optional)</span><span class="en">Phone (optional)</span></span><input id="f-tel" type="tel" autocomplete="tel"></label>
