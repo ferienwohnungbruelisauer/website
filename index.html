@@ -710,6 +710,7 @@ footer a { color: #fff; }
     <div class="wrap">
       <h2><span class="de">Freie und belegte Tage</span><span class="en">Free and booked dates</span></h2>
       <p class="lead"><span class="de">Wähle Anreise und Abreise im Kalender. Die Daten werden in die Anfrage übernommen.</span><span class="en">Pick your arrival and departure in the calendar. The dates are carried over to your enquiry.</span></p>
+      <p class="warn" id="bookedErr" hidden><span class="de">Die belegten Tage konnten nicht geladen werden. Bitte frag direkt bei uns an, ob dein Zeitraum frei ist.</span><span class="en">The booked dates could not be loaded. Please ask us directly whether your dates are free.</span></p>
       <div class="cal">
         <div class="cal-head">
           <button type="button" id="prev" aria-label="Vorheriger Monat / Previous month"><svg class="ic"><use href="#i-left"/></svg></button>
@@ -720,7 +721,6 @@ footer a { color: #fff; }
         <div class="legend">
           <span><i style="background:var(--booked)"></i><span class="de">belegt</span><span class="en">booked</span></span>
           <span><i style="background:var(--brand)"></i><span class="de">deine Auswahl</span><span class="en">your selection</span></span>
-          <span class="todo"><span class="de">Belegte Tage sind noch Beispieldaten</span><span class="en">Booked dates are still sample data</span></span>
         </div>
         <div class="sel">
           <p id="selText"></p>
@@ -823,8 +823,8 @@ footer a { color: #fff; }
 
 <script>
 (function () {
-  // Belegte Zeiträume als [Anreise, Abreise]. Der Abreisetag bleibt frei. Das sind Beispieldaten.
-  var BOOKED = [["2026-11-06", "2026-11-09"], ["2026-11-20", "2026-11-23"], ["2026-12-26", "2027-01-02"]];
+  // Die belegten Tage stehen in der Datei belegt.json (Anreise und Abreise je Aufenthalt).
+  var bookedSet = {};
   var MONTHS = {
     de: ["Januar","Februar","März","April","Mai","Juni","Juli","August","September","Oktober","November","Dezember"],
     en: ["January","February","March","April","May","June","July","August","September","October","November","December"]
@@ -836,10 +836,24 @@ footer a { color: #fff; }
   function parse(s) { var p = s.split("-"); return new Date(+p[0], +p[1] - 1, +p[2]); }
   function fmt(k) { return parse(k).toLocaleDateString(lang === "de" ? "de-CH" : "en-GB", { day: "2-digit", month: "2-digit", year: "numeric" }); }
 
-  var bookedSet = {};
-  BOOKED.forEach(function (r) {
-    for (var d = parse(r[0]), end = parse(r[1]); d < end; d.setDate(d.getDate() + 1)) bookedSet[iso(d)] = true;
-  });
+  function setBooked(list) {
+    var set = {}, re = /^\d{4}-\d{2}-\d{2}$/;
+    (list || []).forEach(function (r) {
+      if (!r || r.length !== 2 || !re.test(r[0]) || !re.test(r[1]) || r[1] <= r[0]) return;
+      for (var d = parse(r[0]), end = parse(r[1]); d < end; d.setDate(d.getDate() + 1)) set[iso(d)] = true;
+    });
+    bookedSet = set;
+  }
+  function loadBooked() {
+    var err = document.getElementById("bookedErr");
+    fetch("belegt.json?t=" + Date.now(), { cache: "no-store" })
+      .then(function (r) { if (!r.ok) throw new Error("http"); return r.json(); })
+      .then(function (data) {
+        setBooked(Array.isArray(data) ? data : data.belegt);
+        err.hidden = true; render();
+      })
+      .catch(function () { err.hidden = false; });
+  }
   var today = new Date(); today.setHours(0, 0, 0, 0);
   var thisMonth = new Date(today.getFullYear(), today.getMonth(), 1);
   var view = new Date(thisMonth);
@@ -1105,6 +1119,7 @@ footer a { color: #fff; }
   document.getElementById("year").textContent = new Date().getFullYear();
   setLang(lang);
   showPage();
+  loadBooked();
 })();
 </script>
 </body>
