@@ -625,7 +625,7 @@ form.rev-form > * { grid-column: 1 / -1; }
           <ul class="rules">
             <li><svg class="ic"><use href="#i-calendar"/></svg><span class="de">Check-in ab 16.00 Uhr, Check-out bis 11.00 Uhr</span><span class="en">Check-in from 4:00 pm, check-out by 11:00 am</span></li>
             <li><svg class="ic"><use href="#i-cable"/></svg><span class="de">Die Appenzeller Ferienkarte bekommst du automatisch, aber erst ab 3 Nächten in Folge. <a href="#ferienkarte">Alle Angebote ansehen</a></span><span class="en">You get the Appenzeller holiday card automatically, but only from 3 consecutive nights. <a href="#ferienkarte">See all offers</a></span></li>
-            <li><svg class="ic"><use href="#i-calendar"/></svg><span class="de">Mindestaufenthalt: 3 Nächte</span><span class="en">Minimum stay: 3 nights</span></li>
+            <li><svg class="ic"><use href="#i-calendar"/></svg><span class="de">Mindestaufenthalt: 3 Nächte von April bis Oktober, 2 Nächte von November bis März (nach Anreisedatum)</span><span class="en">Minimum stay: 3 nights from April to October, 2 nights from November to March (by arrival date)</span></li>
             <li><svg class="ic"><use href="#i-nosmoke"/></svg><span class="de">Rauchen ist verboten</span><span class="en">Smoking is not allowed</span></li>
             <li><svg class="ic"><use href="#i-paw"/></svg><span class="de">Haustiere sind nicht gestattet</span><span class="en">Pets are not allowed</span></li>
             <li><svg class="ic"><use href="#i-paw"/></svg><span class="de">Auf dem Betrieb leben Katzen, Hunde und Kühe. Gäste mit Allergien sollten das bedenken.</span><span class="en">Cats, dogs and cows live on the farm. Guests with allergies should keep this in mind.</span></li>
@@ -806,7 +806,7 @@ form.rev-form > * { grid-column: 1 / -1; }
   <section class="sec tint">
     <div class="wrap">
       <h2><span class="de">Freie und belegte Tage</span><span class="en">Free and booked dates</span></h2>
-      <p class="lead"><span class="de">Wähle Anreise und Abreise im Kalender. Mindestaufenthalt: 3 Nächte. Die Daten werden in die Anfrage übernommen.</span><span class="en">Pick your arrival and departure in the calendar. Minimum stay: 3 nights. The dates are carried over to your enquiry.</span></p>
+      <p class="lead"><span class="de">Wähle Anreise und Abreise im Kalender. Mindestaufenthalt: 3 Nächte (April bis Oktober), 2 Nächte (November bis März). Die Daten werden in die Anfrage übernommen.</span><span class="en">Pick your arrival and departure in the calendar. Minimum stay: 3 nights (April to October), 2 nights (November to March). The dates are carried over to your enquiry.</span></p>
       <p class="warn" id="bookedErr" hidden><span class="de">Die belegten Tage konnten nicht geladen werden. Bitte frag direkt bei uns an, ob dein Zeitraum frei ist.</span><span class="en">The booked dates could not be loaded. Please ask us directly whether your dates are free.</span></p>
       <div class="cal">
         <div class="cal-head">
@@ -855,7 +855,7 @@ form.rev-form > * { grid-column: 1 / -1; }
           <label class="full"><span><span class="de">Nachricht</span><span class="en">Message</span></span><textarea id="f-msg"></textarea></label>
           <div class="full calc-out" id="formPrice" aria-live="polite" hidden></div>
           <p class="warn full" id="fDates" hidden><span class="de">Bitte wähle Anreise und Abreise.</span><span class="en">Please choose your arrival and departure.</span></p>
-          <p class="warn full" id="fMin" hidden><span class="de">Der Mindestaufenthalt beträgt 3 Nächte.</span><span class="en">The minimum stay is 3 nights.</span></p>
+          <p class="warn full" id="fMin" hidden><span class="de">Der Mindestaufenthalt beträgt 3 Nächte (April bis Oktober) bzw. 2 Nächte (November bis März).</span><span class="en">The minimum stay is 3 nights (April to October) or 2 nights (November to March).</span></p>
           <p class="warn full" id="fBooked" hidden><span class="de">Dieser Zeitraum ist leider belegt. Bitte wähle andere Daten.</span><span class="en">Unfortunately these dates are booked. Please choose other dates.</span></p>
           <input type="checkbox" id="f-bot" tabindex="-1" autocomplete="off" style="display:none" aria-hidden="true">
           <div class="full"><button class="btn" id="submitBtn" type="submit"><span class="de">Anfrage vorbereiten</span><span class="en">Prepare enquiry</span></button></div>
@@ -1015,7 +1015,7 @@ form.rev-form > * { grid-column: 1 / -1; }
       var n = Math.round((parse(dep) - parse(arr)) / 86400000);
       el.textContent = fmt(arr) + " – " + fmt(dep) + ", " + n + (de ? (n === 1 ? " Nacht" : " Nächte") : (n === 1 ? " night" : " nights"));
     } else if (arr) {
-      el.textContent = (de ? "Anreise " : "Arrival ") + fmt(arr) + (de ? ". Wähle jetzt die Abreise (mindestens " + MIN_NIGHTS + " Nächte)." : ". Now pick your departure (minimum " + MIN_NIGHTS + " nights).");
+      el.textContent = (de ? "Anreise " : "Arrival ") + fmt(arr) + (de ? ". Wähle jetzt die Abreise (mindestens " + minFor(arr) + " Nächte)." : ". Now pick your departure (minimum " + minFor(arr) + " nights).");
     } else {
       el.textContent = de ? "Noch keine Daten gewählt." : "No dates selected yet.";
     }
@@ -1040,7 +1040,7 @@ form.rev-form > * { grid-column: 1 / -1; }
         var b = document.createElement("button"); b.type = "button"; b.className = "day"; b.textContent = d; b.dataset.d = key;
         if (date < today) b.disabled = true;
         else if (bookedSet[key]) { b.classList.add("booked"); b.disabled = true; }
-        if (arr && !dep && key > arr && nightsBetween(arr, key) < MIN_NIGHTS && !b.disabled) { b.disabled = true; b.classList.add("short"); }
+        if (arr && !dep && key > arr && nightsBetween(arr, key) < minFor(arr) && !b.disabled) { b.disabled = true; b.classList.add("short"); }
         if (key === arr || key === dep) b.classList.add("edge");
         if (arr && dep && key > arr && key < dep) b.classList.add("inrange");
         g.appendChild(b);
@@ -1091,7 +1091,7 @@ form.rev-form > * { grid-column: 1 / -1; }
     var b = e.target.closest(".day"); if (!b || b.disabled) return;
     var k = b.dataset.d;
     if (!arr || dep) { arr = k; dep = null; }
-    else if (k > arr && !hasBooked(arr, k) && nightsBetween(arr, k) >= MIN_NIGHTS) { dep = k; }
+    else if (k > arr && !hasBooked(arr, k) && nightsBetween(arr, k) >= minFor(arr)) { dep = k; }
     else { arr = k; dep = null; }
     syncForm(); render();
     if (arr && dep && !dp.hidden) setTimeout(closePicker, 350);
@@ -1169,7 +1169,7 @@ form.rev-form > * { grid-column: 1 / -1; }
     e.preventDefault();
     if (document.getElementById("f-bot").checked) return;
     if (!getD("f-from") || !getD("f-to")) { document.getElementById("fDates").hidden = false; openPicker(); return; }
-    if (nightsBetween(getD("f-from"), getD("f-to")) < MIN_NIGHTS || rangeBooked(getD("f-from"), getD("f-to"))) { checkForm(); return; }
+    if (nightsBetween(getD("f-from"), getD("f-to")) < minFor(getD("f-from")) || rangeBooked(getD("f-from"), getD("f-to"))) { checkForm(); return; }
     var v = function (id) { return document.getElementById(id).value.trim(); };
     var de = lang === "de";
     var lines = de
@@ -1229,7 +1229,8 @@ form.rev-form > * { grid-column: 1 / -1; }
     cleaning: 110   // Endreinigung, einmalig
   };
   var MAX_GUESTS = 7;
-  var MIN_NIGHTS = 3;
+  // Mindestaufenthalt je nach Anreisemonat: April bis Oktober 3 Nächte, November bis März 2 Nächte
+  function minFor(a) { var m = parseInt(a.slice(5, 7), 10); return (m >= 4 && m <= 10) ? 3 : 2; }
   function nightsBetween(a, b) { return Math.round((parse(b) - parse(a)) / 86400000); }
   function t(de, en) { return '<span class="de">' + de + '</span><span class="en">' + en + '</span>'; }
   function money(n) { return "CHF " + n.toLocaleString("de-CH", { minimumFractionDigits: 2, maximumFractionDigits: 2 }); }
@@ -1254,7 +1255,7 @@ form.rev-form > * { grid-column: 1 / -1; }
   function checkForm() {
     document.getElementById("fBooked").hidden = !rangeBooked(getD("f-from"), getD("f-to"));
     var fa = getD("f-from"), fd = getD("f-to");
-    document.getElementById("fMin").hidden = !(fa && fd && fd > fa && nightsBetween(fa, fd) < MIN_NIGHTS);
+    document.getElementById("fMin").hidden = !(fa && fd && fd > fa && nightsBetween(fa, fd) < minFor(fa));
   }
   function calc() {
     calcInner();
@@ -1279,8 +1280,8 @@ form.rev-form > * { grid-column: 1 / -1; }
       out.innerHTML = '<p class="warn">' + t("Die Abreise muss nach der Anreise liegen.", "The departure must be after the arrival.") + '</p>';
       return;
     }
-    if (nightsBetween(a, d) < MIN_NIGHTS) {
-      out.innerHTML = '<p class="warn">' + t("Der Mindestaufenthalt beträgt " + MIN_NIGHTS + " Nächte.", "The minimum stay is " + MIN_NIGHTS + " nights.") + '</p>';
+    if (nightsBetween(a, d) < minFor(a)) {
+      out.innerHTML = '<p class="warn">' + t("Der Mindestaufenthalt beträgt " + minFor(a) + " Nächte.", "The minimum stay is " + minFor(a) + " nights.") + '</p>';
       return;
     }
     if (rangeBooked(a, d)) {
