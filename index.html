@@ -696,7 +696,8 @@ html[data-lang="fr"] .nav .btn { padding: 8px 14px; }
           <label><span><span class="de">Abreise</span><span class="en">Departure</span><span class="fr">Départ</span></span><input id="c-to" class="dpick" type="text" readonly inputmode="none" autocomplete="off"></label>
           <label><span><span class="de">Erwachsene</span><span class="en">Adults</span><span class="fr">Adultes</span></span><input id="c-adults" type="number" inputmode="numeric" min="0" max="7" value="2"></label>
           <label><span><span class="de">Kinder <small>6 bis 16 Jahre</small></span><span class="en">Children <small>aged 6 to 16</small></span><span class="fr">Enfants <small>6 à 16 ans</small></span></span><input id="c-kids" type="number" inputmode="numeric" min="0" max="6" value="0"></label>
-          <label class="full"><span><span class="de">Kinder unter 6 Jahren <small>gratis</small></span><span class="en">Children under 6 <small>free</small></span><span class="fr">Enfants de moins de 6 ans <small>gratuit</small></span></span><input id="c-tod" type="number" inputmode="numeric" min="0" max="4" value="0"></label>
+          <label><span><span class="de">Kinder <small>2 bis 5 Jahre</small></span><span class="en">Children <small>aged 2 to 5</small></span><span class="fr">Enfants <small>2 à 5 ans</small></span></span><input id="c-tod" type="number" inputmode="numeric" min="0" max="4" value="0"></label>
+          <label><span><span class="de">Kinder unter 2 Jahren <small>gratis</small></span><span class="en">Children under 2 <small>free</small></span><span class="fr">Enfants de moins de 2 ans <small>gratuit</small></span></span><input id="c-bab" type="number" inputmode="numeric" min="0" max="4" value="0"></label>
         </div>
         <div class="calc-out" id="calcOut" aria-live="polite"></div>
       </div>
@@ -714,7 +715,7 @@ html[data-lang="fr"] .nav .btn { padding: 8px 14px; }
             <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Bettwäsche und Handtücher</span><span class="en">Bed linen and towels</span><span class="fr">Linge de lit et serviettes</span></li>
             <li><svg class="ic"><use href="#i-check"/></svg><span class="de">WLAN</span><span class="en">Wi-Fi</span><span class="fr">Wi-Fi</span></li>
             <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Kostenloser Parkplatz beim Haus</span><span class="en">Free parking at the house</span><span class="fr">Place de parking gratuite près de la maison</span></li>
-            <li><svg class="ic"><use href="#i-users"/></svg><span class="de">Kinder unter 6 Jahren (bis 5,99 Jahre) übernachten gratis</span><span class="en">Children under 6 (up to 5.99 years) stay free</span><span class="fr">Les enfants de moins de 6 ans (jusqu'à 5,99 ans) séjournent gratuitement</span></li>
+            <li><svg class="ic"><use href="#i-users"/></svg><span class="de">Kinder unter 2 Jahren übernachten gratis. Kinder von 2 bis 5 Jahren zahlen 5 CHF pro Nacht.</span><span class="en">Children under 2 stay free. Children aged 2 to 5 pay CHF 5 per night.</span><span class="fr">Les enfants de moins de 2 ans séjournent gratuitement. Les enfants de 2 à 5 ans paient 5 CHF par nuit.</span></li>
           </ul>
         </div>
         <div>
@@ -949,7 +950,8 @@ html[data-lang="fr"] .nav .btn { padding: 8px 14px; }
           <label><span><span class="de">Abreise</span><span class="en">Departure</span><span class="fr">Départ</span></span><input id="f-to" class="dpick" type="text" readonly inputmode="none" autocomplete="off"></label>
           <label><span><span class="de">Erwachsene</span><span class="en">Adults</span><span class="fr">Adultes</span></span><input id="f-adults" type="number" inputmode="numeric" min="0" max="7" value="2"></label>
           <label><span><span class="de">Kinder <small>6 bis 16 Jahre</small></span><span class="en">Children <small>aged 6 to 16</small></span><span class="fr">Enfants <small>6 à 16 ans</small></span></span><input id="f-kids" type="number" inputmode="numeric" min="0" max="6" value="0"></label>
-          <label class="full"><span><span class="de">Kinder unter 6 Jahren <small>gratis</small></span><span class="en">Children under 6 <small>free</small></span><span class="fr">Enfants de moins de 6 ans <small>gratuit</small></span></span><input id="f-tod" type="number" inputmode="numeric" min="0" max="4" value="0"></label>
+          <label><span><span class="de">Kinder <small>2 bis 5 Jahre</small></span><span class="en">Children <small>aged 2 to 5</small></span><span class="fr">Enfants <small>2 à 5 ans</small></span></span><input id="f-tod" type="number" inputmode="numeric" min="0" max="4" value="0"></label>
+          <label><span><span class="de">Kinder unter 2 Jahren <small>gratis</small></span><span class="en">Children under 2 <small>free</small></span><span class="fr">Enfants de moins de 2 ans <small>gratuit</small></span></span><input id="f-bab" type="number" inputmode="numeric" min="0" max="4" value="0"></label>
           <label class="full"><span><span class="de">Telefon (optional)</span><span class="en">Phone (optional)</span><span class="fr">Téléphone (facultatif)</span></span><input id="f-tel" type="tel" autocomplete="tel"></label>
           <label class="full"><span><span class="de">Nachricht</span><span class="en">Message</span><span class="fr">Message</span></span><textarea id="f-msg"></textarea></label>
           <div class="full calc-out" id="formPrice" aria-live="polite" hidden></div>
@@ -986,7 +988,7 @@ html[data-lang="fr"] .nav .btn { padding: 8px 14px; }
         <details><summary><span><span class="de">Wie reserviere ich die Wohnung?</span><span class="en">How do I reserve the apartment?</span><span class="fr">Comment réserver l'appartement ?</span></span><svg class="ic"><use href="#i-chev"/></svg></summary><p><span class="de">Schicke uns über «Anfragen» eine Nachricht mit deinen Reisedaten. Wir antworten persönlich per E-Mail, und die Reservierung gilt, sobald du bestätigt hast.</span><span class="en">Send us an enquiry on the “Enquire” page with your dates. We reply personally by email, and the reservation applies once you have confirmed.</span><span class="fr">Envoyez-nous un message via « Demander » avec vos dates de voyage. Nous répondons personnellement par e-mail, et la réservation est valable dès que vous avez confirmé.</span></p></details>
         <details><summary><span><span class="de">Für wie viele Personen ist die Wohnung?</span><span class="en">How many people does the apartment sleep?</span><span class="fr">Pour combien de personnes est l'appartement ?</span></span><svg class="ic"><use href="#i-chev"/></svg></summary><p><span class="de">Bis zu sieben Gäste: fünf in Betten (zwei Doppelbetten und ein Einzelbett) und zwei auf der Couch. Auf Wunsch stellen wir zusätzlich ein Kinderbett auf.</span><span class="en">Up to seven guests: five in beds (two double beds and one single bed) and two on the sofa. A cot can also be set up on request.</span><span class="fr">Jusqu'à sept personnes : cinq dans des lits (deux lits doubles et un lit simple) et deux sur le canapé. Sur demande, nous installons en plus un lit d'enfant.</span></p></details>
         <details><summary><span><span class="de">Wann ist Check-in und Check-out?</span><span class="en">When are check-in and check-out?</span><span class="fr">Quand ont lieu l'arrivée et le départ ?</span></span><svg class="ic"><use href="#i-chev"/></svg></summary><p><span class="de">Check-in ist ab 16.00 Uhr, Check-out bis 11.00 Uhr.</span><span class="en">Check-in is from 4:00 pm, check-out by 11:00 am.</span><span class="fr">L'arrivée est possible dès 16 h, le départ jusqu'à 11 h.</span></p></details>
-        <details><summary><span><span class="de">Wie viel zahlen Kinder?</span><span class="en">How much do children pay?</span><span class="fr">Combien paient les enfants ?</span></span><svg class="ic"><use href="#i-chev"/></svg></summary><p><span class="de">Kinder unter 6 Jahren übernachten gratis. Kinder von 6 bis 16 Jahren zahlen den Kinderpreis, aber keine Kurtaxe. Den genauen Preis siehst du im <a href="#preise">Preisrechner</a>.</span><span class="en">Children under 6 stay free. Children aged 6 to 16 pay the child rate, but no tourist tax. You can see the exact price in the <a href="#preise">price calculator</a>.</span><span class="fr">Les enfants de moins de 6 ans séjournent gratuitement. Les enfants de 6 à 16 ans paient le tarif enfant, mais pas de taxe de séjour. Vous voyez le prix exact dans le <a href="#preise">calculateur de prix</a>.</span></p></details>
+        <details><summary><span><span class="de">Wie viel zahlen Kinder?</span><span class="en">How much do children pay?</span><span class="fr">Combien paient les enfants ?</span></span><svg class="ic"><use href="#i-chev"/></svg></summary><p><span class="de">Kinder unter 2 Jahren übernachten gratis, Kinder von 2 bis 5 Jahren zahlen 5 CHF pro Nacht. Kinder von 6 bis 16 Jahren zahlen den Kinderpreis, aber keine Kurtaxe. Den genauen Preis siehst du im <a href="#preise">Preisrechner</a>.</span><span class="en">Children under 2 stay free, children aged 2 to 5 pay CHF 5 per night. Children aged 6 to 16 pay the child rate, but no tourist tax. You can see the exact price in the <a href="#preise">price calculator</a>.</span><span class="fr">Les enfants de moins de 2 ans séjournent gratuitement, les enfants de 2 à 5 ans paient 5 CHF par nuit. Les enfants de 6 à 16 ans paient le tarif enfant, mais pas de taxe de séjour. Vous voyez le prix exact dans le <a href="#preise">calculateur de prix</a>.</span></p></details>
         <details><summary><span><span class="de">Kann ich stornieren?</span><span class="en">Can I cancel?</span><span class="fr">Puis-je annuler ?</span></span><svg class="ic"><use href="#i-chev"/></svg></summary><p><span class="de">Bis 15 Tage vor Mietbeginn ist die Stornierung kostenlos, und die Anzahlung wird zurückerstattet. Ab 14 Tagen vorher zahlst du 50 % des Mietpreises, ab 7 Tagen vorher oder bei Nichterscheinen 100 %. Alle Fristen stehen bei <a href="#preise">Preise und Infos</a>.</span><span class="en">Up to 15 days before the start of the rental, cancellation is free and the deposit is refunded. From 14 days before you pay 50% of the rental price, from 7 days before or if you do not show up 100%. All deadlines are on the <a href="#preise">Prices and info</a> page.</span><span class="fr">Jusqu'à 15 jours avant le début de la location, l'annulation est gratuite et l'acompte est remboursé. À partir de 14 jours avant, vous payez 50 % du prix de la location, à partir de 7 jours avant ou en cas de non-présentation 100 %. Tous les délais figurent sous <a href="#preise">Prix et infos</a>.</span></p></details>
         <details><summary><span><span class="de">Was ist die Appenzeller Ferienkarte?</span><span class="en">What is the Appenzeller holiday card?</span><span class="fr">Qu'est-ce que la carte de vacances d'Appenzell ?</span></span><svg class="ic"><use href="#i-chev"/></svg></summary><p><span class="de">Als Gast erhältst du damit über 40 Angebote in der Region gratis, zum Beispiel Bergbahnen, Museen und Bäder. Bei uns bekommst du sie ab 3 Nächten dazu. Alle Angebote findest du auf der Seite <a href="#ferienkarte">Ferienkarte</a>.</span><span class="en">As a guest you get over 40 offers in the region for free, for example cable cars, museums and pools. With us you get it from 3 nights. You will find all offers on the <a href="#ferienkarte">holiday card</a> page.</span><span class="fr">Elle vous donne accès gratuitement à plus de 40 offres dans la région, par exemple remontées mécaniques, musées et bains. Chez nous, vous la recevez dès 3 nuits. Vous trouverez toutes les offres sur la page <a href="#ferienkarte">Carte de vacances</a>.</span></p></details>
         <details><summary><span><span class="de">Sind Haustiere erlaubt?</span><span class="en">Are pets allowed?</span><span class="fr">Les animaux de compagnie sont-ils admis ?</span></span><svg class="ic"><use href="#i-chev"/></svg></summary><p><span class="de">Nein, Haustiere sind in der Wohnung nicht gestattet. Das Rauchen ist ebenfalls verboten. Auf dem Betrieb leben Katzen, Hunde und Kühe. Wenn du oder jemand in deiner Gruppe Allergien hat, schreib uns das bitte in deiner Anfrage.</span><span class="en">No, pets are not allowed in the apartment. Smoking is not allowed either. Cats, dogs and cows live on the farm. If you or anyone in your group has allergies, please tell us in your enquiry.</span><span class="fr">Non, les animaux de compagnie ne sont pas admis dans l'appartement. Il est également interdit de fumer. Des chats, des chiens et des vaches vivent sur l'exploitation. Si vous ou une personne de votre groupe êtes allergique, veuillez nous l'indiquer dans votre demande.</span></p></details>
@@ -1284,11 +1286,11 @@ html[data-lang="fr"] .nav .btn { padding: 8px 14px; }
     var f = function (id) { return v(id); };
     var lines;
     if (lang === "fr") {
-      lines = ["Demande appartement de vacances Brülisauer", "", "Nom : " + v("f-name"), "E-mail : " + v("f-mail"), "Téléphone : " + (v("f-tel") || "-"), "Arrivée : " + dmy(getD("f-from")), "Départ : " + dmy(getD("f-to")), "Adultes : " + v("f-adults") + ", enfants (6 à 16 ans) : " + v("f-kids") + ", enfants de moins de 6 ans : " + v("f-tod")].concat(calcLine("fr"), ["", v("f-msg")]);
+      lines = ["Demande appartement de vacances Brülisauer", "", "Nom : " + v("f-name"), "E-mail : " + v("f-mail"), "Téléphone : " + (v("f-tel") || "-"), "Arrivée : " + dmy(getD("f-from")), "Départ : " + dmy(getD("f-to")), "Adultes : " + v("f-adults") + ", enfants (6 à 16 ans) : " + v("f-kids") + ", enfants de 2 à 5 ans : " + v("f-tod") + ", enfants de moins de 2 ans : " + v("f-bab")].concat(calcLine("fr"), ["", v("f-msg")]);
     } else if (lang === "en") {
-      lines = ["Enquiry Ferienwohnung Brülisauer", "", "Name: " + v("f-name"), "Email: " + v("f-mail"), "Phone: " + (v("f-tel") || "-"), "Arrival: " + dmy(getD("f-from")), "Departure: " + dmy(getD("f-to")), "Adults: " + v("f-adults") + ", children (6 to 16): " + v("f-kids") + ", children under 6: " + v("f-tod")].concat(calcLine("en"), ["", v("f-msg")]);
+      lines = ["Enquiry Ferienwohnung Brülisauer", "", "Name: " + v("f-name"), "Email: " + v("f-mail"), "Phone: " + (v("f-tel") || "-"), "Arrival: " + dmy(getD("f-from")), "Departure: " + dmy(getD("f-to")), "Adults: " + v("f-adults") + ", children (6 to 16): " + v("f-kids") + ", children 2 to 5: " + v("f-tod") + ", children under 2: " + v("f-bab")].concat(calcLine("en"), ["", v("f-msg")]);
     } else {
-      lines = ["Anfrage Ferienwohnung Brülisauer", "", "Name: " + v("f-name"), "E-Mail: " + v("f-mail"), "Telefon: " + (v("f-tel") || "-"), "Anreise: " + dmy(getD("f-from")), "Abreise: " + dmy(getD("f-to")), "Erwachsene: " + v("f-adults") + ", Kinder (6 bis 16): " + v("f-kids") + ", Kinder unter 6: " + v("f-tod")].concat(calcLine("de"), ["", v("f-msg")]);
+      lines = ["Anfrage Ferienwohnung Brülisauer", "", "Name: " + v("f-name"), "E-Mail: " + v("f-mail"), "Telefon: " + (v("f-tel") || "-"), "Anreise: " + dmy(getD("f-from")), "Abreise: " + dmy(getD("f-to")), "Erwachsene: " + v("f-adults") + ", Kinder (6 bis 16): " + v("f-kids") + ", Kinder 2 bis 5: " + v("f-tod") + ", Kinder unter 2: " + v("f-bab")].concat(calcLine("de"), ["", v("f-msg")]);
     }
     var text = lines.join("\n");
     var subject = L("Anfrage Ferienwohnung", "Enquiry holiday apartment", "Demande appartement de vacances");
@@ -1339,7 +1341,7 @@ html[data-lang="fr"] .nav .btn { padding: 8px 14px; }
     winter: { adult: 40, child: 15, sofa: 30 }    // November bis März, pro Person und Nacht
   };
   var P = {
-    toddler: 0,     // Kinder unter 6 Jahren, pro Nacht (0 = gratis)
+    toddler: 5,     // Kinder von 2 bis 5 Jahren, pro Nacht (Kinder unter 2 Jahren gratis)
     tax: 2.5,       // Kurtaxe pro Erwachsenem und Nacht (Kinder bis 16 Jahre sind befreit)
     cleaning: 110,        // Endreinigung, einmalig
     cleaningLarge: 150,   // Endreinigung ab 6 Personen
@@ -1359,13 +1361,13 @@ html[data-lang="fr"] .nav .btn { padding: 8px 14px; }
     }
     return c;
   }
-  function quote(cnt, ad, ch, to) {
+  function quote(cnt, ad, ch, to, ba) {
     var n = cnt.summer + cnt.winter;
     var bed = Math.min(ad, 5), sofa = Math.max(0, ad - 5);   // 6. und 7. Erwachsener schlafen auf dem Sofa
     var a = bed * (cnt.summer * SEASON.summer.adult + cnt.winter * SEASON.winter.adult);
     var s = sofa * (cnt.summer * SEASON.summer.sofa + cnt.winter * SEASON.winter.sofa);
     var c = ch * (cnt.summer * SEASON.summer.child + cnt.winter * SEASON.winter.child);
-    var k = to * n * P.toddler, tax = ad * n * P.tax, cl = (ad + ch + to >= P.largeFrom) ? P.cleaningLarge : P.cleaning;
+    var k = to * n * P.toddler, tax = ad * n * P.tax, cl = (ad + ch + to + (ba || 0) >= P.largeFrom) ? P.cleaningLarge : P.cleaning;
     return { adults: a, sofa: s, kids: c, toddlers: k, tax: tax, cleaning: cl, total: a + s + c + k + tax + cl };
   }
   function num(id) { var n = parseInt(document.getElementById(id).value, 10); return isNaN(n) || n < 0 ? 0 : n; }
@@ -1388,7 +1390,7 @@ html[data-lang="fr"] .nav .btn { padding: 8px 14px; }
   function calcInner() {
     var out = document.getElementById("calcOut");
     var a = getD("c-from"), d = getD("c-to");
-    var ad = num("c-adults"), ch = num("c-kids"), to = num("c-tod");
+    var ad = num("c-adults"), ch = num("c-kids"), to = num("c-tod"), ba = num("c-bab");
     lastCalc = null;
     checkForm();
     if (!a || !d) {
@@ -1412,7 +1414,7 @@ html[data-lang="fr"] .nav .btn { padding: 8px 14px; }
       return;
     }
     var cnt = countNights(a, d), n = cnt.summer + cnt.winter;
-    var q = quote(cnt, ad, ch, to);
+    var q = quote(cnt, ad, ch, to, ba);
     function nightsT(k) { return k + " " + (k === 1 ? t("Nacht", "night", "nuit") : t("Nächte", "nights", "nuits")); }
     var nT = nightsT(n);
     function detail(count, key) {
@@ -1428,9 +1430,10 @@ html[data-lang="fr"] .nav .btn { padding: 8px 14px; }
     row(t("Erwachsene", "Adults", "Adultes"), detail(Math.min(ad, 5), "adult"), money(q.adults));
     if (ad > 5) row(t("Erwachsene auf dem Sofa (ab der 6. Person)", "Adults on the sofa (from the 6th person)", "Adultes sur le canapé (à partir de la 6e personne)"), detail(ad - 5, "sofa"), money(q.sofa));
     if (ch > 0) row(t("Kinder (6 bis 16 Jahre)", "Children (6 to 16)", "Enfants (6 à 16 ans)"), detail(ch, "child"), money(q.kids));
-    if (to > 0) row(t("Kinder unter 6 Jahren", "Children under 6", "Enfants de moins de 6 ans"), to + " × " + nT, P.toddler === 0 ? t("gratis", "free", "gratuit") : money(q.toddlers));
+    if (to > 0) row(t("Kinder (2 bis 5 Jahre)", "Children (2 to 5)", "Enfants (2 à 5 ans)"), to + " × " + nT + " × " + money(P.toddler), money(q.toddlers));
+    if (ba > 0) row(t("Kinder unter 2 Jahren", "Children under 2", "Enfants de moins de 2 ans"), ba + " × " + nT, t("gratis", "free", "gratuit"));
     row(t("Kurtaxe", "Tourist tax", "Taxe de séjour"), ad + " " + t("Erwachsene", "adults", "adultes") + " × " + nT + " × " + money(P.tax) + "<br>" + t("Kinder bis 16 Jahre sind befreit", "Children up to 16 are exempt", "Les enfants jusqu'à 16 ans sont exemptés"), money(q.tax));
-    row(t("Endreinigung", "Final cleaning", "Nettoyage final"), (ad + ch + to >= P.largeFrom) ? t("einmalig, ab 6 Personen", "one-off, for 6 or more people", "unique, à partir de 6 personnes") : t("einmalig", "one-off", "unique"), money(q.cleaning));
+    row(t("Endreinigung", "Final cleaning", "Nettoyage final"), (ad + ch + to + ba >= P.largeFrom) ? t("einmalig, ab 6 Personen", "one-off, for 6 or more people", "unique, à partir de 6 personnes") : t("einmalig", "one-off", "unique"), money(q.cleaning));
     var warn = "";
     if (ad + ch > MAX_GUESTS) {
       warn = '<p class="warn">' + t("Die Wohnung bietet Platz für bis zu " + MAX_GUESTS + " Gäste. Schreib uns, wenn ihr mehr seid.", "The apartment sleeps up to " + MAX_GUESTS + " guests. Write to us if you are more.") + "</p>";
@@ -1442,19 +1445,19 @@ html[data-lang="fr"] .nav .btn { padding: 8px 14px; }
       '<p class="note" style="margin:14px 0 0">' + card + ' <a href="#ferienkarte">' + t("Alle Angebote", "All offers", "Toutes les offres") + "</a></p>" +
       '<p class="note" style="margin:8px 0 0">' + t("Das ist eine unverbindliche Berechnung. Den verbindlichen Preis bestätigen wir dir in unserer Antwort.", "This is a non-binding calculation. We confirm the final price in our reply.", "Ceci est un calcul sans engagement. Nous vous confirmons le prix définitif dans notre réponse.") + "</p>" +
       '<div class="actions"><a class="btn" href="#anfrage" data-ask="1">' + t("Mit diesen Angaben anfragen", "Enquire with these details", "Demander avec ces informations") + "</a></div>";
-    lastCalc = { nights: n, adults: ad, kids: ch, toddlers: to, total: q.total };
+    lastCalc = { nights: n, adults: ad, kids: ch, toddlers: to, babies: ba, total: q.total };
   }
   function calcLine(l) {
     if (!lastCalc) return [];
     var c = lastCalc, tot = c.total.toLocaleString("de-CH", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-    if (l === "fr") return ["Calculateur de prix : adultes " + c.adults + ", enfants (6 à 16 ans) " + c.kids + ", enfants de moins de 6 ans " + c.toddlers + ", nuits " + c.nights + ", prix CHF " + tot];
-    if (l === "en") return ["Price calculator: adults " + c.adults + ", children (6 to 16) " + c.kids + ", children under 6 " + c.toddlers + ", nights " + c.nights + ", price CHF " + tot];
-    return ["Preisrechner: Erwachsene " + c.adults + ", Kinder (6 bis 16) " + c.kids + ", Kinder unter 6 Jahren " + c.toddlers + ", Nächte " + c.nights + ", Preis CHF " + tot];
+    if (l === "fr") return ["Calculateur de prix : adultes " + c.adults + ", enfants (6 à 16 ans) " + c.kids + ", enfants de 2 à 5 ans " + c.toddlers + ", enfants de moins de 2 ans " + c.babies + ", nuits " + c.nights + ", prix CHF " + tot];
+    if (l === "en") return ["Price calculator: adults " + c.adults + ", children (6 to 16) " + c.kids + ", children 2 to 5 " + c.toddlers + ", children under 2 " + c.babies + ", nights " + c.nights + ", price CHF " + tot];
+    return ["Preisrechner: Erwachsene " + c.adults + ", Kinder (6 bis 16) " + c.kids + ", Kinder 2 bis 5 Jahre " + c.toddlers + ", Kinder unter 2 Jahren " + c.babies + ", Nächte " + c.nights + ", Preis CHF " + tot];
   }
   document.getElementById("calcOut").addEventListener("click", function (e) {
     if (!e.target.closest("[data-ask]") || !lastCalc) return;
   });
-  ["adults", "kids", "tod"].forEach(function (k) {
+  ["adults", "kids", "tod", "bab"].forEach(function (k) {
     ["c-", "f-"].forEach(function (pre, i) {
       var other = ["f-", "c-"][i];
       document.getElementById(pre + k).addEventListener("input", function () {
