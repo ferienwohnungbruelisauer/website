@@ -51,7 +51,7 @@ html { scroll-behavior: smooth; }
 body { margin: 0; background: var(--bg); color: var(--fg); font-family: var(--font-body); font-size: 17px; line-height: 1.65; -webkit-font-smoothing: antialiased; }
 [hidden] { display: none !important; }
 img { max-width: 100%; }
-html[data-lang="en"] .de, html[data-lang="de"] .en { display: none; }
+html[data-lang="de"] :is(.en, .fr), html[data-lang="en"] :is(.de, .fr), html[data-lang="fr"] :is(.de, .en) { display: none; }
 .wrap { width: 100%; max-width: 1120px; margin: 0 auto; padding-left: max(20px, env(safe-area-inset-left, 0px)); padding-right: max(20px, env(safe-area-inset-right, 0px)); }
 h1, h2, h3 { font-family: var(--font-display); font-weight: 400; line-height: 1.12; margin: 0; text-wrap: balance; letter-spacing: -.01em; }
 h1 { font-size: clamp(2.5rem, 7vw, 4.6rem); }
@@ -437,6 +437,11 @@ footer a:hover { text-decoration-color: var(--gold); }
 @media (max-width: 820px) { .welcome-in { grid-template-columns: 1fr; } .band-img { width: 100%; opacity: .55; -webkit-mask-image: none; mask-image: none; } }
 .welcome-img.second { margin-top: 34px; }
 .welcome-img.second img { border-radius: 14px; }
+
+/* Französisch: schmalere Navigation */
+.nav a { white-space: nowrap; }
+html[data-lang="fr"] .nav { gap: 14px; font-size: .88rem; }
+html[data-lang="fr"] .nav .btn { padding: 8px 14px; }
 </style>
 </head>
 <body>
@@ -475,16 +480,17 @@ footer a:hover { text-decoration-color: var(--gold); }
     <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="nav" aria-label="Menü / Menu"><svg class="ic"><use href="#i-menu"/></svg></button>
     <nav class="nav" id="nav">
       <a href="#start">Start</a>
-      <a href="#wohnung"><span class="de">Wohnung</span><span class="en">Apartment</span></a>
-      <a href="#lage"><span class="de">Lage</span><span class="en">Location</span></a>
-      <a href="#ferienkarte"><span class="de">Ferienkarte</span><span class="en">Holiday card</span></a>
-      <a href="#preise"><span class="de">Preise und Infos</span><span class="en">Prices and info</span></a>
-      <a href="#kalender"><span class="de">Verfügbarkeit</span><span class="en">Availability</span></a>
+      <a href="#wohnung"><span class="de">Wohnung</span><span class="en">Apartment</span><span class="fr">Appartement</span></a>
+      <a href="#lage"><span class="de">Lage</span><span class="en">Location</span><span class="fr">Situation</span></a>
+      <a href="#ferienkarte"><span class="de">Ferienkarte</span><span class="en">Holiday card</span><span class="fr">Carte vacances</span></a>
+      <a href="#preise"><span class="de">Preise und Infos</span><span class="en">Prices and info</span><span class="fr">Prix et infos</span></a>
+      <a href="#kalender"><span class="de">Verfügbarkeit</span><span class="en">Availability</span><span class="fr">Disponibilités</span></a>
       <span class="lang" role="group" aria-label="Sprache / Language">
         <button type="button" data-set="de" aria-pressed="true">DE</button>
         <button type="button" data-set="en" aria-pressed="false">EN</button>
+        <button type="button" data-set="fr" aria-pressed="false">FR</button>
       </span>
-      <a class="btn small" href="#anfrage"><span class="de">Anfragen</span><span class="en">Enquire</span></a>
+      <a class="btn small" href="#anfrage"><span class="de">Anfragen</span><span class="en">Enquire</span><span class="fr">Demander</span></a>
     </nav>
   </div>
 </header>
@@ -506,11 +512,11 @@ footer a:hover { text-decoration-color: var(--gold); }
       <img src="hero.jpg" alt="" onerror="this.remove()">
     </div>
     <div class="wrap hero-in">
-      <h1><span class="de">Ferien auf dem Bauernhof, am Fuss des Alpsteins</span><span class="en">Holidays on a farm, at the foot of the Alpstein</span></h1>
-      <p><span class="de">Zwei Schlafzimmer, bis zu sieben Gäste und die Wanderwege von Brülisau direkt vor der Tür.</span><span class="en">Two bedrooms, up to seven guests and the hiking trails of Brülisau right on your doorstep.</span></p>
+      <h1><span class="de">Ferien auf dem Bauernhof, am Fuss des Alpsteins</span><span class="en">Holidays on a farm, at the foot of the Alpstein</span><span class="fr">Vacances à la ferme, au pied de l'Alpstein</span></h1>
+      <p><span class="de">Zwei Schlafzimmer, bis zu sieben Gäste und die Wanderwege von Brülisau direkt vor der Tür.</span><span class="en">Two bedrooms, up to seven guests and the hiking trails of Brülisau right on your doorstep.</span><span class="fr">Deux chambres, jusqu'à sept personnes et les sentiers de randonnée de Brülisau devant la porte.</span></p>
       <div class="btns">
-        <a class="btn" href="#anfrage"><span class="de">Jetzt anfragen</span><span class="en">Send an enquiry</span></a>
-        <a class="btn line" href="#kalender"><span class="de">Freie Tage ansehen</span><span class="en">See free dates</span></a>
+        <a class="btn" href="#anfrage"><span class="de">Jetzt anfragen</span><span class="en">Send an enquiry</span><span class="fr">Envoyer une demande</span></a>
+        <a class="btn line" href="#kalender"><span class="de">Freie Tage ansehen</span><span class="en">See free dates</span><span class="fr">Voir les dates libres</span></a>
       </div>
     </div>
   </div>
@@ -518,71 +524,71 @@ footer a:hover { text-decoration-color: var(--gold); }
   <div class="glance">
     <div class="wrap">
       <div class="glance-in">
-        <div><svg class="ic"><use href="#i-users"/></svg><div><strong>7</strong><span class="l"><span class="de">Gäste maximal</span><span class="en">guests at most</span></span></div></div>
-        <div><svg class="ic"><use href="#i-door"/></svg><div><strong>2</strong><span class="l"><span class="de">Schlafzimmer</span><span class="en">bedrooms</span></span></div></div>
-        <div><svg class="ic"><use href="#i-bed"/></svg><div><strong>5</strong><span class="l"><span class="de">Betten</span><span class="en">beds</span></span></div></div>
-        <div><svg class="ic"><use href="#i-sofa"/></svg><div><strong>+2</strong><span class="l"><span class="de">auf der Couch</span><span class="en">on the sofa</span></span></div></div>
+        <div><svg class="ic"><use href="#i-users"/></svg><div><strong>7</strong><span class="l"><span class="de">Gäste maximal</span><span class="en">guests at most</span><span class="fr">personnes au maximum</span></span></div></div>
+        <div><svg class="ic"><use href="#i-door"/></svg><div><strong>2</strong><span class="l"><span class="de">Schlafzimmer</span><span class="en">bedrooms</span><span class="fr">chambres</span></span></div></div>
+        <div><svg class="ic"><use href="#i-bed"/></svg><div><strong>5</strong><span class="l"><span class="de">Betten</span><span class="en">beds</span><span class="fr">lits</span></span></div></div>
+        <div><svg class="ic"><use href="#i-sofa"/></svg><div><strong>+2</strong><span class="l"><span class="de">auf der Couch</span><span class="en">on the sofa</span><span class="fr">sur le canapé</span></span></div></div>
       </div>
     </div>
   </div>
 
   <section class="sec welcome" id="willkommen">
     <div class="wrap welcome-in">
-      <figure class="welcome-img"><img src="hof.jpg" alt="Das Haus in Brülisau mit Blick auf den Alpstein / The house in Brülisau with a view of the Alpstein" loading="lazy" decoding="async" onerror="this.closest('.welcome').remove()"><figcaption><span class="de">Unser Haus in Brülisau</span><span class="en">Our house in Brülisau</span></figcaption></figure>
+      <figure class="welcome-img"><img src="haus.JPG" alt="Das Haus in Brülisau mit Blick auf den Alpstein / The house in Brülisau with a view of the Alpstein" loading="lazy" decoding="async" onerror="this.closest('.welcome').remove()"><figcaption><span class="de">Unser Haus in Brülisau</span><span class="en">Our house in Brülisau</span><span class="fr">Notre maison à Brülisau</span></figcaption></figure>
       <div class="welcome-txt">
-        <h2><span class="de">Willkommen in Brülisau</span><span class="en">Welcome to Brülisau</span></h2>
-        <p class="lead"><span class="de">Unser traditionelles Appenzeller Haus steht im Dorf Brülisau, umgeben von Wiesen und mit Blick auf den Alpstein. Von hier aus beginnen viele Wanderwege direkt vor der Haustür.</span><span class="en">Our traditional Appenzell house stands in the village of Brülisau, surrounded by meadows and with a view of the Alpstein. Many hiking trails start right on your doorstep.</span></p>
-        <p><a class="btn dark" href="#lage"><span class="de">Lage und Ausflüge ansehen</span><span class="en">See location and day trips</span></a></p>
-        <figure class="welcome-img second"><img src="ausblick.jpg" alt="Das Haus mit Blick auf die Felswand des Alpsteins / The house with a view of the Alpstein cliffs" loading="lazy" decoding="async" onerror="this.closest('figure').remove()"><figcaption><span class="de">Haus mit Ausblick auf den Alpstein</span><span class="en">The house with a view of the Alpstein</span></figcaption></figure>
+        <h2><span class="de">Willkommen in Brülisau</span><span class="en">Welcome to Brülisau</span><span class="fr">Bienvenue à Brülisau</span></h2>
+        <p class="lead"><span class="de">Unser traditionelles Appenzeller Haus steht im Dorf Brülisau, umgeben von Wiesen und mit Blick auf den Alpstein. Von hier aus beginnen viele Wanderwege direkt vor der Haustür.</span><span class="en">Our traditional Appenzell house stands in the village of Brülisau, surrounded by meadows and with a view of the Alpstein. Many hiking trails start right on your doorstep.</span><span class="fr">Notre maison appenzelloise traditionnelle se trouve dans le village de Brülisau, entourée de prairies et avec vue sur l'Alpstein. De nombreux sentiers de randonnée partent directement devant la porte.</span></p>
+        <p><a class="btn dark" href="#lage"><span class="de">Lage und Ausflüge ansehen</span><span class="en">See location and day trips</span><span class="fr">Voir la situation et les excursions</span></a></p>
+        <figure class="welcome-img second"><img src="berge.JPG" alt="Das Haus mit Blick auf die Felswand des Alpsteins / The house with a view of the Alpstein cliffs" loading="lazy" decoding="async" onerror="this.closest('figure').remove()"><figcaption><span class="de">Haus mit Ausblick auf den Alpstein</span><span class="en">The house with a view of the Alpstein</span><span class="fr">La maison avec vue sur l'Alpstein</span></figcaption></figure>
       </div>
     </div>
   </section>
 
   <section class="sec">
     <div class="wrap">
-      <h2><span class="de">Entdecke die Ferienwohnung</span><span class="en">Discover the apartment</span></h2>
-      <p class="lead"><span class="de">Hier findest du alles für die Planung deines Aufenthalts in Brülisau.</span><span class="en">Everything you need to plan your stay in Brülisau.</span></p>
+      <h2><span class="de">Entdecke die Ferienwohnung</span><span class="en">Discover the apartment</span><span class="fr">Découvrez l'appartement</span></h2>
+      <p class="lead"><span class="de">Hier findest du alles für die Planung deines Aufenthalts in Brülisau.</span><span class="en">Everything you need to plan your stay in Brülisau.</span><span class="fr">Vous trouverez ici tout ce qu'il faut pour préparer votre séjour à Brülisau.</span></p>
       <div class="tiles">
-        <a class="tile" href="#wohnung"><svg class="ic"><use href="#i-door"/></svg><h3><span class="de">Wohnung</span><span class="en">Apartment</span></h3><p><span class="de">Zimmer, Betten und Ausstattung</span><span class="en">Rooms, beds and amenities</span></p></a>
-        <a class="tile" href="#lage"><svg class="ic"><use href="#i-mountain"/></svg><h3><span class="de">Lage</span><span class="en">Location</span></h3><p><span class="de">Wandern und Ausflüge im Alpstein</span><span class="en">Hiking and day trips in the Alpstein</span></p></a>
-        <a class="tile" href="#ferienkarte"><svg class="ic"><use href="#i-cable"/></svg><h3><span class="de">Ferienkarte</span><span class="en">Holiday card</span></h3><p><span class="de">Bergbahnen, Museen und Bäder gratis, ab 3 Nächten</span><span class="en">Cable cars, museums and pools for free, from 3 nights</span></p></a>
-        <a class="tile" href="#preise"><svg class="ic"><use href="#i-check"/></svg><h3><span class="de">Preise und Infos</span><span class="en">Prices and info</span></h3><p><span class="de">Preisrechner, Zeiten und Stornierung</span><span class="en">Price calculator, times and cancellation</span></p></a>
-        <a class="tile" href="#kalender"><svg class="ic"><use href="#i-calendar"/></svg><h3><span class="de">Verfügbarkeit</span><span class="en">Availability</span></h3><p><span class="de">Freie Tage im Kalender</span><span class="en">Free dates in the calendar</span></p></a>
+        <a class="tile" href="#wohnung"><svg class="ic"><use href="#i-door"/></svg><h3><span class="de">Wohnung</span><span class="en">Apartment</span><span class="fr">Appartement</span></h3><p><span class="de">Zimmer, Betten und Ausstattung</span><span class="en">Rooms, beds and amenities</span><span class="fr">Chambres, lits et équipement</span></p></a>
+        <a class="tile" href="#lage"><svg class="ic"><use href="#i-mountain"/></svg><h3><span class="de">Lage</span><span class="en">Location</span><span class="fr">Situation</span></h3><p><span class="de">Wandern und Ausflüge im Alpstein</span><span class="en">Hiking and day trips in the Alpstein</span><span class="fr">Randonnées et excursions dans l'Alpstein</span></p></a>
+        <a class="tile" href="#ferienkarte"><svg class="ic"><use href="#i-cable"/></svg><h3><span class="de">Ferienkarte</span><span class="en">Holiday card</span><span class="fr">Carte de vacances</span></h3><p><span class="de">Bergbahnen, Museen und Bäder gratis, ab 3 Nächten</span><span class="en">Cable cars, museums and pools for free, from 3 nights</span><span class="fr">Remontées mécaniques, musées et bains gratuits, dès 3 nuits</span></p></a>
+        <a class="tile" href="#preise"><svg class="ic"><use href="#i-check"/></svg><h3><span class="de">Preise und Infos</span><span class="en">Prices and info</span><span class="fr">Prix et infos</span></h3><p><span class="de">Preisrechner, Zeiten und Stornierung</span><span class="en">Price calculator, times and cancellation</span><span class="fr">Calculateur de prix, horaires et annulation</span></p></a>
+        <a class="tile" href="#kalender"><svg class="ic"><use href="#i-calendar"/></svg><h3><span class="de">Verfügbarkeit</span><span class="en">Availability</span><span class="fr">Disponibilités</span></h3><p><span class="de">Freie Tage im Kalender</span><span class="en">Free dates in the calendar</span><span class="fr">Dates libres dans le calendrier</span></p></a>
       </div>
     </div>
   </section>
 
   <section class="band" id="anfrageband">
     <div class="wrap band-in">
-      <h2><span class="de">Lust auf den Alpstein?</span><span class="en">Fancy the Alpstein?</span></h2>
-      <p><span class="de">Schau im Kalender nach freien Tagen und schick uns deine Anfrage. Wir antworten persönlich.</span><span class="en">Check the calendar for free dates and send us your enquiry. We reply personally.</span></p>
-      <p class="btns"><a class="btn" href="#anfrage"><span class="de">Anfrage senden</span><span class="en">Send an enquiry</span></a> <a class="btn line" href="#kalender"><span class="de">Freie Tage ansehen</span><span class="en">See free dates</span></a></p>
+      <h2><span class="de">Lust auf den Alpstein?</span><span class="en">Fancy the Alpstein?</span><span class="fr">Envie de l'Alpstein ?</span></h2>
+      <p><span class="de">Schau im Kalender nach freien Tagen und schick uns deine Anfrage. Wir antworten persönlich.</span><span class="en">Check the calendar for free dates and send us your enquiry. We reply personally.</span><span class="fr">Consultez le calendrier pour les dates libres et envoyez-nous votre demande. Nous répondons personnellement.</span></p>
+      <p class="btns"><a class="btn" href="#anfrage"><span class="de">Anfrage senden</span><span class="en">Send an enquiry</span><span class="fr">Envoyer une demande</span></a> <a class="btn line" href="#kalender"><span class="de">Freie Tage ansehen</span><span class="en">See free dates</span><span class="fr">Voir les dates libres</span></a></p>
     </div>
   </section>
 
   <section class="sec tint" id="bewertungen">
     <div class="wrap">
-      <h2><span class="de">Gästebewertungen</span><span class="en">Guest reviews</span></h2>
+      <h2><span class="de">Gästebewertungen</span><span class="en">Guest reviews</span><span class="fr">Avis des hôtes</span></h2>
       <div id="revSum" class="rev-sum" hidden><b id="revAvg"></b><span class="stars" id="revStars" aria-hidden="true"></span><span id="revCount"></span></div>
-      <p class="note" id="revEmpty"><span class="de">Noch keine Bewertungen. Du warst bei uns zu Gast? Wir freuen uns über deine Rückmeldung.</span><span class="en">No reviews yet. Have you stayed with us? We would love to hear from you.</span></p>
+      <p class="note" id="revEmpty"><span class="de">Noch keine Bewertungen. Du warst bei uns zu Gast? Wir freuen uns über deine Rückmeldung.</span><span class="en">No reviews yet. Have you stayed with us? We would love to hear from you.</span><span class="fr">Pas encore d'avis. Vous avez séjourné chez nous ? Nous serions heureux de recevoir votre retour.</span></p>
       <div class="rev-list" id="revList"></div>
       <details class="rev-fold" id="revFold">
-        <summary class="btn"><span class="de">Bewertung abgeben</span><span class="en">Write a review</span></summary>
+        <summary class="btn"><span class="de">Bewertung abgeben</span><span class="en">Write a review</span><span class="fr">Laisser un avis</span></summary>
       <form class="rev-form" id="revForm">
-        <h3><span class="de">Deine Bewertung</span><span class="en">Your review</span></h3>
-        <div><span style="font-weight:600;font-size:.92rem"><span class="de">Sterne</span><span class="en">Stars</span></span>
+        <h3><span class="de">Deine Bewertung</span><span class="en">Your review</span><span class="fr">Votre avis</span></h3>
+        <div><span style="font-weight:600;font-size:.92rem"><span class="de">Sterne</span><span class="en">Stars</span><span class="fr">Étoiles</span></span>
           <div class="starpick" id="starpick" role="radiogroup" aria-label="Sterne / Stars"></div></div>
-        <label><span><span class="de">Vorname</span><span class="en">First name</span></span><input id="r-name" required autocomplete="given-name"></label>
-        <label><span><span class="de">Aufenthalt (Monat und Jahr, optional)</span><span class="en">Stay (month and year, optional)</span></span><input id="r-when" placeholder="z. B. August 2026 / e.g. August 2026"></label>
-        <label><span><span class="de">Deine Bewertung</span><span class="en">Your review</span></span><textarea id="r-text" required></textarea></label>
-        <label><span><span class="de">E-Mail (optional, wird nicht veröffentlicht)</span><span class="en">Email (optional, not published)</span></span><input id="r-mail" type="email" autocomplete="email"></label>
+        <label><span><span class="de">Vorname</span><span class="en">First name</span><span class="fr">Prénom</span></span><input id="r-name" required autocomplete="given-name"></label>
+        <label><span><span class="de">Aufenthalt (Monat und Jahr, optional)</span><span class="en">Stay (month and year, optional)</span><span class="fr">Séjour (mois et année, facultatif)</span></span><input id="r-when" placeholder="z. B. August 2026"></label>
+        <label><span><span class="de">Deine Bewertung</span><span class="en">Your review</span><span class="fr">Votre avis</span></span><textarea id="r-text" required></textarea></label>
+        <label><span><span class="de">E-Mail (optional, wird nicht veröffentlicht)</span><span class="en">Email (optional, not published)</span><span class="fr">E-mail (facultatif, non publié)</span></span><input id="r-mail" type="email" autocomplete="email"></label>
         <input type="checkbox" id="r-bot" tabindex="-1" autocomplete="off" style="display:none" aria-hidden="true">
-        <p class="note" style="margin:0"><span class="de">Wir prüfen jede Bewertung, bevor wir sie veröffentlichen. Mit dem Absenden erlaubst du uns, sie mit deinem Vornamen auf dieser Seite zu zeigen.</span><span class="en">We check every review before publishing it. By submitting, you allow us to show it on this page with your first name.</span></p>
+        <p class="note" style="margin:0"><span class="de">Wir prüfen jede Bewertung, bevor wir sie veröffentlichen. Mit dem Absenden erlaubst du uns, sie mit deinem Vornamen auf dieser Seite zu zeigen.</span><span class="en">We check every review before publishing it. By submitting, you allow us to show it on this page with your first name.</span><span class="fr">Nous vérifions chaque avis avant de le publier. En l'envoyant, vous nous autorisez à l'afficher sur cette page avec votre prénom.</span></p>
         <p class="warn" id="revMsg" hidden></p>
-        <div><button class="btn" id="revBtn" type="submit"><span class="de">Bewertung senden</span><span class="en">Send review</span></button></div>
+        <div><button class="btn" id="revBtn" type="submit"><span class="de">Bewertung senden</span><span class="en">Send review</span><span class="fr">Envoyer l'avis</span></button></div>
       </form>
-      <div class="rev-form" id="revDone" hidden role="status"><h3><span class="de">Danke für deine Bewertung</span><span class="en">Thank you for your review</span></h3><p style="margin:0"><span class="de">Wir schauen sie uns an und veröffentlichen sie bald.</span><span class="en">We will look at it and publish it soon.</span></p></div>
-      <div class="rev-form" id="revMail" hidden><h3><span class="de">Bewertung per E-Mail senden</span><span class="en">Send review by email</span></h3><p style="margin:0"><span class="de">Das Senden direkt aus der Seite ist noch nicht eingerichtet. Bitte schicke uns den Text per E-Mail.</span><span class="en">Sending from the page is not set up yet. Please email us the text.</span></p><div><a class="btn" id="revMailto" href="#"><span class="de">E-Mail öffnen</span><span class="en">Open email</span></a></div></div>
+      <div class="rev-form" id="revDone" hidden role="status"><h3><span class="de">Danke für deine Bewertung</span><span class="en">Thank you for your review</span><span class="fr">Merci pour votre avis</span></h3><p style="margin:0"><span class="de">Wir schauen sie uns an und veröffentlichen sie bald.</span><span class="en">We will look at it and publish it soon.</span><span class="fr">Nous allons le lire et le publier prochainement.</span></p></div>
+      <div class="rev-form" id="revMail" hidden><h3><span class="de">Bewertung per E-Mail senden</span><span class="en">Send review by email</span><span class="fr">Envoyer l'avis par e-mail</span></h3><p style="margin:0"><span class="de">Das Senden direkt aus der Seite ist noch nicht eingerichtet. Bitte schicke uns den Text per E-Mail.</span><span class="en">Sending from the page is not set up yet. Please email us the text.</span><span class="fr">L'envoi direct depuis le site n'est pas encore configuré. Veuillez nous envoyer le texte par e-mail.</span></p><div><a class="btn" id="revMailto" href="#"><span class="de">E-Mail öffnen</span><span class="en">Open email</span><span class="fr">Ouvrir l'e-mail</span></a></div></div>
       </details>
     </div>
   </section>
@@ -593,60 +599,60 @@ footer a:hover { text-decoration-color: var(--gold); }
     <div class="wrap">
       <div>
         <div>
-          <h2><span class="de">Eine Wohnung, in der alle Platz haben</span><span class="en">An apartment with room for everyone</span></h2>
-          <p class="lead"><span class="de">Die möblierte Ferienwohnung liegt in Brülisau, mit Blick auf den Alpstein. Sie eignet sich für Familien und Freundesgruppen. Fünf Gäste schlafen in Betten, zwei weitere auf der Couch.</span><span class="en">The furnished holiday apartment is in Brülisau, with a view of the Alpstein. It suits families and groups of friends. Five guests sleep in beds, two more on the sofa.</span></p>
+          <h2><span class="de">Eine Wohnung, in der alle Platz haben</span><span class="en">An apartment with room for everyone</span><span class="fr">Un appartement avec de la place pour tous</span></h2>
+          <p class="lead"><span class="de">Die möblierte Ferienwohnung liegt in Brülisau, mit Blick auf den Alpstein. Sie eignet sich für Familien und Freundesgruppen. Fünf Gäste schlafen in Betten, zwei weitere auf der Couch.</span><span class="en">The furnished holiday apartment is in Brülisau, with a view of the Alpstein. It suits families and groups of friends. Five guests sleep in beds, two more on the sofa.</span><span class="fr">L'appartement de vacances meublé se trouve à Brülisau, avec vue sur l'Alpstein. Il convient aux familles et aux groupes d'amis. Cinq personnes dorment dans des lits, deux autres sur le canapé.</span></p>
           <div class="points">
-            <div><svg class="ic"><use href="#i-mountain"/></svg><div><b><span class="de">Wandern ab der Haustür</span><span class="en">Hiking from your door</span></b><span class="t"><span class="de">Brülisau ist ein Ausgangspunkt für Touren im Alpstein.</span><span class="en">Brülisau is a starting point for tours in the Alpstein.</span></span></div></div>
-            <div><svg class="ic"><use href="#i-chat"/></svg><div><b><span class="de">Direkt beim Gastgeber anfragen</span><span class="en">Enquire directly with your host</span></b><span class="t"><span class="de">Du bekommst eine persönliche Antwort, ohne Online-Buchungsportal.</span><span class="en">You get a personal reply, without a booking portal.</span></span></div></div>
-            <div><svg class="ic"><use href="#i-check"/></svg><div><b><span class="de">Appenzeller Ferienkarte gratis dazu</span><span class="en">Appenzeller holiday card free</span></b><span class="t"><span class="de">Ab 3 Nächten: Bergbahnen, Museen, Bäder und mehr. <a href="#ferienkarte">Alle Angebote ansehen</a></span><span class="en">From 3 nights: cable cars, museums, pools and more. <a href="#ferienkarte">See all offers</a></span></span></div></div>
+            <div><svg class="ic"><use href="#i-mountain"/></svg><div><b><span class="de">Wandern ab der Haustür</span><span class="en">Hiking from your door</span><span class="fr">Randonnées dès la porte</span></b><span class="t"><span class="de">Brülisau ist ein Ausgangspunkt für Touren im Alpstein.</span><span class="en">Brülisau is a starting point for tours in the Alpstein.</span><span class="fr">Brülisau est un point de départ pour des excursions dans l'Alpstein.</span></span></div></div>
+            <div><svg class="ic"><use href="#i-chat"/></svg><div><b><span class="de">Direkt beim Gastgeber anfragen</span><span class="en">Enquire directly with your host</span><span class="fr">Demandez directement à votre hôte</span></b><span class="t"><span class="de">Du bekommst eine persönliche Antwort, ohne Online-Buchungsportal.</span><span class="en">You get a personal reply, without a booking portal.</span><span class="fr">Vous recevez une réponse personnelle, sans portail de réservation en ligne.</span></span></div></div>
+            <div><svg class="ic"><use href="#i-check"/></svg><div><b><span class="de">Appenzeller Ferienkarte gratis dazu</span><span class="en">Appenzeller holiday card free</span><span class="fr">Carte de vacances d'Appenzell offerte</span></b><span class="t"><span class="de">Ab 3 Nächten: Bergbahnen, Museen, Bäder und mehr. <a href="#ferienkarte">Alle Angebote ansehen</a></span><span class="en">From 3 nights: cable cars, museums, pools and more. <a href="#ferienkarte">See all offers</a></span><span class="fr">Dès 3 nuits : remontées mécaniques, musées, bains et plus encore. <a href="#ferienkarte">Voir toutes les offres</a></span></span></div></div>
           </div>
         </div>
       </div>
 
       <div class="rooms">
-        <div class="room"><div class="beds"><svg class="ic"><use href="#i-bed"/></svg></div><h3><span class="de">Schlafzimmer 1</span><span class="en">Bedroom 1</span></h3><p><span class="de">Ein Doppelbett</span><span class="en">One double bed</span></p></div>
-        <div class="room"><div class="beds"><svg class="ic"><use href="#i-bed"/></svg><svg class="ic"><use href="#i-bed"/></svg></div><h3><span class="de">Schlafzimmer 2</span><span class="en">Bedroom 2</span></h3><p><span class="de">Ein Doppelbett und ein Einzelbett</span><span class="en">One double bed and one single bed</span></p></div>
-        <div class="room"><div class="beds"><svg class="ic"><use href="#i-sofa"/></svg></div><h3><span class="de">Wohnbereich</span><span class="en">Living area</span></h3><p><span class="de">Couch mit Schlafplatz für bis zu zwei weitere Personen</span><span class="en">Sofa with sleeping space for up to two more people</span></p></div>
+        <div class="room"><div class="beds"><svg class="ic"><use href="#i-bed"/></svg></div><h3><span class="de">Schlafzimmer 1</span><span class="en">Bedroom 1</span><span class="fr">Chambre 1</span></h3><p><span class="de">Ein Doppelbett</span><span class="en">One double bed</span><span class="fr">Un lit double</span></p></div>
+        <div class="room"><div class="beds"><svg class="ic"><use href="#i-bed"/></svg><svg class="ic"><use href="#i-bed"/></svg></div><h3><span class="de">Schlafzimmer 2</span><span class="en">Bedroom 2</span><span class="fr">Chambre 2</span></h3><p><span class="de">Ein Doppelbett und ein Einzelbett</span><span class="en">One double bed and one single bed</span><span class="fr">Un lit double et un lit simple</span></p></div>
+        <div class="room"><div class="beds"><svg class="ic"><use href="#i-sofa"/></svg></div><h3><span class="de">Wohnbereich</span><span class="en">Living area</span><span class="fr">Espace de vie</span></h3><p><span class="de">Couch mit Schlafplatz für bis zu zwei weitere Personen</span><span class="en">Sofa with sleeping space for up to two more people</span><span class="fr">Canapé avec couchage pour jusqu'à deux personnes supplémentaires</span></p></div>
       </div>
     </div>
   </section>
 
   <section class="sec tint" id="fotos" aria-label="Fotos">
     <div class="wrap">
-      <h2><span class="de">Ein Blick hinein</span><span class="en">A look inside</span></h2>
+      <h2><span class="de">Ein Blick hinein</span><span class="en">A look inside</span><span class="fr">Un aperçu de l'intérieur</span></h2>
       <div class="gal">
-        <figure class="gi"><button type="button" class="ph" data-zoom aria-label="Wohnzimmer / Living room"><img src="wohnzimmer.jpg" alt="Wohnzimmer / Living room" loading="lazy" decoding="async" onerror="this.closest('figure').remove()"></button><figcaption><span class="de">Wohnzimmer</span><span class="en">Living room</span></figcaption></figure>
-        <figure class="gi"><button type="button" class="ph" data-zoom aria-label="Esszimmer / Dining room"><img src="esszimmer.jpg" alt="Esszimmer / Dining room" loading="lazy" decoding="async" onerror="this.closest('figure').remove()"></button><figcaption><span class="de">Esszimmer</span><span class="en">Dining room</span></figcaption></figure>
-        <figure class="gi"><button type="button" class="ph" data-zoom aria-label="Küche / Kitchen"><img src="kueche-1.jpg" alt="Küche / Kitchen" loading="lazy" decoding="async" onerror="this.closest('figure').remove()"></button><figcaption><span class="de">Küche</span><span class="en">Kitchen</span></figcaption></figure>
-        <figure class="gi"><button type="button" class="ph" data-zoom aria-label="Küche / Kitchen"><img src="kueche-2.jpg" alt="Küche / Kitchen" loading="lazy" decoding="async" onerror="this.closest('figure').remove()"></button><figcaption><span class="de">Küche</span><span class="en">Kitchen</span></figcaption></figure>
-        <figure class="gi"><button type="button" class="ph" data-zoom aria-label="Schlafzimmer 1 / Bedroom 1"><img src="schlafzimmer-1a.jpg" alt="Schlafzimmer 1 / Bedroom 1" loading="lazy" decoding="async" onerror="this.closest('figure').remove()"></button><figcaption><span class="de">Schlafzimmer 1</span><span class="en">Bedroom 1</span></figcaption></figure>
-        <figure class="gi"><button type="button" class="ph" data-zoom aria-label="Schlafzimmer 1 / Bedroom 1"><img src="schlafzimmer-1b.jpg" alt="Schlafzimmer 1 / Bedroom 1" loading="lazy" decoding="async" onerror="this.closest('figure').remove()"></button><figcaption><span class="de">Schlafzimmer 1</span><span class="en">Bedroom 1</span></figcaption></figure>
-        <figure class="gi"><button type="button" class="ph" data-zoom aria-label="Schlafzimmer 2 / Bedroom 2"><img src="schlafzimmer-2a.jpg" alt="Schlafzimmer 2 / Bedroom 2" loading="lazy" decoding="async" onerror="this.closest('figure').remove()"></button><figcaption><span class="de">Schlafzimmer 2</span><span class="en">Bedroom 2</span></figcaption></figure>
-        <figure class="gi"><button type="button" class="ph" data-zoom aria-label="Schlafzimmer 2 / Bedroom 2"><img src="schlafzimmer-2b.jpg" alt="Schlafzimmer 2 / Bedroom 2" loading="lazy" decoding="async" onerror="this.closest('figure').remove()"></button><figcaption><span class="de">Schlafzimmer 2</span><span class="en">Bedroom 2</span></figcaption></figure>
-        <figure class="gi"><button type="button" class="ph" data-zoom aria-label="Badezimmer / Bathroom"><img src="bad-1.jpg" alt="Badezimmer / Bathroom" loading="lazy" decoding="async" onerror="this.closest('figure').remove()"></button><figcaption><span class="de">Badezimmer</span><span class="en">Bathroom</span></figcaption></figure>
-        <figure class="gi"><button type="button" class="ph" data-zoom aria-label="Badezimmer / Bathroom"><img src="bad-2.jpg" alt="Badezimmer / Bathroom" loading="lazy" decoding="async" onerror="this.closest('figure').remove()"></button><figcaption><span class="de">Badezimmer</span><span class="en">Bathroom</span></figcaption></figure>
+        <figure class="gi"><button type="button" class="ph" data-zoom aria-label="Wohnzimmer / Living room"><img src="wohnzimmer.jpg" alt="Wohnzimmer / Living room" loading="lazy" decoding="async" onerror="this.closest('figure').remove()"></button><figcaption><span class="de">Wohnzimmer</span><span class="en">Living room</span><span class="fr">Salon</span></figcaption></figure>
+        <figure class="gi"><button type="button" class="ph" data-zoom aria-label="Esszimmer / Dining room"><img src="esszimmer.jpg" alt="Esszimmer / Dining room" loading="lazy" decoding="async" onerror="this.closest('figure').remove()"></button><figcaption><span class="de">Esszimmer</span><span class="en">Dining room</span><span class="fr">Salle à manger</span></figcaption></figure>
+        <figure class="gi"><button type="button" class="ph" data-zoom aria-label="Küche / Kitchen"><img src="kueche-1.jpg" alt="Küche / Kitchen" loading="lazy" decoding="async" onerror="this.closest('figure').remove()"></button><figcaption><span class="de">Küche</span><span class="en">Kitchen</span><span class="fr">Cuisine</span></figcaption></figure>
+        <figure class="gi"><button type="button" class="ph" data-zoom aria-label="Küche / Kitchen"><img src="kueche-2.jpg" alt="Küche / Kitchen" loading="lazy" decoding="async" onerror="this.closest('figure').remove()"></button><figcaption><span class="de">Küche</span><span class="en">Kitchen</span><span class="fr">Cuisine</span></figcaption></figure>
+        <figure class="gi"><button type="button" class="ph" data-zoom aria-label="Schlafzimmer 1 / Bedroom 1"><img src="schlafzimmer-1a.jpg" alt="Schlafzimmer 1 / Bedroom 1" loading="lazy" decoding="async" onerror="this.closest('figure').remove()"></button><figcaption><span class="de">Schlafzimmer 1</span><span class="en">Bedroom 1</span><span class="fr">Chambre 1</span></figcaption></figure>
+        <figure class="gi"><button type="button" class="ph" data-zoom aria-label="Schlafzimmer 1 / Bedroom 1"><img src="schlafzimmer-1b.jpg" alt="Schlafzimmer 1 / Bedroom 1" loading="lazy" decoding="async" onerror="this.closest('figure').remove()"></button><figcaption><span class="de">Schlafzimmer 1</span><span class="en">Bedroom 1</span><span class="fr">Chambre 1</span></figcaption></figure>
+        <figure class="gi"><button type="button" class="ph" data-zoom aria-label="Schlafzimmer 2 / Bedroom 2"><img src="schlafzimmer-2a.jpg" alt="Schlafzimmer 2 / Bedroom 2" loading="lazy" decoding="async" onerror="this.closest('figure').remove()"></button><figcaption><span class="de">Schlafzimmer 2</span><span class="en">Bedroom 2</span><span class="fr">Chambre 2</span></figcaption></figure>
+        <figure class="gi"><button type="button" class="ph" data-zoom aria-label="Schlafzimmer 2 / Bedroom 2"><img src="schlafzimmer-2b.jpg" alt="Schlafzimmer 2 / Bedroom 2" loading="lazy" decoding="async" onerror="this.closest('figure').remove()"></button><figcaption><span class="de">Schlafzimmer 2</span><span class="en">Bedroom 2</span><span class="fr">Chambre 2</span></figcaption></figure>
+        <figure class="gi"><button type="button" class="ph" data-zoom aria-label="Badezimmer / Bathroom"><img src="bad-1.jpg" alt="Badezimmer / Bathroom" loading="lazy" decoding="async" onerror="this.closest('figure').remove()"></button><figcaption><span class="de">Badezimmer</span><span class="en">Bathroom</span><span class="fr">Salle de bains</span></figcaption></figure>
+        <figure class="gi"><button type="button" class="ph" data-zoom aria-label="Badezimmer / Bathroom"><img src="bad-2.jpg" alt="Badezimmer / Bathroom" loading="lazy" decoding="async" onerror="this.closest('figure').remove()"></button><figcaption><span class="de">Badezimmer</span><span class="en">Bathroom</span><span class="fr">Salle de bains</span></figcaption></figure>
       </div>
     </div>
   </section>
 
   <section class="sec">
     <div class="wrap">
-      <h2><span class="de">Ausstattung</span><span class="en">Amenities</span></h2>
+      <h2><span class="de">Ausstattung</span><span class="en">Amenities</span><span class="fr">Équipement</span></h2>
       <div class="amen">
-        <div><h3><span class="de">Küche</span><span class="en">Kitchen</span></h3><ul>
-          <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Voll ausgestattete Küche</span><span class="en">Fully equipped kitchen</span></li>
-          <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Kühlschrank und Tiefkühler</span><span class="en">Fridge and freezer</span></li>
-          <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Induktionsherd und Dampfgarer</span><span class="en">Induction hob and steamer</span></li>
-          <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Geschirrspüler</span><span class="en">Dishwasher</span></li></ul></div>
-        <div><h3><span class="de">Komfort</span><span class="en">Comfort</span></h3><ul>
+        <div><h3><span class="de">Küche</span><span class="en">Kitchen</span><span class="fr">Cuisine</span></h3><ul>
+          <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Voll ausgestattete Küche</span><span class="en">Fully equipped kitchen</span><span class="fr">Cuisine entièrement équipée</span></li>
+          <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Kühlschrank und Tiefkühler</span><span class="en">Fridge and freezer</span><span class="fr">Réfrigérateur et congélateur</span></li>
+          <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Induktionsherd und Dampfgarer</span><span class="en">Induction hob and steamer</span><span class="fr">Plaque à induction et cuiseur vapeur</span></li>
+          <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Geschirrspüler</span><span class="en">Dishwasher</span><span class="fr">Lave-vaisselle</span></li></ul></div>
+        <div><h3><span class="de">Komfort</span><span class="en">Comfort</span><span class="fr">Confort</span></h3><ul>
           <li><svg class="ic"><use href="#i-check"/></svg>WLAN</li>
           <li><svg class="ic"><use href="#i-check"/></svg>TV</li>
-          <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Blick auf den Alpstein</span><span class="en">View of the Alpstein</span></li>
-          <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Bettwäsche und Handtücher</span><span class="en">Bed linen and towels</span></li></ul></div>
-        <div><h3><span class="de">Draussen und Anreise</span><span class="en">Outside and arrival</span></h3><ul>
-          <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Kostenloser Parkplatz beim Haus</span><span class="en">Free parking at the house</span></li>
-          <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Sitzplatz im Freien</span><span class="en">Outdoor seating</span></li>
-          <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Grillstelle</span><span class="en">Barbecue area</span></li></ul></div>
+          <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Blick auf den Alpstein</span><span class="en">View of the Alpstein</span><span class="fr">Vue sur l'Alpstein</span></li>
+          <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Bettwäsche und Handtücher</span><span class="en">Bed linen and towels</span><span class="fr">Linge de lit et serviettes</span></li></ul></div>
+        <div><h3><span class="de">Draussen und Anreise</span><span class="en">Outside and arrival</span><span class="fr">Extérieur et accès</span></h3><ul>
+          <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Kostenloser Parkplatz beim Haus</span><span class="en">Free parking at the house</span><span class="fr">Place de parking gratuite près de la maison</span></li>
+          <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Sitzplatz im Freien</span><span class="en">Outdoor seating</span><span class="fr">Coin salon en plein air</span></li>
+          <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Grillstelle</span><span class="en">Barbecue area</span><span class="fr">Emplacement de grillade</span></li></ul></div>
       </div>
     </div>
   </section>
@@ -658,22 +664,22 @@ footer a:hover { text-decoration-color: var(--gold); }
     <div class="wrap">
       <div>
         <div>
-          <h2><span class="de">Brülisau am Fuss des Alpsteins</span><span class="en">Brülisau at the foot of the Alpstein</span></h2>
-          <p class="lead"><span class="de">Brülisau liegt auf rund 900 Metern im Kanton Appenzell Innerrhoden, etwa 5 Kilometer von Appenzell entfernt. Von hier aus erreichst du Aussichtspunkte, Bergseen und Wanderwege im Alpstein.</span><span class="en">Brülisau lies at about 900 metres in the canton of Appenzell Innerrhoden, roughly 5 kilometres from Appenzell. From here you can reach viewpoints, mountain lakes and hiking trails in the Alpstein.</span></p>
+          <h2><span class="de">Brülisau am Fuss des Alpsteins</span><span class="en">Brülisau at the foot of the Alpstein</span><span class="fr">Brülisau, au pied de l'Alpstein</span></h2>
+          <p class="lead"><span class="de">Brülisau liegt auf rund 900 Metern im Kanton Appenzell Innerrhoden, etwa 5 Kilometer von Appenzell entfernt. Von hier aus erreichst du Aussichtspunkte, Bergseen und Wanderwege im Alpstein.</span><span class="en">Brülisau lies at about 900 metres in the canton of Appenzell Innerrhoden, roughly 5 kilometres from Appenzell. From here you can reach viewpoints, mountain lakes and hiking trails in the Alpstein.</span><span class="fr">Brülisau se situe à environ 900 mètres d'altitude, dans le canton d'Appenzell Rhodes-Intérieures, à environ 5 kilomètres d'Appenzell. D'ici, vous accédez à des points de vue, des lacs de montagne et des sentiers de randonnée dans l'Alpstein.</span></p>
         </div>
       </div>
       <div class="spots">
-        <div class="spot"><svg class="ic"><use href="#i-cable"/></svg><div><h3>Hoher Kasten</h3><p><span class="de">Die Talstation der Luftseilbahn liegt in Brülisau, nur ca. 3 Minuten von der Wohnung entfernt. Die Fahrt auf den Gipfel dauert etwa 8 Minuten. Ein beliebter Aussichtspunkt im Alpstein.</span><span class="en">The valley station of the cable car is in Brülisau, only about 3 minutes from the apartment. The ride to the summit takes about 8 minutes. A popular viewpoint in the Alpstein.</span></p></div></div>
-        <div class="spot"><svg class="ic"><use href="#i-water"/></svg><div><h3>Sämtisersee</h3><p><span class="de">Wanderung ab Brülisau, ca. 2 Stunden zu Fuss. Ein beliebter Bergsee.</span><span class="en">Hike from Brülisau, about 2 hours on foot. A popular mountain lake.</span></p></div></div>
-        <div class="spot"><svg class="ic"><use href="#i-water"/></svg><div><h3>Ebenalp und Seealpsee</h3><p><span class="de">Wasserauen ist ca. 10 Minuten mit dem Auto entfernt. Von dort geht es mit der Bahn auf die Ebenalp oder zu Fuss zum Seealpsee.</span><span class="en">Wasserauen is about 10 minutes away by car. From there you can take the cable car to the Ebenalp or walk to the Seealpsee.</span></p></div></div>
-        <div class="spot"><svg class="ic"><use href="#i-mountain"/></svg><div><h3>Säntis</h3><p><span class="de">Mit 2502 Metern der höchste Gipfel im Alpstein. Die Schwebebahn startet auf der Schwägalp, ca. 30 Minuten mit dem Auto. Die Fahrt dauert etwa 10 Minuten. Aktuelle Betriebszeiten bitte direkt bei der Säntis-Schwebebahn prüfen.</span><span class="en">At 2,502 metres the highest peak in the Alpstein. The cable car starts at Schwägalp, about 30 minutes by car. The ride takes about 10 minutes. Please check current operating times with the Säntis cable car.</span></p></div></div>
-        <div class="spot"><svg class="ic"><use href="#i-village"/></svg><div><h3>Appenzell</h3><p><span class="de">Der Hauptort mit seinem Dorfkern ist rund 5 Kilometer entfernt, ca. 6 Minuten mit dem Auto.</span><span class="en">The main village with its historic centre is about 5 kilometres away, roughly 6 minutes by car.</span></p></div></div>
-        <div class="spot"><svg class="ic"><use href="#i-door"/></svg><div><h3>Bahnhof Steinegg</h3><p><span class="de">Der nächste Bahnhof liegt in Steinegg, 2,1 Kilometer entfernt, ca. 3 Minuten mit dem Auto.</span><span class="en">The nearest railway station is Steinegg, 2.1 kilometres away, about 3 minutes by car.</span></p></div></div>
-        <div class="spot"><svg class="ic"><use href="#i-snow"/></svg><div><h3><span class="de">Im Winter</span><span class="en">In winter</span></h3><p><span class="de">Winterwanderwege und Schneeschuhrouten in der Umgebung.</span><span class="en">Winter walking trails and snowshoe routes nearby.</span></p></div></div>
+        <div class="spot"><svg class="ic"><use href="#i-cable"/></svg><div><h3>Hoher Kasten</h3><p><span class="de">Die Talstation der Luftseilbahn liegt in Brülisau, nur ca. 3 Minuten von der Wohnung entfernt. Die Fahrt auf den Gipfel dauert etwa 8 Minuten. Ein beliebter Aussichtspunkt im Alpstein.</span><span class="en">The valley station of the cable car is in Brülisau, only about 3 minutes from the apartment. The ride to the summit takes about 8 minutes. A popular viewpoint in the Alpstein.</span><span class="fr">La station de départ du téléphérique se trouve à Brülisau, à environ 3 minutes de l'appartement. Le trajet jusqu'au sommet dure environ 8 minutes. Un point de vue très apprécié dans l'Alpstein.</span></p></div></div>
+        <div class="spot"><svg class="ic"><use href="#i-water"/></svg><div><h3>Sämtisersee</h3><p><span class="de">Wanderung ab Brülisau, ca. 2 Stunden zu Fuss. Ein beliebter Bergsee.</span><span class="en">Hike from Brülisau, about 2 hours on foot. A popular mountain lake.</span><span class="fr">Randonnée depuis Brülisau, environ 2 heures à pied. Un lac de montagne très apprécié.</span></p></div></div>
+        <div class="spot"><svg class="ic"><use href="#i-water"/></svg><div><h3>Ebenalp und Seealpsee</h3><p><span class="de">Wasserauen ist ca. 10 Minuten mit dem Auto entfernt. Von dort geht es mit der Bahn auf die Ebenalp oder zu Fuss zum Seealpsee.</span><span class="en">Wasserauen is about 10 minutes away by car. From there you can take the cable car to the Ebenalp or walk to the Seealpsee.</span><span class="fr">Wasserauen se trouve à environ 10 minutes en voiture. De là, un téléphérique mène à l'Ebenalp, ou l'on peut marcher jusqu'au Seealpsee.</span></p></div></div>
+        <div class="spot"><svg class="ic"><use href="#i-mountain"/></svg><div><h3>Säntis</h3><p><span class="de">Mit 2502 Metern der höchste Gipfel im Alpstein. Die Schwebebahn startet auf der Schwägalp, ca. 30 Minuten mit dem Auto. Die Fahrt dauert etwa 10 Minuten. Aktuelle Betriebszeiten bitte direkt bei der Säntis-Schwebebahn prüfen.</span><span class="en">At 2,502 metres the highest peak in the Alpstein. The cable car starts at Schwägalp, about 30 minutes by car. The ride takes about 10 minutes. Please check current operating times with the Säntis cable car.</span><span class="fr">Avec ses 2502 mètres, c'est le plus haut sommet de l'Alpstein. Le téléphérique part de la Schwägalp, à environ 30 minutes en voiture. Le trajet dure environ 10 minutes. Veuillez vérifier les horaires actuels directement auprès du téléphérique du Säntis.</span></p></div></div>
+        <div class="spot"><svg class="ic"><use href="#i-village"/></svg><div><h3>Appenzell</h3><p><span class="de">Der Hauptort mit seinem Dorfkern ist rund 5 Kilometer entfernt, ca. 6 Minuten mit dem Auto.</span><span class="en">The main village with its historic centre is about 5 kilometres away, roughly 6 minutes by car.</span><span class="fr">Le chef-lieu et son centre historique se trouvent à environ 5 kilomètres, à environ 6 minutes en voiture.</span></p></div></div>
+        <div class="spot"><svg class="ic"><use href="#i-door"/></svg><div><h3>Bahnhof Steinegg</h3><p><span class="de">Der nächste Bahnhof liegt in Steinegg, 2,1 Kilometer entfernt, ca. 3 Minuten mit dem Auto.</span><span class="en">The nearest railway station is Steinegg, 2.1 kilometres away, about 3 minutes by car.</span><span class="fr">La gare la plus proche est Steinegg, à 2,1 kilomètres, à environ 3 minutes en voiture.</span></p></div></div>
+        <div class="spot"><svg class="ic"><use href="#i-snow"/></svg><div><h3><span class="de">Im Winter</span><span class="en">In winter</span><span class="fr">En hiver</span></h3><p><span class="de">Winterwanderwege und Schneeschuhrouten in der Umgebung.</span><span class="en">Winter walking trails and snowshoe routes nearby.</span><span class="fr">Sentiers de randonnée hivernale et itinéraires de raquettes dans les environs.</span></p></div></div>
       </div>
-      <h2 style="margin-top:44px"><span class="de">So findest du uns</span><span class="en">How to find us</span></h2>
+      <h2 style="margin-top:44px"><span class="de">So findest du uns</span><span class="en">How to find us</span><span class="fr">Comment nous trouver</span></h2>
       <div class="mapbox"><iframe title="Google Maps" src="https://www.google.com/maps?q=Br%C3%BClisauerstrasse+39%2C+9058+Br%C3%BClisau&amp;hl=de&amp;z=14&amp;output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe></div>
-      <p class="note" style="margin-top:10px"><a href="https://www.google.com/maps?q=Br%C3%BClisauerstrasse+39%2C+9058+Br%C3%BClisau&hl=de" target="_blank" rel="noopener"><span class="de">In Google Maps öffnen und Route planen</span><span class="en">Open in Google Maps and plan a route</span></a></p>
+      <p class="note" style="margin-top:10px"><a href="https://www.google.com/maps?q=Br%C3%BClisauerstrasse+39%2C+9058+Br%C3%BClisau&hl=de" target="_blank" rel="noopener"><span class="de">In Google Maps öffnen und Route planen</span><span class="en">Open in Google Maps and plan a route</span><span class="fr">Ouvrir dans Google Maps et planifier l'itinéraire</span></a></p>
     </div>
   </section>
 
@@ -682,15 +688,15 @@ footer a:hover { text-decoration-color: var(--gold); }
   <div class="page" data-page="preise">
   <section class="sec" id="rechner">
     <div class="wrap">
-      <h2><span class="de">Preisrechner</span><span class="en">Price calculator</span></h2>
-      <p class="lead"><span class="de">Gib deine Reisedaten und die Anzahl Gäste ein. Der Preis wird sofort berechnet.</span><span class="en">Enter your dates and the number of guests. The price is calculated straight away.</span></p>
+      <h2><span class="de">Preisrechner</span><span class="en">Price calculator</span><span class="fr">Calculateur de prix</span></h2>
+      <p class="lead"><span class="de">Gib deine Reisedaten und die Anzahl Gäste ein. Der Preis wird sofort berechnet.</span><span class="en">Enter your dates and the number of guests. The price is calculated straight away.</span><span class="fr">Saisissez vos dates de voyage et le nombre de personnes. Le prix est calculé immédiatement.</span></p>
       <div class="calc">
         <div class="calc-in">
-          <label><span><span class="de">Anreise</span><span class="en">Arrival</span></span><input id="c-from" class="dpick" type="text" readonly inputmode="none" autocomplete="off"></label>
-          <label><span><span class="de">Abreise</span><span class="en">Departure</span></span><input id="c-to" class="dpick" type="text" readonly inputmode="none" autocomplete="off"></label>
-          <label><span><span class="de">Erwachsene</span><span class="en">Adults</span></span><input id="c-adults" type="number" inputmode="numeric" min="0" max="7" value="2"></label>
-          <label><span><span class="de">Kinder <small>6 bis 16 Jahre</small></span><span class="en">Children <small>aged 6 to 16</small></span></span><input id="c-kids" type="number" inputmode="numeric" min="0" max="6" value="0"></label>
-          <label class="full"><span><span class="de">Kinder unter 6 Jahren <small>gratis</small></span><span class="en">Children under 6 <small>free</small></span></span><input id="c-tod" type="number" inputmode="numeric" min="0" max="4" value="0"></label>
+          <label><span><span class="de">Anreise</span><span class="en">Arrival</span><span class="fr">Arrivée</span></span><input id="c-from" class="dpick" type="text" readonly inputmode="none" autocomplete="off"></label>
+          <label><span><span class="de">Abreise</span><span class="en">Departure</span><span class="fr">Départ</span></span><input id="c-to" class="dpick" type="text" readonly inputmode="none" autocomplete="off"></label>
+          <label><span><span class="de">Erwachsene</span><span class="en">Adults</span><span class="fr">Adultes</span></span><input id="c-adults" type="number" inputmode="numeric" min="0" max="7" value="2"></label>
+          <label><span><span class="de">Kinder <small>6 bis 16 Jahre</small></span><span class="en">Children <small>aged 6 to 16</small></span><span class="fr">Enfants <small>6 à 16 ans</small></span></span><input id="c-kids" type="number" inputmode="numeric" min="0" max="6" value="0"></label>
+          <label class="full"><span><span class="de">Kinder unter 6 Jahren <small>gratis</small></span><span class="en">Children under 6 <small>free</small></span><span class="fr">Enfants de moins de 6 ans <small>gratuit</small></span></span><input id="c-tod" type="number" inputmode="numeric" min="0" max="4" value="0"></label>
         </div>
         <div class="calc-out" id="calcOut" aria-live="polite"></div>
       </div>
@@ -700,29 +706,29 @@ footer a:hover { text-decoration-color: var(--gold); }
     <div class="wrap">
       <div class="two" style="align-items:start">
         <div>
-          <h2><span class="de">Im Preis inbegriffen</span><span class="en">Included in the price</span></h2>
+          <h2><span class="de">Im Preis inbegriffen</span><span class="en">Included in the price</span><span class="fr">Inclus dans le prix</span></h2>
           <ul class="rules">
-            <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Endreinigung</span><span class="en">Final cleaning</span></li>
-            <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Kurtaxe</span><span class="en">Tourist tax</span></li>
-            <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Appenzeller Ferienkarte ab 3 Nächten. <a href="#ferienkarte">Alle Angebote ansehen</a></span><span class="en">Appenzeller holiday card from 3 nights. <a href="#ferienkarte">See all offers</a></span></li>
-            <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Bettwäsche und Handtücher</span><span class="en">Bed linen and towels</span></li>
-            <li><svg class="ic"><use href="#i-check"/></svg><span class="de">WLAN</span><span class="en">Wi-Fi</span></li>
-            <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Kostenloser Parkplatz beim Haus</span><span class="en">Free parking at the house</span></li>
-            <li><svg class="ic"><use href="#i-users"/></svg><span class="de">Kinder unter 6 Jahren (bis 5,99 Jahre) übernachten gratis</span><span class="en">Children under 6 (up to 5.99 years) stay free</span></li>
+            <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Endreinigung</span><span class="en">Final cleaning</span><span class="fr">Nettoyage final</span></li>
+            <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Kurtaxe</span><span class="en">Tourist tax</span><span class="fr">Taxe de séjour</span></li>
+            <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Appenzeller Ferienkarte ab 3 Nächten. <a href="#ferienkarte">Alle Angebote ansehen</a></span><span class="en">Appenzeller holiday card from 3 nights. <a href="#ferienkarte">See all offers</a></span><span class="fr">Carte de vacances d'Appenzell dès 3 nuits. <a href="#ferienkarte">Voir toutes les offres</a></span></li>
+            <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Bettwäsche und Handtücher</span><span class="en">Bed linen and towels</span><span class="fr">Linge de lit et serviettes</span></li>
+            <li><svg class="ic"><use href="#i-check"/></svg><span class="de">WLAN</span><span class="en">Wi-Fi</span><span class="fr">Wi-Fi</span></li>
+            <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Kostenloser Parkplatz beim Haus</span><span class="en">Free parking at the house</span><span class="fr">Place de parking gratuite près de la maison</span></li>
+            <li><svg class="ic"><use href="#i-users"/></svg><span class="de">Kinder unter 6 Jahren (bis 5,99 Jahre) übernachten gratis</span><span class="en">Children under 6 (up to 5.99 years) stay free</span><span class="fr">Les enfants de moins de 6 ans (jusqu'à 5,99 ans) séjournent gratuitement</span></li>
           </ul>
         </div>
         <div>
-          <h2><span class="de">Gut zu wissen</span><span class="en">Good to know</span></h2>
+          <h2><span class="de">Gut zu wissen</span><span class="en">Good to know</span><span class="fr">Bon à savoir</span></h2>
           <ul class="rules">
-            <li><svg class="ic"><use href="#i-calendar"/></svg><span class="de">Check-in ab 16.00 Uhr, Check-out bis 11.00 Uhr</span><span class="en">Check-in from 4:00 pm, check-out by 11:00 am</span></li>
-            <li><svg class="ic"><use href="#i-cable"/></svg><span class="de">Die Appenzeller Ferienkarte bekommst du automatisch, aber erst ab 3 Nächten in Folge. <a href="#ferienkarte">Alle Angebote ansehen</a></span><span class="en">You get the Appenzeller holiday card automatically, but only from 3 consecutive nights. <a href="#ferienkarte">See all offers</a></span></li>
-            <li><svg class="ic"><use href="#i-sofa"/></svg><span class="de">Ab der 6. erwachsenen Person (Schlafplatz auf dem Sofa) gilt ein reduzierter Preis: 35 CHF pro Nacht im Sommer, 30 CHF im Winter. Die Endreinigung beträgt ab 6 Personen 150 CHF.</span><span class="en">From the 6th adult (sleeping on the sofa) a reduced rate applies: CHF 35 per night in summer, CHF 30 in winter. Final cleaning is CHF 150 for 6 or more people.</span></li>
-            <li><svg class="ic"><use href="#i-calendar"/></svg><span class="de">Mindestaufenthalt: 3 Nächte von April bis Oktober, 2 Nächte von November bis März (nach Anreisedatum)</span><span class="en">Minimum stay: 3 nights from April to October, 2 nights from November to March (by arrival date)</span></li>
-            <li><svg class="ic"><use href="#i-nosmoke"/></svg><span class="de">Rauchen ist verboten</span><span class="en">Smoking is not allowed</span></li>
-            <li><svg class="ic"><use href="#i-paw"/></svg><span class="de">Haustiere sind nicht gestattet</span><span class="en">Pets are not allowed</span></li>
-            <li><svg class="ic"><use href="#i-paw"/></svg><span class="de">Auf dem Betrieb leben Katzen, Hunde und Kühe. Gäste mit Allergien sollten das bedenken.</span><span class="en">Cats, dogs and cows live on the farm. Guests with allergies should keep this in mind.</span></li>
-            <li><svg class="ic"><use href="#i-bed"/></svg><span class="de">Auf Wunsch stellen wir ein Kinderbett auf.</span><span class="en">A cot can be set up on request.</span></li>
-            <li><svg class="ic"><use href="#i-door"/></svg><span class="de">Die Wohnung liegt im 2. und 3. Stock. Die Deckenhöhe beträgt 1,92 Meter.</span><span class="en">The apartment is on the 2nd and 3rd floor. The ceiling height is 1.92 metres.</span></li>
+            <li><svg class="ic"><use href="#i-calendar"/></svg><span class="de">Check-in ab 16.00 Uhr, Check-out bis 11.00 Uhr</span><span class="en">Check-in from 4:00 pm, check-out by 11:00 am</span><span class="fr">Arrivée dès 16 h, départ jusqu'à 11 h</span></li>
+            <li><svg class="ic"><use href="#i-cable"/></svg><span class="de">Die Appenzeller Ferienkarte bekommst du automatisch, aber erst ab 3 Nächten in Folge. <a href="#ferienkarte">Alle Angebote ansehen</a></span><span class="en">You get the Appenzeller holiday card automatically, but only from 3 consecutive nights. <a href="#ferienkarte">See all offers</a></span><span class="fr">Vous recevez automatiquement la carte de vacances d'Appenzell, mais seulement à partir de 3 nuits consécutives. <a href="#ferienkarte">Voir toutes les offres</a></span></li>
+            <li><svg class="ic"><use href="#i-sofa"/></svg><span class="de">Ab der 6. erwachsenen Person (Schlafplatz auf dem Sofa) gilt ein reduzierter Preis: 35 CHF pro Nacht im Sommer, 30 CHF im Winter. Die Endreinigung beträgt ab 6 Personen 150 CHF.</span><span class="en">From the 6th adult (sleeping on the sofa) a reduced rate applies: CHF 35 per night in summer, CHF 30 in winter. Final cleaning is CHF 150 for 6 or more people.</span><span class="fr">À partir du 6e adulte (couchage sur le canapé), un tarif réduit s'applique : 35 CHF par nuit en été, 30 CHF en hiver. Le nettoyage final est de 150 CHF à partir de 6 personnes.</span></li>
+            <li><svg class="ic"><use href="#i-calendar"/></svg><span class="de">Mindestaufenthalt: 3 Nächte von April bis Oktober, 2 Nächte von November bis März (nach Anreisedatum)</span><span class="en">Minimum stay: 3 nights from April to October, 2 nights from November to March (by arrival date)</span><span class="fr">Séjour minimum : 3 nuits d'avril à octobre, 2 nuits de novembre à mars (selon la date d'arrivée)</span></li>
+            <li><svg class="ic"><use href="#i-nosmoke"/></svg><span class="de">Rauchen ist verboten</span><span class="en">Smoking is not allowed</span><span class="fr">Il est interdit de fumer</span></li>
+            <li><svg class="ic"><use href="#i-paw"/></svg><span class="de">Haustiere sind nicht gestattet</span><span class="en">Pets are not allowed</span><span class="fr">Les animaux de compagnie ne sont pas admis</span></li>
+            <li><svg class="ic"><use href="#i-paw"/></svg><span class="de">Auf dem Betrieb leben Katzen, Hunde und Kühe. Gäste mit Allergien sollten das bedenken.</span><span class="en">Cats, dogs and cows live on the farm. Guests with allergies should keep this in mind.</span><span class="fr">Des chats, des chiens et des vaches vivent sur l'exploitation. Les personnes allergiques doivent en tenir compte.</span></li>
+            <li><svg class="ic"><use href="#i-bed"/></svg><span class="de">Auf Wunsch stellen wir ein Kinderbett auf.</span><span class="en">A cot can be set up on request.</span><span class="fr">Sur demande, nous installons un lit d'enfant.</span></li>
+            <li><svg class="ic"><use href="#i-door"/></svg><span class="de">Die Wohnung liegt im 2. und 3. Stock. Die Deckenhöhe beträgt 1,92 Meter.</span><span class="en">The apartment is on the 2nd and 3rd floor. The ceiling height is 1.92 metres.</span><span class="fr">L'appartement se trouve aux 2e et 3e étages. La hauteur sous plafond est de 1,92 mètre.</span></li>
           </ul>
         </div>
       </div>
@@ -731,12 +737,12 @@ footer a:hover { text-decoration-color: var(--gold); }
 
   <section class="sec">
     <div class="wrap">
-      <h2><span class="de">Stornierung</span><span class="en">Cancellation</span></h2>
-      <p class="lead"><span class="de">Das gilt, wenn du als Mieter annullierst.</span><span class="en">This applies if you cancel as the tenant.</span></p>
+      <h2><span class="de">Stornierung</span><span class="en">Cancellation</span><span class="fr">Annulation</span></h2>
+      <p class="lead"><span class="de">Das gilt, wenn du als Mieter annullierst.</span><span class="en">This applies if you cancel as the tenant.</span><span class="fr">Cela s'applique si vous annulez en tant que locataire.</span></p>
       <div class="cancel">
-        <div><b><span class="de">Bis 15 Tage vor Mietbeginn</span><span class="en">Up to 15 days before the start of the rental</span></b><span class="res"><span class="de">kostenlos, die Anzahlung wird zurückerstattet</span><span class="en">free of charge, the deposit is refunded</span></span></div>
-        <div><b><span class="de">Ab 14 Tage vor Mietbeginn</span><span class="en">From 14 days before the start of the rental</span></b><span class="res"><span class="de">50 % des Mietpreises</span><span class="en">50% of the rental price</span></span></div>
-        <div><b><span class="de">Ab 7 Tage vor Mietbeginn oder bei Nichterscheinen</span><span class="en">From 7 days before the start of the rental or if you do not show up</span></b><span class="res"><span class="de">100 % des Mietpreises</span><span class="en">100% of the rental price</span></span></div>
+        <div><b><span class="de">Bis 15 Tage vor Mietbeginn</span><span class="en">Up to 15 days before the start of the rental</span><span class="fr">Jusqu'à 15 jours avant le début de la location</span></b><span class="res"><span class="de">kostenlos, die Anzahlung wird zurückerstattet</span><span class="en">free of charge, the deposit is refunded</span><span class="fr">gratuit, l'acompte est remboursé</span></span></div>
+        <div><b><span class="de">Ab 14 Tage vor Mietbeginn</span><span class="en">From 14 days before the start of the rental</span><span class="fr">À partir de 14 jours avant le début de la location</span></b><span class="res"><span class="de">50 % des Mietpreises</span><span class="en">50% of the rental price</span><span class="fr">50 % du prix de la location</span></span></div>
+        <div><b><span class="de">Ab 7 Tage vor Mietbeginn oder bei Nichterscheinen</span><span class="en">From 7 days before the start of the rental or if you do not show up</span><span class="fr">À partir de 7 jours avant le début de la location ou en cas de non-présentation</span></b><span class="res"><span class="de">100 % des Mietpreises</span><span class="en">100% of the rental price</span><span class="fr">100 % du prix de la location</span></span></div>
       </div>
     </div>
   </section>
@@ -745,86 +751,86 @@ footer a:hover { text-decoration-color: var(--gold); }
   <div class="page" data-page="ferienkarte">
   <section class="sec">
     <div class="wrap">
-      <h2><span class="de">Appenzeller Ferienkarte</span><span class="en">Appenzeller holiday card</span></h2>
-      <p class="lead"><span class="de">Mit der Ferienkarte erhältst du über 40 Angebote in der Region gratis. Dazu gehören Bergbahnen, Museen, Bäder und Ausflüge.</span><span class="en">With the holiday card you get over 40 offers in the region for free. They include cable cars, museums, pools and excursions.</span></p>
-      <p class="note" style="margin-top:-6px"><span class="de">Die Angaben auf dieser Seite stammen von Appenzellerland Tourismus AI (<a href="https://www.appenzell.ch/de/unterkunft/appenzeller-ferienkarte.html" target="_blank" rel="noopener">appenzell.ch</a>, Stand Oktober 2026). Verbindlich sind die Angaben des Tourismus.</span><span class="en">The information on this page comes from Appenzellerland Tourismus AI (<a href="https://www.appenzell.ch/de/unterkunft/appenzeller-ferienkarte.html" target="_blank" rel="noopener">appenzell.ch</a>, as of October 2026). The tourism office's information is binding.</span></p>
+      <h2><span class="de">Appenzeller Ferienkarte</span><span class="en">Appenzeller holiday card</span><span class="fr">Carte de vacances d'Appenzell</span></h2>
+      <p class="lead"><span class="de">Mit der Ferienkarte erhältst du über 40 Angebote in der Region gratis. Dazu gehören Bergbahnen, Museen, Bäder und Ausflüge.</span><span class="en">With the holiday card you get over 40 offers in the region for free. They include cable cars, museums, pools and excursions.</span><span class="fr">Avec la carte de vacances, vous bénéficiez gratuitement de plus de 40 offres dans la région. Elles comprennent remontées mécaniques, musées, bains et excursions.</span></p>
+      <p class="note" style="margin-top:-6px"><span class="de">Die Angaben auf dieser Seite stammen von Appenzellerland Tourismus AI (<a href="https://www.appenzell.ch/de/unterkunft/appenzeller-ferienkarte.html" target="_blank" rel="noopener">appenzell.ch</a>, Stand Oktober 2026). Verbindlich sind die Angaben des Tourismus.</span><span class="en">The information on this page comes from Appenzellerland Tourismus AI (<a href="https://www.appenzell.ch/de/unterkunft/appenzeller-ferienkarte.html" target="_blank" rel="noopener">appenzell.ch</a>, as of October 2026). The tourism office's information is binding.</span><span class="fr">Les informations de cette page proviennent d'Appenzellerland Tourismus AI (<a href="https://www.appenzell.ch/de/unterkunft/appenzeller-ferienkarte.html" target="_blank" rel="noopener">appenzell.ch</a>, état octobre 2026). Seules les indications de l'office du tourisme font foi.</span></p>
 
       <div class="gift">
         <div>
-          <h3><span class="de">Bei uns gratis ab 3 Nächten</span><span class="en">Free with us from 3 nights</span></h3>
-          <p><span class="de">Du bekommst die Ferienkarte automatisch, du musst nichts dafür tun. Bei kürzeren Aufenthalten als 3 Nächte gibt es sie nicht.</span><span class="en">You get the holiday card automatically, you do not need to do anything. It is not available for stays shorter than 3 nights.</span></p>
+          <h3><span class="de">Bei uns gratis ab 3 Nächten</span><span class="en">Free with us from 3 nights</span><span class="fr">Chez nous, gratuite dès 3 nuits</span></h3>
+          <p><span class="de">Du bekommst die Ferienkarte automatisch, du musst nichts dafür tun. Bei kürzeren Aufenthalten als 3 Nächte gibt es sie nicht.</span><span class="en">You get the holiday card automatically, you do not need to do anything. It is not available for stays shorter than 3 nights.</span><span class="fr">Vous recevez la carte de vacances automatiquement, sans rien avoir à faire. Pour les séjours de moins de 3 nuits, elle n'est pas incluse.</span></p>
         </div>
-        <a class="btn" href="#anfrage"><span class="de">Jetzt anfragen</span><span class="en">Send an enquiry</span></a>
+        <a class="btn" href="#anfrage"><span class="de">Jetzt anfragen</span><span class="en">Send an enquiry</span><span class="fr">Envoyer une demande</span></a>
       </div>
 
       <div class="rooms">
-        <div class="room"><div class="beds"><svg class="ic"><use href="#i-check"/></svg></div><h3><span class="de">Über 40 Angebote</span><span class="en">Over 40 offers</span></h3><p><span class="de">Das ganze Jahr und je nach Saison</span><span class="en">All year and by season</span></p></div>
-        <div class="room"><div class="beds"><svg class="ic"><use href="#i-users"/></svg></div><h3><span class="de">Für alle Gäste ab 6 Jahren</span><span class="en">For all guests aged 6 and over</span></h3><p><span class="de">Erwachsene und Kinder</span><span class="en">Adults and children</span></p></div>
-        <div class="room"><div class="beds"><svg class="ic"><use href="#i-calendar"/></svg></div><h3><span class="de">Automatisch ab 3 Nächten</span><span class="en">Automatic from 3 nights</span></h3><p><span class="de">Bei 3 oder mehr Nächten in Folge bei uns</span><span class="en">For 3 or more consecutive nights with us</span></p></div>
+        <div class="room"><div class="beds"><svg class="ic"><use href="#i-check"/></svg></div><h3><span class="de">Über 40 Angebote</span><span class="en">Over 40 offers</span><span class="fr">Plus de 40 offres</span></h3><p><span class="de">Das ganze Jahr und je nach Saison</span><span class="en">All year and by season</span><span class="fr">Toute l'année et selon la saison</span></p></div>
+        <div class="room"><div class="beds"><svg class="ic"><use href="#i-users"/></svg></div><h3><span class="de">Für alle Gäste ab 6 Jahren</span><span class="en">For all guests aged 6 and over</span><span class="fr">Pour tous les hôtes dès 6 ans</span></h3><p><span class="de">Erwachsene und Kinder</span><span class="en">Adults and children</span><span class="fr">Adultes et enfants</span></p></div>
+        <div class="room"><div class="beds"><svg class="ic"><use href="#i-calendar"/></svg></div><h3><span class="de">Automatisch ab 3 Nächten</span><span class="en">Automatic from 3 nights</span><span class="fr">Automatique dès 3 nuits</span></h3><p><span class="de">Bei 3 oder mehr Nächten in Folge bei uns</span><span class="en">For 3 or more consecutive nights with us</span><span class="fr">Pour 3 nuits consécutives ou plus chez nous</span></p></div>
       </div>
     </div>
   </section>
 
   <section class="sec tint">
     <div class="wrap">
-      <h2><span class="de">Bergbahnen und Verkehr</span><span class="en">Cable cars and transport</span></h2>
-      <p class="lead"><span class="de">Die Luftseilbahn zum Hohen Kasten startet direkt in Brülisau.</span><span class="en">The Hoher Kasten cable car starts right in Brülisau.</span></p>
+      <h2><span class="de">Bergbahnen und Verkehr</span><span class="en">Cable cars and transport</span><span class="fr">Remontées mécaniques et transports</span></h2>
+      <p class="lead"><span class="de">Die Luftseilbahn zum Hohen Kasten startet direkt in Brülisau.</span><span class="en">The Hoher Kasten cable car starts right in Brülisau.</span><span class="fr">Le téléphérique du Hoher Kasten part directement de Brülisau.</span></p>
       <div class="spots">
-        <div class="spot"><svg class="ic"><use href="#i-cable"/></svg><div><h3>Hoher Kasten</h3><p><span class="de">Luftseilbahn und Drehrestaurant in Brülisau: 2 Einzelfahrten oder 1 Berg- und Talfahrt.</span><span class="en">Cable car and revolving restaurant in Brülisau: 2 single trips or 1 return trip.</span></p></div></div>
-        <div class="spot"><svg class="ic"><use href="#i-cable"/></svg><div><h3>Kronberg</h3><p><span class="de">Luftseilbahn in Jakobsbad: 2 Einzelfahrten oder 1 Berg- und Talfahrt.</span><span class="en">Cable car in Jakobsbad: 2 single trips or 1 return trip.</span></p></div></div>
-        <div class="spot"><svg class="ic"><use href="#i-cable"/></svg><div><h3>Ebenalp</h3><p><span class="de">Luftseilbahn Wasserauen–Ebenalp: 2 Einzelfahrten oder 1 Berg- und Talfahrt.</span><span class="en">Cable car Wasserauen–Ebenalp: 2 single trips or 1 return trip.</span></p></div></div>
-        <div class="spot"><svg class="ic"><use href="#i-car"/></svg><div><h3>Öffentlicher Verkehr</h3><p><span class="de">Gratis in 21 Zonen des Tarifverbunds Ostwind rund um Appenzell, 2. Klasse. Der Rufbus PubliCar Appenzell ist ebenfalls gratis, kostet aber 5 Franken pro Person extra. Buchung per App, Website oder Telefon.</span><span class="en">Free in 21 zones of the Ostwind fare network around Appenzell, 2nd class. The on-demand bus PubliCar Appenzell is also free, but costs an extra CHF 5 per person. Book by app, website or phone.</span></p></div></div>
+        <div class="spot"><svg class="ic"><use href="#i-cable"/></svg><div><h3>Hoher Kasten</h3><p><span class="de">Luftseilbahn und Drehrestaurant in Brülisau: 2 Einzelfahrten oder 1 Berg- und Talfahrt.</span><span class="en">Cable car and revolving restaurant in Brülisau: 2 single trips or 1 return trip.</span><span class="fr">Téléphérique et restaurant tournant à Brülisau : 2 trajets simples ou 1 aller-retour.</span></p></div></div>
+        <div class="spot"><svg class="ic"><use href="#i-cable"/></svg><div><h3>Kronberg</h3><p><span class="de">Luftseilbahn in Jakobsbad: 2 Einzelfahrten oder 1 Berg- und Talfahrt.</span><span class="en">Cable car in Jakobsbad: 2 single trips or 1 return trip.</span><span class="fr">Téléphérique à Jakobsbad : 2 trajets simples ou 1 aller-retour.</span></p></div></div>
+        <div class="spot"><svg class="ic"><use href="#i-cable"/></svg><div><h3>Ebenalp</h3><p><span class="de">Luftseilbahn Wasserauen–Ebenalp: 2 Einzelfahrten oder 1 Berg- und Talfahrt.</span><span class="en">Cable car Wasserauen–Ebenalp: 2 single trips or 1 return trip.</span><span class="fr">Téléphérique Wasserauen–Ebenalp : 2 trajets simples ou 1 aller-retour.</span></p></div></div>
+        <div class="spot"><svg class="ic"><use href="#i-car"/></svg><div><h3>Öffentlicher Verkehr</h3><p><span class="de">Gratis in 21 Zonen des Tarifverbunds Ostwind rund um Appenzell, 2. Klasse. Der Rufbus PubliCar Appenzell ist ebenfalls gratis, kostet aber 5 Franken pro Person extra. Buchung per App, Website oder Telefon.</span><span class="en">Free in 21 zones of the Ostwind fare network around Appenzell, 2nd class. The on-demand bus PubliCar Appenzell is also free, but costs an extra CHF 5 per person. Book by app, website or phone.</span><span class="fr">Gratuit dans 21 zones de la communauté tarifaire Ostwind autour d'Appenzell, 2e classe. Le bus à la demande PubliCar Appenzell est également gratuit, mais coûte 5 francs par personne en supplément. Réservation par application, site web ou téléphone.</span></p></div></div>
       </div>
     </div>
   </section>
 
   <section class="sec">
     <div class="wrap">
-      <h2><span class="de">Das ganze Jahr</span><span class="en">All year round</span></h2>
+      <h2><span class="de">Das ganze Jahr</span><span class="en">All year round</span><span class="fr">Toute l'année</span></h2>
       <div class="kcols">
-        <div><h3><span class="de">Erlebniswelten</span><span class="en">Experiences</span></h3>
+        <div><h3><span class="de">Erlebniswelten</span><span class="en">Experiences</span><span class="fr">Mondes d'expérience</span></h3>
           <ul class="rules">
-            <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Appenzeller Alpenbitter: 1 Geschenk. Abholung Montag bis Freitag bei der Alpenbitter AG, am Wochenende bei der Tourist Information Appenzell</span><span class="en">Appenzeller Alpenbitter: 1 gift. Pick-up Monday to Friday at Alpenbitter AG, at weekends at the Tourist Information Appenzell</span></li>
-            <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Appenzeller Käseladen, Postplatz Appenzell: 1 traditionelles Appenzeller Geschirrtuch</span><span class="en">Appenzeller cheese shop, Postplatz Appenzell: 1 traditional Appenzeller tea towel</span></li>
-            <li><svg class="ic"><use href="#i-check"/></svg><span class="de">A. Vogel Besucherzentrum, Teufen: freier Eintritt ins A. Vogel Museum</span><span class="en">A. Vogel visitor centre, Teufen: free entry to the A. Vogel Museum</span></li>
-            <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Brauerei Locher, Appenzell: 1 Degustationsbier nach Wahl im Besucherzentrum «Brauquöll»</span><span class="en">Locher brewery, Appenzell: 1 tasting beer of your choice at the “Brauquöll” visitor centre</span></li>
-            <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Flauderei Appenzell: 1 alkoholfreies Goba-Getränk nach Wahl (0,5 l)</span><span class="en">Flauderei Appenzell: 1 non-alcoholic Goba drink of your choice (0.5 l)</span></li>
-            <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Appenzeller Schaukäserei, Stein AR: 1 Eintritt in den Schaubereich</span><span class="en">Appenzeller show dairy, Stein AR: 1 entry to the show area</span></li>
-            <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Breitenmoser Gustarium, Steinegg: Degustation von Appenzeller Fleischspezialitäten</span><span class="en">Breitenmoser Gustarium, Steinegg: tasting of Appenzell meat specialities</span></li>
-            <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Kinderdorf Pestalozzi, Trogen: freier Eintritt in die Ausstellung</span><span class="en">Pestalozzi Children's Village, Trogen: free entry to the exhibition</span></li>
-            <li><svg class="ic"><use href="#i-check"/></svg><span class="de">JUST Schweiz, Walzenhausen: 1 Eintritt in die JUST Welt</span><span class="en">JUST Schweiz, Walzenhausen: 1 entry to JUST Welt</span></li>
-            <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Bischofberger Biber-Spezialitäten, Weissbad: freier Eintritt in die Bärli-Biber-Welt</span><span class="en">Bischofberger Biber specialities, Weissbad: free entry to the Bärli-Biber-Welt</span></li>
+            <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Appenzeller Alpenbitter: 1 Geschenk. Abholung Montag bis Freitag bei der Alpenbitter AG, am Wochenende bei der Tourist Information Appenzell</span><span class="en">Appenzeller Alpenbitter: 1 gift. Pick-up Monday to Friday at Alpenbitter AG, at weekends at the Tourist Information Appenzell</span><span class="fr">Appenzeller Alpenbitter : 1 cadeau. Retrait du lundi au vendredi chez Alpenbitter AG, le week-end à l'office du tourisme d'Appenzell</span></li>
+            <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Appenzeller Käseladen, Postplatz Appenzell: 1 traditionelles Appenzeller Geschirrtuch</span><span class="en">Appenzeller cheese shop, Postplatz Appenzell: 1 traditional Appenzeller tea towel</span><span class="fr">Appenzeller Käseladen, Postplatz Appenzell : 1 torchon appenzellois traditionnel</span></li>
+            <li><svg class="ic"><use href="#i-check"/></svg><span class="de">A. Vogel Besucherzentrum, Teufen: freier Eintritt ins A. Vogel Museum</span><span class="en">A. Vogel visitor centre, Teufen: free entry to the A. Vogel Museum</span><span class="fr">Centre des visiteurs A. Vogel, Teufen : entrée libre au musée A. Vogel</span></li>
+            <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Brauerei Locher, Appenzell: 1 Degustationsbier nach Wahl im Besucherzentrum «Brauquöll»</span><span class="en">Locher brewery, Appenzell: 1 tasting beer of your choice at the “Brauquöll” visitor centre</span><span class="fr">Brasserie Locher, Appenzell : 1 bière de dégustation au choix au centre des visiteurs « Brauquöll »</span></li>
+            <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Flauderei Appenzell: 1 alkoholfreies Goba-Getränk nach Wahl (0,5 l)</span><span class="en">Flauderei Appenzell: 1 non-alcoholic Goba drink of your choice (0.5 l)</span><span class="fr">Flauderei Appenzell : 1 boisson Goba sans alcool au choix (0,5 l)</span></li>
+            <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Appenzeller Schaukäserei, Stein AR: 1 Eintritt in den Schaubereich</span><span class="en">Appenzeller show dairy, Stein AR: 1 entry to the show area</span><span class="fr">Fromagerie de démonstration d'Appenzell, Stein AR : 1 entrée dans l'espace de démonstration</span></li>
+            <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Breitenmoser Gustarium, Steinegg: Degustation von Appenzeller Fleischspezialitäten</span><span class="en">Breitenmoser Gustarium, Steinegg: tasting of Appenzell meat specialities</span><span class="fr">Breitenmoser Gustarium, Steinegg : dégustation de spécialités de viande d'Appenzell</span></li>
+            <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Kinderdorf Pestalozzi, Trogen: freier Eintritt in die Ausstellung</span><span class="en">Pestalozzi Children's Village, Trogen: free entry to the exhibition</span><span class="fr">Village d'enfants Pestalozzi, Trogen : entrée libre à l'exposition</span></li>
+            <li><svg class="ic"><use href="#i-check"/></svg><span class="de">JUST Schweiz, Walzenhausen: 1 Eintritt in die JUST Welt</span><span class="en">JUST Schweiz, Walzenhausen: 1 entry to JUST Welt</span><span class="fr">JUST Suisse, Walzenhausen : 1 entrée au monde JUST</span></li>
+            <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Bischofberger Biber-Spezialitäten, Weissbad: freier Eintritt in die Bärli-Biber-Welt</span><span class="en">Bischofberger Biber specialities, Weissbad: free entry to the Bärli-Biber-Welt</span><span class="fr">Bischofberger Biber-Spezialitäten, Weissbad : entrée libre au monde Bärli-Biber</span></li>
           </ul></div>
-        <div><h3><span class="de">Museen mit freiem Eintritt</span><span class="en">Museums with free entry</span></h3>
+        <div><h3><span class="de">Museen mit freiem Eintritt</span><span class="en">Museums with free entry</span><span class="fr">Musées à entrée libre</span></h3>
           <ul class="rules">
-            <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Kunsthalle Appenzell</span><span class="en">Kunsthalle Appenzell</span></li>
-            <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Kunstmuseum Appenzell</span><span class="en">Kunstmuseum Appenzell</span></li>
-            <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Museum Appenzell</span><span class="en">Museum Appenzell</span></li>
-            <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Museum Heiden</span><span class="en">Museum Heiden</span></li>
-            <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Museum Henry Dunant, Heiden</span><span class="en">Museum Henry Dunant, Heiden</span></li>
-            <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Museum Herisau</span><span class="en">Museum Herisau</span></li>
-            <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Appenzeller Volkskunde-Museum, Stein</span><span class="en">Appenzeller Volkskunde-Museum, Stein</span></li>
-            <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Zeughaus Teufen</span><span class="en">Zeughaus Teufen</span></li>
-            <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Appenzeller Brauchtumsmuseum, Urnäsch</span><span class="en">Appenzeller Brauchtumsmuseum, Urnäsch</span></li>
+            <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Kunsthalle Appenzell</span><span class="en">Kunsthalle Appenzell</span><span class="fr">Kunsthalle Appenzell</span></li>
+            <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Kunstmuseum Appenzell</span><span class="en">Kunstmuseum Appenzell</span><span class="fr">Kunstmuseum Appenzell</span></li>
+            <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Museum Appenzell</span><span class="en">Museum Appenzell</span><span class="fr">Musée d'Appenzell</span></li>
+            <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Museum Heiden</span><span class="en">Museum Heiden</span><span class="fr">Musée de Heiden</span></li>
+            <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Museum Henry Dunant, Heiden</span><span class="en">Museum Henry Dunant, Heiden</span><span class="fr">Musée Henry Dunant, Heiden</span></li>
+            <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Museum Herisau</span><span class="en">Museum Herisau</span><span class="fr">Musée de Herisau</span></li>
+            <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Appenzeller Volkskunde-Museum, Stein</span><span class="en">Appenzeller Volkskunde-Museum, Stein</span><span class="fr">Musée d'ethnographie appenzellois, Stein</span></li>
+            <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Zeughaus Teufen</span><span class="en">Zeughaus Teufen</span><span class="fr">Zeughaus Teufen</span></li>
+            <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Appenzeller Brauchtumsmuseum, Urnäsch</span><span class="en">Appenzeller Brauchtumsmuseum, Urnäsch</span><span class="fr">Musée des coutumes appenzelloises, Urnäsch</span></li>
           </ul>
-          <h3><span class="de">Diverses</span><span class="en">Miscellaneous</span></h3>
+          <h3><span class="de">Diverses</span><span class="en">Miscellaneous</span><span class="fr">Divers</span></h3>
           <ul class="rules">
-            <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Kantons- und Volksbibliothek Appenzell: Bücher und Medien ausleihen während des Aufenthalts (ohne E-Medien)</span><span class="en">Cantonal and public library Appenzell: borrow books and media during your stay (no e-media)</span></li>
-            <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Kirchturm Heiden: freier Eintritt</span><span class="en">Heiden church tower: free entry</span></li>
-            <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Säntis Schwebebahn, Schwägalp: Teilnahme am Wochenprogramm</span><span class="en">Säntis cable car, Schwägalp: take part in the weekly programme</span></li>
+            <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Kantons- und Volksbibliothek Appenzell: Bücher und Medien ausleihen während des Aufenthalts (ohne E-Medien)</span><span class="en">Cantonal and public library Appenzell: borrow books and media during your stay (no e-media)</span><span class="fr">Bibliothèque cantonale et populaire d'Appenzell : emprunt de livres et de médias pendant le séjour (sans médias électroniques)</span></li>
+            <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Kirchturm Heiden: freier Eintritt</span><span class="en">Heiden church tower: free entry</span><span class="fr">Clocher de Heiden : entrée libre</span></li>
+            <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Säntis Schwebebahn, Schwägalp: Teilnahme am Wochenprogramm</span><span class="en">Säntis cable car, Schwägalp: take part in the weekly programme</span><span class="fr">Téléphérique du Säntis, Schwägalp : participation au programme hebdomadaire</span></li>
           </ul></div>
-        <div><h3><span class="de">Sportliche Aktivitäten</span><span class="en">Sports</span></h3>
+        <div><h3><span class="de">Sportliche Aktivitäten</span><span class="en">Sports</span><span class="fr">Activités sportives</span></h3>
           <ul class="rules">
-            <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Boulderhalle «chletterai», Appenzell: 1 Eintritt</span><span class="en">Bouldering hall “chletterai”, Appenzell: 1 entry</span></li>
-            <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Tennishalle Appenzell: einmalige Benutzung, Reservation per Telefon nötig</span><span class="en">Tennis hall Appenzell: one-time use, reservation by phone required</span></li>
-            <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Eishalle Sportzentrum Herisau: freier Eintritt inklusive Schlittschuhmiete</span><span class="en">Ice rink Sportzentrum Herisau: free entry including skate rental</span></li>
+            <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Boulderhalle «chletterai», Appenzell: 1 Eintritt</span><span class="en">Bouldering hall “chletterai”, Appenzell: 1 entry</span><span class="fr">Salle d'escalade de bloc « chletterai », Appenzell : 1 entrée</span></li>
+            <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Tennishalle Appenzell: einmalige Benutzung, Reservation per Telefon nötig</span><span class="en">Tennis hall Appenzell: one-time use, reservation by phone required</span><span class="fr">Halle de tennis d'Appenzell : une utilisation, réservation par téléphone nécessaire</span></li>
+            <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Eishalle Sportzentrum Herisau: freier Eintritt inklusive Schlittschuhmiete</span><span class="en">Ice rink Sportzentrum Herisau: free entry including skate rental</span><span class="fr">Patinoire du centre sportif de Herisau : entrée libre, location de patins incluse</span></li>
           </ul>
-          <h3><span class="de">Schwimmbäder</span><span class="en">Swimming pools</span></h3>
+          <h3><span class="de">Schwimmbäder</span><span class="en">Swimming pools</span><span class="fr">Piscines</span></h3>
           <ul class="rules">
-            <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Hallenbad Appenzell: freier Eintritt</span><span class="en">Indoor pool Appenzell: free entry</span></li>
-            <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Appenzeller Heilbad, Heiden: 1 Eintritt für 3 Stunden</span><span class="en">Appenzeller Heilbad, Heiden: 1 entry for 3 hours</span></li>
-            <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Hallenbad Sportzentrum Herisau: freier Eintritt</span><span class="en">Indoor pool Sportzentrum Herisau: free entry</span></li>
-            <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Hallenbad Speicher: freier Eintritt</span><span class="en">Indoor pool Speicher: free entry</span></li>
+            <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Hallenbad Appenzell: freier Eintritt</span><span class="en">Indoor pool Appenzell: free entry</span><span class="fr">Piscine couverte d'Appenzell : entrée libre</span></li>
+            <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Appenzeller Heilbad, Heiden: 1 Eintritt für 3 Stunden</span><span class="en">Appenzeller Heilbad, Heiden: 1 entry for 3 hours</span><span class="fr">Appenzeller Heilbad, Heiden : 1 entrée pour 3 heures</span></li>
+            <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Hallenbad Sportzentrum Herisau: freier Eintritt</span><span class="en">Indoor pool Sportzentrum Herisau: free entry</span><span class="fr">Piscine couverte du centre sportif de Herisau : entrée libre</span></li>
+            <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Hallenbad Speicher: freier Eintritt</span><span class="en">Indoor pool Speicher: free entry</span><span class="fr">Piscine couverte de Speicher : entrée libre</span></li>
           </ul></div>
       </div>
     </div>
@@ -832,37 +838,37 @@ footer a:hover { text-decoration-color: var(--gold); }
 
   <section class="sec tint">
     <div class="wrap">
-      <h2><span class="de">Zusätzlich von April bis Oktober</span><span class="en">Also from April to October</span></h2>
+      <h2><span class="de">Zusätzlich von April bis Oktober</span><span class="en">Also from April to October</span><span class="fr">En plus d'avril à octobre</span></h2>
       <div class="kcols">
-        <div><h3><span class="de">Unterwegs, Sport und Museum</span><span class="en">On the go, sport and museum</span></h3>
+        <div><h3><span class="de">Unterwegs, Sport und Museum</span><span class="en">On the go, sport and museum</span><span class="fr">En route, sport et musée</span></h3>
           <ul class="rules">
-            <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Schifffahrt Rheineck–Rorschach: 1 Fahrt in eine Richtung</span><span class="en">Boat trip Rheineck–Rorschach: 1 trip in either direction</span></li>
-            <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Bobbahn Kronberg, Jakobsbad: 1 Schlitten, einlösbar von Montag bis Freitag</span><span class="en">Kronberg toboggan run, Jakobsbad: 1 sled, redeemable Monday to Friday</span></li>
-            <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Kybun Joya Shop, Appenzell: Testschuhe für 2 Tage</span><span class="en">Kybun Joya Shop, Appenzell: trial shoes for 2 days</span></li>
-            <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Sport Baumann, Appenzell: Wanderschuhe zum Testen für 1 Tag</span><span class="en">Sport Baumann, Appenzell: hiking shoes to try for 1 day</span></li>
-            <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Museum Appenzeller Bahnen, Wasserauen: freier Eintritt</span><span class="en">Museum Appenzeller Bahnen, Wasserauen: free entry</span></li>
+            <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Schifffahrt Rheineck–Rorschach: 1 Fahrt in eine Richtung</span><span class="en">Boat trip Rheineck–Rorschach: 1 trip in either direction</span><span class="fr">Navigation Rheineck–Rorschach : 1 trajet simple</span></li>
+            <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Bobbahn Kronberg, Jakobsbad: 1 Schlitten, einlösbar von Montag bis Freitag</span><span class="en">Kronberg toboggan run, Jakobsbad: 1 sled, redeemable Monday to Friday</span><span class="fr">Piste de luge Kronberg, Jakobsbad : 1 luge, utilisable du lundi au vendredi</span></li>
+            <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Kybun Joya Shop, Appenzell: Testschuhe für 2 Tage</span><span class="en">Kybun Joya Shop, Appenzell: trial shoes for 2 days</span><span class="fr">Kybun Joya Shop, Appenzell : chaussures d'essai pour 2 jours</span></li>
+            <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Sport Baumann, Appenzell: Wanderschuhe zum Testen für 1 Tag</span><span class="en">Sport Baumann, Appenzell: hiking shoes to try for 1 day</span><span class="fr">Sport Baumann, Appenzell : chaussures de randonnée à tester pendant 1 jour</span></li>
+            <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Museum Appenzeller Bahnen, Wasserauen: freier Eintritt</span><span class="en">Museum Appenzeller Bahnen, Wasserauen: free entry</span><span class="fr">Musée des chemins de fer appenzellois, Wasserauen : entrée libre</span></li>
           </ul></div>
-        <div><h3><span class="de">Freibäder mit freiem Eintritt</span><span class="en">Outdoor pools with free entry</span></h3>
+        <div><h3><span class="de">Freibäder mit freiem Eintritt</span><span class="en">Outdoor pools with free entry</span><span class="fr">Piscines en plein air à entrée libre</span></h3>
           <ul class="rules">
-            <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Freibad Appenzell</span><span class="en">Outdoor pool Appenzell</span></li>
-            <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Freibad Rotenwies, Gais</span><span class="en">Outdoor pool Rotenwies, Gais</span></li>
-            <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Badi Heiden</span><span class="en">Badi Heiden</span></li>
-            <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Freibad Sonnenberg, Herisau</span><span class="en">Outdoor pool Sonnenberg, Herisau</span></li>
-            <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Freibad Rehetobel</span><span class="en">Outdoor pool Rehetobel</span></li>
-            <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Freibad Teufen</span><span class="en">Outdoor pool Teufen</span></li>
-            <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Freibad Waldstatt</span><span class="en">Outdoor pool Waldstatt</span></li>
-            <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Freibad Ledi, Walzenhausen</span><span class="en">Outdoor pool Ledi, Walzenhausen</span></li>
+            <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Freibad Appenzell</span><span class="en">Outdoor pool Appenzell</span><span class="fr">Piscine en plein air d'Appenzell</span></li>
+            <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Freibad Rotenwies, Gais</span><span class="en">Outdoor pool Rotenwies, Gais</span><span class="fr">Piscine en plein air Rotenwies, Gais</span></li>
+            <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Badi Heiden</span><span class="en">Badi Heiden</span><span class="fr">Badi Heiden</span></li>
+            <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Freibad Sonnenberg, Herisau</span><span class="en">Outdoor pool Sonnenberg, Herisau</span><span class="fr">Piscine en plein air Sonnenberg, Herisau</span></li>
+            <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Freibad Rehetobel</span><span class="en">Outdoor pool Rehetobel</span><span class="fr">Piscine en plein air de Rehetobel</span></li>
+            <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Freibad Teufen</span><span class="en">Outdoor pool Teufen</span><span class="fr">Piscine en plein air de Teufen</span></li>
+            <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Freibad Waldstatt</span><span class="en">Outdoor pool Waldstatt</span><span class="fr">Piscine en plein air de Waldstatt</span></li>
+            <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Freibad Ledi, Walzenhausen</span><span class="en">Outdoor pool Ledi, Walzenhausen</span><span class="fr">Piscine en plein air Ledi, Walzenhausen</span></li>
           </ul></div>
-        <div><h3><span class="de">Veloverleih</span><span class="en">Bike rental</span></h3>
-          <p class="note"><span class="de">Tagesmiete von E-Bike, Mountainbike oder Citybike gegen Depot. Nicht sonntags, Verfügbarkeit nicht garantiert.</span><span class="en">Day rental of an e-bike, mountain bike or city bike against a deposit. Not on Sundays, availability not guaranteed.</span></p>
+        <div><h3><span class="de">Veloverleih</span><span class="en">Bike rental</span><span class="fr">Location de vélos</span></h3>
+          <p class="note"><span class="de">Tagesmiete von E-Bike, Mountainbike oder Citybike gegen Depot. Nicht sonntags, Verfügbarkeit nicht garantiert.</span><span class="en">Day rental of an e-bike, mountain bike or city bike against a deposit. Not on Sundays, availability not guaranteed.</span><span class="fr">Location à la journée d'un vélo électrique, d'un VTT ou d'un vélo de ville contre caution. Pas le dimanche, disponibilité non garantie.</span></p>
           <ul class="rules">
-            <li><svg class="ic"><use href="#i-check"/></svg><span class="de">H&amp;G Motos, Appenzell</span><span class="en">H&amp;G Motos, Appenzell</span></li>
-            <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Neff Zweirad, Appenzell</span><span class="en">Neff Zweirad, Appenzell</span></li>
-            <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Stefan Gollino, Appenzell</span><span class="en">Stefan Gollino, Appenzell</span></li>
-            <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Das Velo-Center, Heiden</span><span class="en">Das Velo-Center, Heiden</span></li>
-            <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Vali's Bike Shop, Rehetobel</span><span class="en">Vali's Bike Shop, Rehetobel</span></li>
-            <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Dani's Velolade, Steinegg</span><span class="en">Dani's Velolade, Steinegg</span></li>
-            <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Abenteuer Reisen TOPAZ, Teufen</span><span class="en">Abenteuer Reisen TOPAZ, Teufen</span></li>
+            <li><svg class="ic"><use href="#i-check"/></svg><span class="de">H&amp;G Motos, Appenzell</span><span class="en">H&amp;G Motos, Appenzell</span><span class="fr">H&amp;G Motos, Appenzell</span></li>
+            <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Neff Zweirad, Appenzell</span><span class="en">Neff Zweirad, Appenzell</span><span class="fr">Neff Zweirad, Appenzell</span></li>
+            <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Stefan Gollino, Appenzell</span><span class="en">Stefan Gollino, Appenzell</span><span class="fr">Stefan Gollino, Appenzell</span></li>
+            <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Das Velo-Center, Heiden</span><span class="en">Das Velo-Center, Heiden</span><span class="fr">Das Velo-Center, Heiden</span></li>
+            <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Vali's Bike Shop, Rehetobel</span><span class="en">Vali's Bike Shop, Rehetobel</span><span class="fr">Vali's Bike Shop, Rehetobel</span></li>
+            <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Dani's Velolade, Steinegg</span><span class="en">Dani's Velolade, Steinegg</span><span class="fr">Dani's Velolade, Steinegg</span></li>
+            <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Abenteuer Reisen TOPAZ, Teufen</span><span class="en">Abenteuer Reisen TOPAZ, Teufen</span><span class="fr">Abenteuer Reisen TOPAZ, Teufen</span></li>
           </ul></div>
       </div>
     </div>
@@ -870,26 +876,26 @@ footer a:hover { text-decoration-color: var(--gold); }
 
   <section class="sec">
     <div class="wrap">
-      <h2><span class="de">Zusätzlich von November bis März</span><span class="en">Also from November to March</span></h2>
+      <h2><span class="de">Zusätzlich von November bis März</span><span class="en">Also from November to March</span><span class="fr">En plus de novembre à mars</span></h2>
       <div class="kcols two">
-        <div><h3><span class="de">Angebote</span><span class="en">Offers</span></h3>
+        <div><h3><span class="de">Angebote</span><span class="en">Offers</span><span class="fr">Offres</span></h3>
           <ul class="rules">
-            <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Langlaufski, Gonten: 1 Tag gratis gegen Depot, Reservation per Telefon</span><span class="en">Cross-country skis, Gonten: 1 day free against a deposit, reservation by phone</span></li>
-            <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Natureisbahn Glandenstein, Weissbad: Schlittschuhmiete gratis, Voranmeldung per Telefon nötig</span><span class="en">Natural ice rink Glandenstein, Weissbad: free skate rental, booking by phone required</span></li>
-            <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Kinder-Skiunterricht der Schneesportschule Schwende: Gruppenunterricht für Kinder bis 12 Jahre, ohne Skipass, während des ganzen Aufenthalts, nicht sonntags, Anmeldung online</span><span class="en">Children's ski lessons at the Schwende snow sports school: group lessons for children up to age 12, ski pass not included, for the whole stay, not on Sundays, online registration</span></li>
-            <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Skilift Horn: 1 Nachtskifahren, dienstags und freitags</span><span class="en">Horn ski lift: 1 night skiing session, Tuesdays and Fridays</span></li>
-            <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Skilift Alpsteinblick, Gonten: 1 halber Tag Skipass</span><span class="en">Alpsteinblick ski lift, Gonten: 1 half-day ski pass</span></li>
+            <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Langlaufski, Gonten: 1 Tag gratis gegen Depot, Reservation per Telefon</span><span class="en">Cross-country skis, Gonten: 1 day free against a deposit, reservation by phone</span><span class="fr">Skis de fond, Gonten : 1 jour gratuit contre caution, réservation par téléphone</span></li>
+            <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Natureisbahn Glandenstein, Weissbad: Schlittschuhmiete gratis, Voranmeldung per Telefon nötig</span><span class="en">Natural ice rink Glandenstein, Weissbad: free skate rental, booking by phone required</span><span class="fr">Patinoire naturelle Glandenstein, Weissbad : location de patins gratuite, inscription préalable par téléphone nécessaire</span></li>
+            <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Kinder-Skiunterricht der Schneesportschule Schwende: Gruppenunterricht für Kinder bis 12 Jahre, ohne Skipass, während des ganzen Aufenthalts, nicht sonntags, Anmeldung online</span><span class="en">Children's ski lessons at the Schwende snow sports school: group lessons for children up to age 12, ski pass not included, for the whole stay, not on Sundays, online registration</span><span class="fr">Cours de ski pour enfants de l'école de sports de neige de Schwende : cours collectifs pour enfants jusqu'à 12 ans, sans forfait de ski, pendant tout le séjour, pas le dimanche, inscription en ligne</span></li>
+            <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Skilift Horn: 1 Nachtskifahren, dienstags und freitags</span><span class="en">Horn ski lift: 1 night skiing session, Tuesdays and Fridays</span><span class="fr">Remonte-pente Horn : 1 session de ski nocturne, le mardi et le vendredi</span></li>
+            <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Skilift Alpsteinblick, Gonten: 1 halber Tag Skipass</span><span class="en">Alpsteinblick ski lift, Gonten: 1 half-day ski pass</span><span class="fr">Remonte-pente Alpsteinblick, Gonten : 1 demi-journée de forfait de ski</span></li>
           </ul></div>
-        <div><h3><span class="de">Schneeschuhverleih</span><span class="en">Snowshoe rental</span></h3>
-          <p class="note"><span class="de">1 Tag Schneeschuhe und Stöcke gratis gegen Depot bei:</span><span class="en">1 day of snowshoes and poles free against a deposit at:</span></p>
+        <div><h3><span class="de">Schneeschuhverleih</span><span class="en">Snowshoe rental</span><span class="fr">Location de raquettes</span></h3>
+          <p class="note"><span class="de">1 Tag Schneeschuhe und Stöcke gratis gegen Depot bei:</span><span class="en">1 day of snowshoes and poles free against a deposit at:</span><span class="fr">1 jour de raquettes et de bâtons gratuit contre caution chez :</span></p>
           <ul class="rules">
-            <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Sport Baumann</span><span class="en">Sport Baumann</span></li>
-            <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Dörig Sport</span><span class="en">Dörig Sport</span></li>
-            <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Kronberg Luftseilbahn</span><span class="en">Kronberg Luftseilbahn</span></li>
-            <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Schuhe + Sport am Landsgemeindeplatz</span><span class="en">Schuhe + Sport am Landsgemeindeplatz</span></li>
+            <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Sport Baumann</span><span class="en">Sport Baumann</span><span class="fr">Sport Baumann</span></li>
+            <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Dörig Sport</span><span class="en">Dörig Sport</span><span class="fr">Dörig Sport</span></li>
+            <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Kronberg Luftseilbahn</span><span class="en">Kronberg Luftseilbahn</span><span class="fr">Téléphérique Kronberg</span></li>
+            <li><svg class="ic"><use href="#i-check"/></svg><span class="de">Schuhe + Sport am Landsgemeindeplatz</span><span class="en">Schuhe + Sport am Landsgemeindeplatz</span><span class="fr">Schuhe + Sport am Landsgemeindeplatz</span></li>
           </ul></div>
       </div>
-      <p class="note" style="margin-top:36px"><span class="de">Nicht alle Leistungen sind immer verfügbar. Wenn ein Angebot wegen einer Störung, Wartung oder aus ähnlichen Gründen ausfällt, gibt es dafür keinen Ersatz. Telefonnummern und weitere Bedingungen findest du auf <a href="https://www.appenzell.ch/de/unterkunft/appenzeller-ferienkarte.html" target="_blank" rel="noopener">appenzell.ch</a> (Stand Oktober 2026).</span><span class="en">Not all services are always available. If an offer is unavailable because of a fault, maintenance or similar reasons, there is no compensation. Phone numbers and further conditions are on <a href="https://www.appenzell.ch/de/unterkunft/appenzeller-ferienkarte.html" target="_blank" rel="noopener">appenzell.ch</a> (as of October 2026).</span></p>
+      <p class="note" style="margin-top:36px"><span class="de">Nicht alle Leistungen sind immer verfügbar. Wenn ein Angebot wegen einer Störung, Wartung oder aus ähnlichen Gründen ausfällt, gibt es dafür keinen Ersatz. Telefonnummern und weitere Bedingungen findest du auf <a href="https://www.appenzell.ch/de/unterkunft/appenzeller-ferienkarte.html" target="_blank" rel="noopener">appenzell.ch</a> (Stand Oktober 2026).</span><span class="en">Not all services are always available. If an offer is unavailable because of a fault, maintenance or similar reasons, there is no compensation. Phone numbers and further conditions are on <a href="https://www.appenzell.ch/de/unterkunft/appenzeller-ferienkarte.html" target="_blank" rel="noopener">appenzell.ch</a> (as of October 2026).</span><span class="fr">Toutes les prestations ne sont pas toujours disponibles. Si une offre est supprimée en raison d'une panne, d'une maintenance ou pour des raisons similaires, elle n'est pas remplacée. Vous trouverez les numéros de téléphone et d'autres conditions sur <a href="https://www.appenzell.ch/de/unterkunft/appenzeller-ferienkarte.html" target="_blank" rel="noopener">appenzell.ch</a> (état octobre 2026).</span></p>
     </div>
   </section>
   </div>
@@ -897,9 +903,9 @@ footer a:hover { text-decoration-color: var(--gold); }
   <div class="page" data-page="kalender">
   <section class="sec tint">
     <div class="wrap">
-      <h2><span class="de">Freie und belegte Tage</span><span class="en">Free and booked dates</span></h2>
-      <p class="lead"><span class="de">Wähle Anreise und Abreise im Kalender. Mindestaufenthalt: 3 Nächte (April bis Oktober), 2 Nächte (November bis März). Die Daten werden in die Anfrage übernommen.</span><span class="en">Pick your arrival and departure in the calendar. Minimum stay: 3 nights (April to October), 2 nights (November to March). The dates are carried over to your enquiry.</span></p>
-      <p class="warn" id="bookedErr" hidden><span class="de">Die belegten Tage konnten nicht geladen werden. Bitte frag direkt bei uns an, ob dein Zeitraum frei ist.</span><span class="en">The booked dates could not be loaded. Please ask us directly whether your dates are free.</span></p>
+      <h2><span class="de">Freie und belegte Tage</span><span class="en">Free and booked dates</span><span class="fr">Jours libres et occupés</span></h2>
+      <p class="lead"><span class="de">Wähle Anreise und Abreise im Kalender. Mindestaufenthalt: 3 Nächte (April bis Oktober), 2 Nächte (November bis März). Die Daten werden in die Anfrage übernommen.</span><span class="en">Pick your arrival and departure in the calendar. Minimum stay: 3 nights (April to October), 2 nights (November to March). The dates are carried over to your enquiry.</span><span class="fr">Choisissez l'arrivée et le départ dans le calendrier. Séjour minimum : 3 nuits (avril à octobre), 2 nuits (novembre à mars). Les dates sont reprises dans la demande.</span></p>
+      <p class="warn" id="bookedErr" hidden><span class="de">Die belegten Tage konnten nicht geladen werden. Bitte frag direkt bei uns an, ob dein Zeitraum frei ist.</span><span class="en">The booked dates could not be loaded. Please ask us directly whether your dates are free.</span><span class="fr">Les jours occupés n'ont pas pu être chargés. Veuillez nous demander directement si votre période est libre.</span></p>
       <div class="cal">
         <div class="cal-head">
           <button type="button" id="prev" aria-label="Vorheriger Monat / Previous month"><svg class="ic"><use href="#i-left"/></svg></button>
@@ -908,13 +914,13 @@ footer a:hover { text-decoration-color: var(--gold); }
         </div>
         <div class="months" id="months"></div>
         <div class="legend">
-          <span><i style="background:var(--booked)"></i><span class="de">belegt</span><span class="en">booked</span></span>
-          <span><i style="background:linear-gradient(135deg, var(--bg) 50%, var(--booked) 50%); border:1px solid var(--line)"></i><span class="de">Anreise anderer Gäste (als Abreisetag wählbar)</span><span class="en">other guests arrive (can be chosen as departure day)</span></span>
-          <span><i style="background:var(--brand)"></i><span class="de">deine Auswahl</span><span class="en">your selection</span></span>
+          <span><i style="background:var(--booked)"></i><span class="de">belegt</span><span class="en">booked</span><span class="fr">occupé</span></span>
+          <span><i style="background:linear-gradient(135deg, var(--bg) 50%, var(--booked) 50%); border:1px solid var(--line)"></i><span class="de">Anreise anderer Gäste (als Abreisetag wählbar)</span><span class="en">other guests arrive (can be chosen as departure day)</span><span class="fr">Arrivée d'autres hôtes (sélectionnable comme jour de départ)</span></span>
+          <span><i style="background:var(--brand)"></i><span class="de">deine Auswahl</span><span class="en">your selection</span><span class="fr">votre sélection</span></span>
         </div>
         <div class="sel">
           <p id="selText"></p>
-          <a class="btn dark" href="#anfrage"><span class="de">Mit diesen Daten anfragen</span><span class="en">Enquire for these dates</span></a>
+          <a class="btn dark" href="#anfrage"><span class="de">Mit diesen Daten anfragen</span><span class="en">Enquire for these dates</span><span class="fr">Demander avec ces dates</span></a>
         </div>
       </div>
     </div>
@@ -926,47 +932,47 @@ footer a:hover { text-decoration-color: var(--gold); }
   <section class="sec">
     <div class="wrap ask">
       <div>
-        <h2><span class="de">Unverbindlich anfragen</span><span class="en">Send a non-binding enquiry</span></h2>
-        <p class="lead"><span class="de">Eine Online-Buchung gibt es nicht. Du schreibst uns, und wir antworten persönlich.</span><span class="en">There is no online booking. You write to us and we reply personally.</span></p>
+        <h2><span class="de">Unverbindlich anfragen</span><span class="en">Send a non-binding enquiry</span><span class="fr">Demande sans engagement</span></h2>
+        <p class="lead"><span class="de">Eine Online-Buchung gibt es nicht. Du schreibst uns, und wir antworten persönlich.</span><span class="en">There is no online booking. You write to us and we reply personally.</span><span class="fr">Il n'y a pas de réservation en ligne. Vous nous écrivez, et nous répondons personnellement.</span></p>
         <ul class="steps">
-          <li><svg class="ic"><use href="#i-calendar"/></svg><span><span class="de">Du wählst deine Reisedaten und die Anzahl Gäste.</span><span class="en">You choose your dates and the number of guests.</span></span></li>
-          <li><svg class="ic"><use href="#i-mail"/></svg><span><span class="de">Wir melden uns per E-Mail mit Verfügbarkeit und Preis.</span><span class="en">We reply by email with availability and price.</span></span></li>
-          <li><svg class="ic"><use href="#i-check"/></svg><span><span class="de">Du bestätigst, und die Wohnung ist für dich reserviert.</span><span class="en">You confirm and the apartment is reserved for you.</span></span></li>
+          <li><svg class="ic"><use href="#i-calendar"/></svg><span><span class="de">Du wählst deine Reisedaten und die Anzahl Gäste.</span><span class="en">You choose your dates and the number of guests.</span><span class="fr">Vous choisissez vos dates de voyage et le nombre de personnes.</span></span></li>
+          <li><svg class="ic"><use href="#i-mail"/></svg><span><span class="de">Wir melden uns per E-Mail mit Verfügbarkeit und Preis.</span><span class="en">We reply by email with availability and price.</span><span class="fr">Nous vous répondons par e-mail avec les disponibilités et le prix.</span></span></li>
+          <li><svg class="ic"><use href="#i-check"/></svg><span><span class="de">Du bestätigst, und die Wohnung ist für dich reserviert.</span><span class="en">You confirm and the apartment is reserved for you.</span><span class="fr">Vous confirmez, et l'appartement est réservé pour vous.</span></span></li>
         </ul>
-        <div class="mailbox note"><span class="de">Du erreichst uns auch direkt:</span><span class="en">You can also reach us directly:</span><br><strong style="color:var(--fg)">ferienwohnungbruelisauer@gmail.com</strong></div>
+        <div class="mailbox note"><span class="de">Du erreichst uns auch direkt:</span><span class="en">You can also reach us directly:</span><span class="fr">Vous pouvez aussi nous joindre directement :</span><br><strong style="color:var(--fg)">ferienwohnungbruelisauer@gmail.com</strong></div>
       </div>
       <div class="formcard">
         <form id="form">
-          <label><span><span class="de">Name</span><span class="en">Name</span></span><input id="f-name" required autocomplete="name"></label>
-          <label><span>E-Mail</span><input id="f-mail" type="email" required autocomplete="email"></label>
-          <label><span><span class="de">Anreise</span><span class="en">Arrival</span></span><input id="f-from" class="dpick" type="text" readonly inputmode="none" autocomplete="off"></label>
-          <label><span><span class="de">Abreise</span><span class="en">Departure</span></span><input id="f-to" class="dpick" type="text" readonly inputmode="none" autocomplete="off"></label>
-          <label><span><span class="de">Erwachsene</span><span class="en">Adults</span></span><input id="f-adults" type="number" inputmode="numeric" min="0" max="7" value="2"></label>
-          <label><span><span class="de">Kinder <small>6 bis 16 Jahre</small></span><span class="en">Children <small>aged 6 to 16</small></span></span><input id="f-kids" type="number" inputmode="numeric" min="0" max="6" value="0"></label>
-          <label class="full"><span><span class="de">Kinder unter 6 Jahren <small>gratis</small></span><span class="en">Children under 6 <small>free</small></span></span><input id="f-tod" type="number" inputmode="numeric" min="0" max="4" value="0"></label>
-          <label class="full"><span><span class="de">Telefon (optional)</span><span class="en">Phone (optional)</span></span><input id="f-tel" type="tel" autocomplete="tel"></label>
-          <label class="full"><span><span class="de">Nachricht</span><span class="en">Message</span></span><textarea id="f-msg"></textarea></label>
+          <label><span><span class="de">Name</span><span class="en">Name</span><span class="fr">Nom</span></span><input id="f-name" required autocomplete="name"></label>
+          <label><span><span class="de">E-Mail</span><span class="en">Email</span><span class="fr">E-mail</span></span><input id="f-mail" type="email" required autocomplete="email"></label>
+          <label><span><span class="de">Anreise</span><span class="en">Arrival</span><span class="fr">Arrivée</span></span><input id="f-from" class="dpick" type="text" readonly inputmode="none" autocomplete="off"></label>
+          <label><span><span class="de">Abreise</span><span class="en">Departure</span><span class="fr">Départ</span></span><input id="f-to" class="dpick" type="text" readonly inputmode="none" autocomplete="off"></label>
+          <label><span><span class="de">Erwachsene</span><span class="en">Adults</span><span class="fr">Adultes</span></span><input id="f-adults" type="number" inputmode="numeric" min="0" max="7" value="2"></label>
+          <label><span><span class="de">Kinder <small>6 bis 16 Jahre</small></span><span class="en">Children <small>aged 6 to 16</small></span><span class="fr">Enfants <small>6 à 16 ans</small></span></span><input id="f-kids" type="number" inputmode="numeric" min="0" max="6" value="0"></label>
+          <label class="full"><span><span class="de">Kinder unter 6 Jahren <small>gratis</small></span><span class="en">Children under 6 <small>free</small></span><span class="fr">Enfants de moins de 6 ans <small>gratuit</small></span></span><input id="f-tod" type="number" inputmode="numeric" min="0" max="4" value="0"></label>
+          <label class="full"><span><span class="de">Telefon (optional)</span><span class="en">Phone (optional)</span><span class="fr">Téléphone (facultatif)</span></span><input id="f-tel" type="tel" autocomplete="tel"></label>
+          <label class="full"><span><span class="de">Nachricht</span><span class="en">Message</span><span class="fr">Message</span></span><textarea id="f-msg"></textarea></label>
           <div class="full calc-out" id="formPrice" aria-live="polite" hidden></div>
-          <p class="warn full" id="fDates" hidden><span class="de">Bitte wähle Anreise und Abreise.</span><span class="en">Please choose your arrival and departure.</span></p>
-          <p class="warn full" id="fMin" hidden><span class="de">Der Mindestaufenthalt beträgt 3 Nächte (April bis Oktober) bzw. 2 Nächte (November bis März).</span><span class="en">The minimum stay is 3 nights (April to October) or 2 nights (November to March).</span></p>
-          <p class="warn full" id="fBooked" hidden><span class="de">Dieser Zeitraum ist leider belegt. Bitte wähle andere Daten.</span><span class="en">Unfortunately these dates are booked. Please choose other dates.</span></p>
+          <p class="warn full" id="fDates" hidden><span class="de">Bitte wähle Anreise und Abreise.</span><span class="en">Please choose your arrival and departure.</span><span class="fr">Veuillez choisir l'arrivée et le départ.</span></p>
+          <p class="warn full" id="fMin" hidden><span class="de">Der Mindestaufenthalt beträgt 3 Nächte (April bis Oktober) bzw. 2 Nächte (November bis März).</span><span class="en">The minimum stay is 3 nights (April to October) or 2 nights (November to March).</span><span class="fr">Le séjour minimum est de 3 nuits (avril à octobre) ou de 2 nuits (novembre à mars).</span></p>
+          <p class="warn full" id="fBooked" hidden><span class="de">Dieser Zeitraum ist leider belegt. Bitte wähle andere Daten.</span><span class="en">Unfortunately these dates are booked. Please choose other dates.</span><span class="fr">Cette période est malheureusement occupée. Veuillez choisir d'autres dates.</span></p>
           <input type="checkbox" id="f-bot" tabindex="-1" autocomplete="off" style="display:none" aria-hidden="true">
-          <div class="full"><button class="btn" id="submitBtn" type="submit"><span class="de">Anfrage vorbereiten</span><span class="en">Prepare enquiry</span></button></div>
-          <p class="full note" style="margin:0"><span class="de">Deine Angaben nutzen wir nur, um deine Anfrage zu beantworten.</span><span class="en">We only use your details to answer your enquiry.</span></p>
+          <div class="full"><button class="btn" id="submitBtn" type="submit"><span class="de">Anfrage vorbereiten</span><span class="en">Prepare enquiry</span><span class="fr">Préparer la demande</span></button></div>
+          <p class="full note" style="margin:0"><span class="de">Deine Angaben nutzen wir nur, um deine Anfrage zu beantworten.</span><span class="en">We only use your details to answer your enquiry.</span><span class="fr">Nous n'utilisons vos données que pour répondre à votre demande.</span></p>
         </form>
         <div class="out" id="sent" hidden role="status">
-          <h3><span class="de">Danke für deine Anfrage</span><span class="en">Thank you for your enquiry</span></h3>
-          <p><span class="de">Sie ist bei uns angekommen. Wir melden uns so bald wie möglich per E-Mail.</span><span class="en">We have received it and will reply by email as soon as possible.</span></p>
+          <h3><span class="de">Danke für deine Anfrage</span><span class="en">Thank you for your enquiry</span><span class="fr">Merci pour votre demande</span></h3>
+          <p><span class="de">Sie ist bei uns angekommen. Wir melden uns so bald wie möglich per E-Mail.</span><span class="en">We have received it and will reply by email as soon as possible.</span><span class="fr">Elle nous est bien parvenue. Nous vous répondrons dès que possible par e-mail.</span></p>
         </div>
         <div class="out" id="out" hidden>
-          <h3><span class="de">Deine Anfrage ist bereit</span><span class="en">Your enquiry is ready</span></h3>
-          <p class="note" id="failNote" hidden><span class="de">Das Senden hat nicht geklappt. Bitte schicke den Text per E-Mail.</span><span class="en">Sending did not work. Please send the text by email.</span></p>
-          <p><span class="de">Sie wurde noch nicht gesendet. Kopiere den Text und schicke ihn an <strong>ferienwohnungbruelisauer@gmail.com</strong>.</span><span class="en">It has not been sent yet. Copy the text and send it to <strong>ferienwohnungbruelisauer@gmail.com</strong>.</span></p>
+          <h3><span class="de">Deine Anfrage ist bereit</span><span class="en">Your enquiry is ready</span><span class="fr">Votre demande est prête</span></h3>
+          <p class="note" id="failNote" hidden><span class="de">Das Senden hat nicht geklappt. Bitte schicke den Text per E-Mail.</span><span class="en">Sending did not work. Please send the text by email.</span><span class="fr">L'envoi n'a pas fonctionné. Veuillez nous envoyer le texte par e-mail.</span></p>
+          <p><span class="de">Sie wurde noch nicht gesendet. Kopiere den Text und schicke ihn an <strong>ferienwohnungbruelisauer@gmail.com</strong>.</span><span class="en">It has not been sent yet. Copy the text and send it to <strong>ferienwohnungbruelisauer@gmail.com</strong>.</span><span class="fr">Elle n'a pas encore été envoyée. Copiez le texte et envoyez-le à <strong>ferienwohnungbruelisauer@gmail.com</strong>.</span></p>
           <pre id="outText"></pre>
           <div class="row">
-            <button class="btn dark" type="button" id="copy"><span class="de">Text kopieren</span><span class="en">Copy text</span></button>
-            <a class="btn line" id="mailto" href="#"><span class="de">Im Mailprogramm öffnen</span><span class="en">Open in mail app</span></a>
-            <span class="note" id="copied" hidden><span class="de">Kopiert</span><span class="en">Copied</span></span>
+            <button class="btn dark" type="button" id="copy"><span class="de">Text kopieren</span><span class="en">Copy text</span><span class="fr">Copier le texte</span></button>
+            <a class="btn line" id="mailto" href="#"><span class="de">Im Mailprogramm öffnen</span><span class="en">Open in mail app</span><span class="fr">Ouvrir dans le programme de messagerie</span></a>
+            <span class="note" id="copied" hidden><span class="de">Kopiert</span><span class="en">Copied</span><span class="fr">Copié</span></span>
           </div>
         </div>
       </div>
@@ -975,15 +981,15 @@ footer a:hover { text-decoration-color: var(--gold); }
 
   <section class="sec tint">
     <div class="wrap">
-      <h2><span class="de">Häufige Fragen</span><span class="en">Frequently asked questions</span></h2>
+      <h2><span class="de">Häufige Fragen</span><span class="en">Frequently asked questions</span><span class="fr">Questions fréquentes</span></h2>
       <div class="faq">
-        <details><summary><span><span class="de">Wie reserviere ich die Wohnung?</span><span class="en">How do I reserve the apartment?</span></span><svg class="ic"><use href="#i-chev"/></svg></summary><p><span class="de">Schicke uns über «Anfragen» eine Nachricht mit deinen Reisedaten. Wir antworten persönlich per E-Mail, und die Reservierung gilt, sobald du bestätigt hast.</span><span class="en">Send us an enquiry on the “Enquire” page with your dates. We reply personally by email, and the reservation applies once you have confirmed.</span></p></details>
-        <details><summary><span><span class="de">Für wie viele Personen ist die Wohnung?</span><span class="en">How many people does the apartment sleep?</span></span><svg class="ic"><use href="#i-chev"/></svg></summary><p><span class="de">Bis zu sieben Gäste: fünf in Betten (zwei Doppelbetten und ein Einzelbett) und zwei auf der Couch. Auf Wunsch stellen wir zusätzlich ein Kinderbett auf.</span><span class="en">Up to seven guests: five in beds (two double beds and one single bed) and two on the sofa. A cot can also be set up on request.</span></p></details>
-        <details><summary><span><span class="de">Wann ist Check-in und Check-out?</span><span class="en">When are check-in and check-out?</span></span><svg class="ic"><use href="#i-chev"/></svg></summary><p><span class="de">Check-in ist ab 16.00 Uhr, Check-out bis 11.00 Uhr.</span><span class="en">Check-in is from 4:00 pm, check-out by 11:00 am.</span></p></details>
-        <details><summary><span><span class="de">Wie viel zahlen Kinder?</span><span class="en">How much do children pay?</span></span><svg class="ic"><use href="#i-chev"/></svg></summary><p><span class="de">Kinder unter 6 Jahren übernachten gratis. Kinder von 6 bis 16 Jahren zahlen den Kinderpreis, aber keine Kurtaxe. Den genauen Preis siehst du im <a href="#preise">Preisrechner</a>.</span><span class="en">Children under 6 stay free. Children aged 6 to 16 pay the child rate, but no tourist tax. You can see the exact price in the <a href="#preise">price calculator</a>.</span></p></details>
-        <details><summary><span><span class="de">Kann ich stornieren?</span><span class="en">Can I cancel?</span></span><svg class="ic"><use href="#i-chev"/></svg></summary><p><span class="de">Bis 15 Tage vor Mietbeginn ist die Stornierung kostenlos, und die Anzahlung wird zurückerstattet. Ab 14 Tagen vorher zahlst du 50 % des Mietpreises, ab 7 Tagen vorher oder bei Nichterscheinen 100 %. Alle Fristen stehen bei <a href="#preise">Preise und Infos</a>.</span><span class="en">Up to 15 days before the start of the rental, cancellation is free and the deposit is refunded. From 14 days before you pay 50% of the rental price, from 7 days before or if you do not show up 100%. All deadlines are on the <a href="#preise">Prices and info</a> page.</span></p></details>
-        <details><summary><span><span class="de">Was ist die Appenzeller Ferienkarte?</span><span class="en">What is the Appenzeller holiday card?</span></span><svg class="ic"><use href="#i-chev"/></svg></summary><p><span class="de">Als Gast erhältst du damit über 40 Angebote in der Region gratis, zum Beispiel Bergbahnen, Museen und Bäder. Bei uns bekommst du sie ab 3 Nächten dazu. Alle Angebote findest du auf der Seite <a href="#ferienkarte">Ferienkarte</a>.</span><span class="en">As a guest you get over 40 offers in the region for free, for example cable cars, museums and pools. With us you get it from 3 nights. You will find all offers on the <a href="#ferienkarte">holiday card</a> page.</span></p></details>
-        <details><summary><span><span class="de">Sind Haustiere erlaubt?</span><span class="en">Are pets allowed?</span></span><svg class="ic"><use href="#i-chev"/></svg></summary><p><span class="de">Nein, Haustiere sind in der Wohnung nicht gestattet. Das Rauchen ist ebenfalls verboten. Auf dem Betrieb leben Katzen, Hunde und Kühe. Wenn du oder jemand in deiner Gruppe Allergien hat, schreib uns das bitte in deiner Anfrage.</span><span class="en">No, pets are not allowed in the apartment. Smoking is not allowed either. Cats, dogs and cows live on the farm. If you or anyone in your group has allergies, please tell us in your enquiry.</span></p></details>
+        <details><summary><span><span class="de">Wie reserviere ich die Wohnung?</span><span class="en">How do I reserve the apartment?</span><span class="fr">Comment réserver l'appartement ?</span></span><svg class="ic"><use href="#i-chev"/></svg></summary><p><span class="de">Schicke uns über «Anfragen» eine Nachricht mit deinen Reisedaten. Wir antworten persönlich per E-Mail, und die Reservierung gilt, sobald du bestätigt hast.</span><span class="en">Send us an enquiry on the “Enquire” page with your dates. We reply personally by email, and the reservation applies once you have confirmed.</span><span class="fr">Envoyez-nous un message via « Demander » avec vos dates de voyage. Nous répondons personnellement par e-mail, et la réservation est valable dès que vous avez confirmé.</span></p></details>
+        <details><summary><span><span class="de">Für wie viele Personen ist die Wohnung?</span><span class="en">How many people does the apartment sleep?</span><span class="fr">Pour combien de personnes est l'appartement ?</span></span><svg class="ic"><use href="#i-chev"/></svg></summary><p><span class="de">Bis zu sieben Gäste: fünf in Betten (zwei Doppelbetten und ein Einzelbett) und zwei auf der Couch. Auf Wunsch stellen wir zusätzlich ein Kinderbett auf.</span><span class="en">Up to seven guests: five in beds (two double beds and one single bed) and two on the sofa. A cot can also be set up on request.</span><span class="fr">Jusqu'à sept personnes : cinq dans des lits (deux lits doubles et un lit simple) et deux sur le canapé. Sur demande, nous installons en plus un lit d'enfant.</span></p></details>
+        <details><summary><span><span class="de">Wann ist Check-in und Check-out?</span><span class="en">When are check-in and check-out?</span><span class="fr">Quand ont lieu l'arrivée et le départ ?</span></span><svg class="ic"><use href="#i-chev"/></svg></summary><p><span class="de">Check-in ist ab 16.00 Uhr, Check-out bis 11.00 Uhr.</span><span class="en">Check-in is from 4:00 pm, check-out by 11:00 am.</span><span class="fr">L'arrivée est possible dès 16 h, le départ jusqu'à 11 h.</span></p></details>
+        <details><summary><span><span class="de">Wie viel zahlen Kinder?</span><span class="en">How much do children pay?</span><span class="fr">Combien paient les enfants ?</span></span><svg class="ic"><use href="#i-chev"/></svg></summary><p><span class="de">Kinder unter 6 Jahren übernachten gratis. Kinder von 6 bis 16 Jahren zahlen den Kinderpreis, aber keine Kurtaxe. Den genauen Preis siehst du im <a href="#preise">Preisrechner</a>.</span><span class="en">Children under 6 stay free. Children aged 6 to 16 pay the child rate, but no tourist tax. You can see the exact price in the <a href="#preise">price calculator</a>.</span><span class="fr">Les enfants de moins de 6 ans séjournent gratuitement. Les enfants de 6 à 16 ans paient le tarif enfant, mais pas de taxe de séjour. Vous voyez le prix exact dans le <a href="#preise">calculateur de prix</a>.</span></p></details>
+        <details><summary><span><span class="de">Kann ich stornieren?</span><span class="en">Can I cancel?</span><span class="fr">Puis-je annuler ?</span></span><svg class="ic"><use href="#i-chev"/></svg></summary><p><span class="de">Bis 15 Tage vor Mietbeginn ist die Stornierung kostenlos, und die Anzahlung wird zurückerstattet. Ab 14 Tagen vorher zahlst du 50 % des Mietpreises, ab 7 Tagen vorher oder bei Nichterscheinen 100 %. Alle Fristen stehen bei <a href="#preise">Preise und Infos</a>.</span><span class="en">Up to 15 days before the start of the rental, cancellation is free and the deposit is refunded. From 14 days before you pay 50% of the rental price, from 7 days before or if you do not show up 100%. All deadlines are on the <a href="#preise">Prices and info</a> page.</span><span class="fr">Jusqu'à 15 jours avant le début de la location, l'annulation est gratuite et l'acompte est remboursé. À partir de 14 jours avant, vous payez 50 % du prix de la location, à partir de 7 jours avant ou en cas de non-présentation 100 %. Tous les délais figurent sous <a href="#preise">Prix et infos</a>.</span></p></details>
+        <details><summary><span><span class="de">Was ist die Appenzeller Ferienkarte?</span><span class="en">What is the Appenzeller holiday card?</span><span class="fr">Qu'est-ce que la carte de vacances d'Appenzell ?</span></span><svg class="ic"><use href="#i-chev"/></svg></summary><p><span class="de">Als Gast erhältst du damit über 40 Angebote in der Region gratis, zum Beispiel Bergbahnen, Museen und Bäder. Bei uns bekommst du sie ab 3 Nächten dazu. Alle Angebote findest du auf der Seite <a href="#ferienkarte">Ferienkarte</a>.</span><span class="en">As a guest you get over 40 offers in the region for free, for example cable cars, museums and pools. With us you get it from 3 nights. You will find all offers on the <a href="#ferienkarte">holiday card</a> page.</span><span class="fr">Elle vous donne accès gratuitement à plus de 40 offres dans la région, par exemple remontées mécaniques, musées et bains. Chez nous, vous la recevez dès 3 nuits. Vous trouverez toutes les offres sur la page <a href="#ferienkarte">Carte de vacances</a>.</span></p></details>
+        <details><summary><span><span class="de">Sind Haustiere erlaubt?</span><span class="en">Are pets allowed?</span><span class="fr">Les animaux de compagnie sont-ils admis ?</span></span><svg class="ic"><use href="#i-chev"/></svg></summary><p><span class="de">Nein, Haustiere sind in der Wohnung nicht gestattet. Das Rauchen ist ebenfalls verboten. Auf dem Betrieb leben Katzen, Hunde und Kühe. Wenn du oder jemand in deiner Gruppe Allergien hat, schreib uns das bitte in deiner Anfrage.</span><span class="en">No, pets are not allowed in the apartment. Smoking is not allowed either. Cats, dogs and cows live on the farm. If you or anyone in your group has allergies, please tell us in your enquiry.</span><span class="fr">Non, les animaux de compagnie ne sont pas admis dans l'appartement. Il est également interdit de fumer. Des chats, des chiens et des vaches vivent sur l'exploitation. Si vous ou une personne de votre groupe êtes allergique, veuillez nous l'indiquer dans votre demande.</span></p></details>
       </div>
     </div>
   </section>
@@ -993,8 +999,8 @@ footer a:hover { text-decoration-color: var(--gold); }
   <section class="sec">
     <div class="wrap">
       <h2>Impressum</h2>
-      <p>Ferienwohnung Brülisauer<br><span class="de">Vermieter</span><span class="en">Landlord</span>: Thomas Brülisauer<br>Brülisauerstrasse 39<br>9058 Brülisau<br><span class="de">Schweiz</span><span class="en">Switzerland</span></p>
-      <p><span class="de">E-Mail</span><span class="en">Email</span>: <a href="mailto:ferienwohnungbruelisauer@gmail.com">ferienwohnungbruelisauer@gmail.com</a></p>
+      <p>Ferienwohnung Brülisauer<br><span class="de">Vermieter</span><span class="en">Landlord</span><span class="fr">Bailleur</span>: Thomas Brülisauer<br>Brülisauerstrasse 39<br>9058 Brülisau<br><span class="de">Schweiz</span><span class="en">Switzerland</span><span class="fr">Suisse</span></p>
+      <p><span class="de">E-Mail</span><span class="en">Email</span><span class="fr">E-mail</span>: <a href="mailto:ferienwohnungbruelisauer@gmail.com">ferienwohnungbruelisauer@gmail.com</a></p>
     </div>
   </section>
   </div>
@@ -1002,32 +1008,32 @@ footer a:hover { text-decoration-color: var(--gold); }
   <div class="page" data-page="datenschutz">
   <section class="sec">
     <div class="wrap legal">
-      <h2><span class="de">Datenschutzerklärung</span><span class="en">Privacy notice</span></h2>
-      <p><span class="de">Der Schutz deiner Daten ist uns wichtig. Hier erklären wir, welche Personendaten wir auf dieser Website bearbeiten und warum. Es gilt das Schweizer Datenschutzgesetz (DSG).</span><span class="en">Protecting your data matters to us. Here we explain which personal data we process on this website and why. The Swiss Federal Act on Data Protection (FADP) applies.</span></p>
-      <h3><span class="de">1. Wer ist verantwortlich?</span><span class="en">1. Who is responsible?</span></h3>
-      <p><span class="de">Verantwortlich für diese Website ist Thomas Brülisauer, Brülisauerstrasse 39, 9058 Brülisau, Schweiz. E-Mail: <a href="mailto:ferienwohnungbruelisauer@gmail.com">ferienwohnungbruelisauer@gmail.com</a>. An diese Adresse kannst du dich bei allen Fragen zum Datenschutz wenden.</span><span class="en">Responsible for this website is Thomas Brülisauer, Brülisauerstrasse 39, 9058 Brülisau, Switzerland. Email: <a href="mailto:ferienwohnungbruelisauer@gmail.com">ferienwohnungbruelisauer@gmail.com</a>. You can contact this address with any privacy question.</span></p>
-      <h3><span class="de">2. Besuch der Website</span><span class="en">2. Visiting the website</span></h3>
-      <p><span class="de">Die Website wird bei GitHub Pages (GitHub, Inc., USA) gehostet. Beim Aufruf übermittelt dein Browser technische Daten an den Server, zum Beispiel IP-Adresse, Datum und Uhrzeit, aufgerufene Seite und Browsertyp. Diese Daten fallen automatisch an und werden vom Hosting-Anbieter bearbeitet. Wir selbst werten sie nicht aus. Zweck ist der sichere und stabile Betrieb der Website.</span><span class="en">The website is hosted on GitHub Pages (GitHub, Inc., USA). When you open it, your browser sends technical data to the server, such as IP address, date and time, the page requested and browser type. This data arises automatically and is processed by the hosting provider. We do not analyse it ourselves. The purpose is the secure and stable operation of the website.</span></p>
-      <h3><span class="de">3. Anfrageformular und E-Mail</span><span class="en">3. Enquiry form and email</span></h3>
-      <p><span class="de">Wenn du das Anfrageformular nutzt, bearbeiten wir deine Angaben: Name, E-Mail-Adresse, Telefonnummer (freiwillig), Reisedaten, Anzahl Gäste und deine Nachricht. Wir nutzen sie nur, um deine Anfrage zu beantworten und den Aufenthalt vorzubereiten.</span><span class="en">If you use the enquiry form, we process your details: name, email address, phone number (optional), travel dates, number of guests and your message. We use them only to answer your enquiry and to prepare your stay.</span></p>
-      <p><span class="de">Das Formular wird über den Dienst Web3Forms übermittelt, der die Nachricht an unser E-Mail-Postfach weiterleitet. Unser Postfach wird bei Google (Gmail) geführt. Wenn du uns direkt per E-Mail schreibst, gelten dieselben Zwecke.</span><span class="en">The form is sent via the service Web3Forms, which forwards the message to our mailbox. Our mailbox is hosted by Google (Gmail). If you email us directly, the same purposes apply.</span></p>
-      <h3><span class="de">4. Gästebewertungen</span><span class="en">4. Guest reviews</span></h3>
-      <p><span class="de">Wenn du eine Bewertung sendest, bearbeiten wir deinen Vornamen, die Sterne, deinen Text, den Aufenthaltsmonat (freiwillig) und deine E-Mail-Adresse (freiwillig, wird nicht veröffentlicht). Wir prüfen jede Bewertung und zeigen sie nur mit deinem Vornamen auf dieser Seite, wenn wir sie veröffentlichen. Du kannst jederzeit verlangen, dass wir sie entfernen.</span><span class="en">If you send a review, we process your first name, the stars, your text, the month of your stay (optional) and your email address (optional, not published). We check every review and, if we publish it, show it on this page with your first name only. You can ask us to remove it at any time.</span></p>
-      <h3><span class="de">5. Eingebundene Dienste von Dritten</span><span class="en">5. Third-party services</span></h3>
-      <p><span class="de">Beim Aufruf der Seite werden folgende Dienste geladen. Dabei wird deine IP-Adresse an den Anbieter übermittelt:</span><span class="en">When the page loads, the following services are used. Your IP address is transmitted to the provider:</span></p>
+      <h2><span class="de">Datenschutzerklärung</span><span class="en">Privacy notice</span><span class="fr">Déclaration de protection des données</span></h2>
+      <p><span class="de">Der Schutz deiner Daten ist uns wichtig. Hier erklären wir, welche Personendaten wir auf dieser Website bearbeiten und warum. Es gilt das Schweizer Datenschutzgesetz (DSG).</span><span class="en">Protecting your data matters to us. Here we explain which personal data we process on this website and why. The Swiss Federal Act on Data Protection (FADP) applies.</span><span class="fr">La protection de vos données est importante pour nous. Nous expliquons ici quelles données personnelles nous traitons sur ce site et pourquoi. La loi suisse sur la protection des données (LPD) s'applique.</span></p>
+      <h3><span class="de">1. Wer ist verantwortlich?</span><span class="en">1. Who is responsible?</span><span class="fr">1. Qui est responsable ?</span></h3>
+      <p><span class="de">Verantwortlich für diese Website ist Thomas Brülisauer, Brülisauerstrasse 39, 9058 Brülisau, Schweiz. E-Mail: <a href="mailto:ferienwohnungbruelisauer@gmail.com">ferienwohnungbruelisauer@gmail.com</a>. An diese Adresse kannst du dich bei allen Fragen zum Datenschutz wenden.</span><span class="en">Responsible for this website is Thomas Brülisauer, Brülisauerstrasse 39, 9058 Brülisau, Switzerland. Email: <a href="mailto:ferienwohnungbruelisauer@gmail.com">ferienwohnungbruelisauer@gmail.com</a>. You can contact this address with any privacy question.</span><span class="fr">Le responsable de ce site est Thomas Brülisauer, Brülisauerstrasse 39, 9058 Brülisau, Suisse. E-mail : <a href="mailto:ferienwohnungbruelisauer@gmail.com">ferienwohnungbruelisauer@gmail.com</a>. Vous pouvez vous adresser à cette adresse pour toute question relative à la protection des données.</span></p>
+      <h3><span class="de">2. Besuch der Website</span><span class="en">2. Visiting the website</span><span class="fr">2. Visite du site</span></h3>
+      <p><span class="de">Die Website wird bei GitHub Pages (GitHub, Inc., USA) gehostet. Beim Aufruf übermittelt dein Browser technische Daten an den Server, zum Beispiel IP-Adresse, Datum und Uhrzeit, aufgerufene Seite und Browsertyp. Diese Daten fallen automatisch an und werden vom Hosting-Anbieter bearbeitet. Wir selbst werten sie nicht aus. Zweck ist der sichere und stabile Betrieb der Website.</span><span class="en">The website is hosted on GitHub Pages (GitHub, Inc., USA). When you open it, your browser sends technical data to the server, such as IP address, date and time, the page requested and browser type. This data arises automatically and is processed by the hosting provider. We do not analyse it ourselves. The purpose is the secure and stable operation of the website.</span><span class="fr">Le site est hébergé chez GitHub Pages (GitHub, Inc., États-Unis). Lors de l'accès, votre navigateur transmet des données techniques au serveur, par exemple l'adresse IP, la date et l'heure, la page consultée et le type de navigateur. Ces données sont générées automatiquement et traitées par l'hébergeur. Nous ne les analysons pas nous-mêmes. Le but est le fonctionnement sûr et stable du site.</span></p>
+      <h3><span class="de">3. Anfrageformular und E-Mail</span><span class="en">3. Enquiry form and email</span><span class="fr">3. Formulaire de demande et e-mail</span></h3>
+      <p><span class="de">Wenn du das Anfrageformular nutzt, bearbeiten wir deine Angaben: Name, E-Mail-Adresse, Telefonnummer (freiwillig), Reisedaten, Anzahl Gäste und deine Nachricht. Wir nutzen sie nur, um deine Anfrage zu beantworten und den Aufenthalt vorzubereiten.</span><span class="en">If you use the enquiry form, we process your details: name, email address, phone number (optional), travel dates, number of guests and your message. We use them only to answer your enquiry and to prepare your stay.</span><span class="fr">Si vous utilisez le formulaire de demande, nous traitons vos données : nom, adresse e-mail, numéro de téléphone (facultatif), dates de voyage, nombre de personnes et votre message. Nous ne les utilisons que pour répondre à votre demande et préparer le séjour.</span></p>
+      <p><span class="de">Das Formular wird über den Dienst Web3Forms übermittelt, der die Nachricht an unser E-Mail-Postfach weiterleitet. Unser Postfach wird bei Google (Gmail) geführt. Wenn du uns direkt per E-Mail schreibst, gelten dieselben Zwecke.</span><span class="en">The form is sent via the service Web3Forms, which forwards the message to our mailbox. Our mailbox is hosted by Google (Gmail). If you email us directly, the same purposes apply.</span><span class="fr">Le formulaire est transmis via le service Web3Forms, qui transfère le message à notre boîte e-mail. Notre boîte e-mail est gérée chez Google (Gmail). Si vous nous écrivez directement par e-mail, les mêmes finalités s'appliquent.</span></p>
+      <h3><span class="de">4. Gästebewertungen</span><span class="en">4. Guest reviews</span><span class="fr">4. Avis des hôtes</span></h3>
+      <p><span class="de">Wenn du eine Bewertung sendest, bearbeiten wir deinen Vornamen, die Sterne, deinen Text, den Aufenthaltsmonat (freiwillig) und deine E-Mail-Adresse (freiwillig, wird nicht veröffentlicht). Wir prüfen jede Bewertung und zeigen sie nur mit deinem Vornamen auf dieser Seite, wenn wir sie veröffentlichen. Du kannst jederzeit verlangen, dass wir sie entfernen.</span><span class="en">If you send a review, we process your first name, the stars, your text, the month of your stay (optional) and your email address (optional, not published). We check every review and, if we publish it, show it on this page with your first name only. You can ask us to remove it at any time.</span><span class="fr">Si vous envoyez un avis, nous traitons votre prénom, les étoiles, votre texte, le mois du séjour (facultatif) et votre adresse e-mail (facultatif, non publiée). Nous vérifions chaque avis et ne l'affichons sur cette page qu'avec votre prénom, si nous le publions. Vous pouvez à tout moment demander que nous le supprimions.</span></p>
+      <h3><span class="de">5. Eingebundene Dienste von Dritten</span><span class="en">5. Third-party services</span><span class="fr">5. Services tiers intégrés</span></h3>
+      <p><span class="de">Beim Aufruf der Seite werden folgende Dienste geladen. Dabei wird deine IP-Adresse an den Anbieter übermittelt:</span><span class="en">When the page loads, the following services are used. Your IP address is transmitted to the provider:</span><span class="fr">Lors de l'accès à la page, les services suivants sont chargés. Votre adresse IP est alors transmise au fournisseur :</span></p>
       <ul>
-        <li><span class="de">Google Fonts (Google): lädt die Schriftarten der Website.</span><span class="en">Google Fonts (Google): loads the fonts of the website.</span></li>
-        <li><span class="de">Google Maps (Google): zeigt auf der Seite «Lage» die Karte. Google kann dabei Cookies setzen und Daten zur Nutzung erfassen.</span><span class="en">Google Maps (Google): shows the map on the “Location” page. Google may set cookies and collect usage data.</span></li>
-        <li><span class="de">Web3Forms: nur, wenn du das Anfrageformular oder das Bewertungsformular absendest.</span><span class="en">Web3Forms: only when you submit the enquiry or review form.</span></li>
+        <li><span class="de">Google Fonts (Google): lädt die Schriftarten der Website.</span><span class="en">Google Fonts (Google): loads the fonts of the website.</span><span class="fr">Google Fonts (Google) : charge les polices du site.</span></li>
+        <li><span class="de">Google Maps (Google): zeigt auf der Seite «Lage» die Karte. Google kann dabei Cookies setzen und Daten zur Nutzung erfassen.</span><span class="en">Google Maps (Google): shows the map on the “Location” page. Google may set cookies and collect usage data.</span><span class="fr">Google Maps (Google) : affiche la carte sur la page « Situation ». Google peut alors placer des cookies et collecter des données d'utilisation.</span></li>
+        <li><span class="de">Web3Forms: nur, wenn du das Anfrageformular oder das Bewertungsformular absendest.</span><span class="en">Web3Forms: only when you submit the enquiry or review form.</span><span class="fr">Web3Forms : uniquement lorsque vous envoyez le formulaire de demande ou d'avis.</span></li>
       </ul>
-      <p><span class="de">Auf unserer Seite selbst setzen wir keine Cookies, keine Analyse- und keine Werbe-Tools ein. Links zu anderen Websites (zum Beispiel appenzell.ch) führen dich weg von unserer Seite. Für diese gelten die Datenschutzbestimmungen der jeweiligen Anbieter.</span><span class="en">On our own site we use no cookies, no analytics and no advertising tools. Links to other websites (for example appenzell.ch) take you away from our site. The privacy policies of those providers apply there.</span></p>
-      <h3><span class="de">6. Weitergabe und Übermittlung ins Ausland</span><span class="en">6. Disclosure and transfer abroad</span></h3>
-      <p><span class="de">Wir geben deine Daten nicht zu Werbezwecken weiter und verkaufen sie nicht. Die genannten Dienste (GitHub, Google, Web3Forms) können Daten auf Servern im Ausland bearbeiten, auch in den USA. Dort kann ein anderes Datenschutzniveau gelten als in der Schweiz. Die Anbieter sind dafür verantwortlich, geeignete Garantien einzuhalten.</span><span class="en">We do not pass on your data for advertising purposes and we do not sell it. The services mentioned (GitHub, Google, Web3Forms) may process data on servers abroad, including in the USA. The level of data protection there may differ from Switzerland. The providers are responsible for applying suitable safeguards.</span></p>
-      <h3><span class="de">7. Wie lange speichern wir Daten?</span><span class="en">7. How long do we keep data?</span></h3>
-      <p><span class="de">Anfragen und E-Mails bewahren wir so lange auf, wie es für die Beantwortung und die Abwicklung eines Aufenthalts nötig ist, und danach, soweit wir gesetzlich dazu verpflichtet sind. Danach löschen wir sie. Veröffentlichte Bewertungen bleiben auf der Seite, bis du ihre Entfernung verlangst.</span><span class="en">We keep enquiries and emails for as long as needed to answer them and to handle a stay, and afterwards as far as the law requires. Then we delete them. Published reviews stay on the page until you ask for their removal.</span></p>
-      <h3><span class="de">8. Deine Rechte</span><span class="en">8. Your rights</span></h3>
-      <p><span class="de">Du hast das Recht auf Auskunft über deine Daten, auf Berichtigung, auf Löschung, auf Einschränkung der Bearbeitung, auf Herausgabe deiner Daten und auf Widerspruch gegen die Bearbeitung. Schreibe uns dafür an <a href="mailto:ferienwohnungbruelisauer@gmail.com">ferienwohnungbruelisauer@gmail.com</a>. Du kannst dich ausserdem beim Eidgenössischen Datenschutz- und Öffentlichkeitsbeauftragten (EDÖB, <a href="https://www.edoeb.admin.ch" target="_blank" rel="noopener">edoeb.admin.ch</a>) beschweren.</span><span class="en">You have the right to information about your data, to correction, deletion, restriction of processing, to data portability and to object to processing. Write to us at <a href="mailto:ferienwohnungbruelisauer@gmail.com">ferienwohnungbruelisauer@gmail.com</a>. You can also lodge a complaint with the Federal Data Protection and Information Commissioner (FDPIC, <a href="https://www.edoeb.admin.ch" target="_blank" rel="noopener">edoeb.admin.ch</a>).</span></p>
-      <p><span class="de">Stand: Oktober 2026. Wir passen diese Erklärung an, wenn sich die Website ändert.</span><span class="en">As of October 2026. We update this notice when the website changes.</span></p>
+      <p><span class="de">Auf unserer Seite selbst setzen wir keine Cookies, keine Analyse- und keine Werbe-Tools ein. Links zu anderen Websites (zum Beispiel appenzell.ch) führen dich weg von unserer Seite. Für diese gelten die Datenschutzbestimmungen der jeweiligen Anbieter.</span><span class="en">On our own site we use no cookies, no analytics and no advertising tools. Links to other websites (for example appenzell.ch) take you away from our site. The privacy policies of those providers apply there.</span><span class="fr">Sur notre site lui-même, nous n'utilisons ni cookies, ni outils d'analyse, ni outils publicitaires. Les liens vers d'autres sites (par exemple appenzell.ch) vous éloignent de notre site. Les dispositions de protection des données des fournisseurs respectifs s'y appliquent.</span></p>
+      <h3><span class="de">6. Weitergabe und Übermittlung ins Ausland</span><span class="en">6. Disclosure and transfer abroad</span><span class="fr">6. Transmission et communication à l'étranger</span></h3>
+      <p><span class="de">Wir geben deine Daten nicht zu Werbezwecken weiter und verkaufen sie nicht. Die genannten Dienste (GitHub, Google, Web3Forms) können Daten auf Servern im Ausland bearbeiten, auch in den USA. Dort kann ein anderes Datenschutzniveau gelten als in der Schweiz. Die Anbieter sind dafür verantwortlich, geeignete Garantien einzuhalten.</span><span class="en">We do not pass on your data for advertising purposes and we do not sell it. The services mentioned (GitHub, Google, Web3Forms) may process data on servers abroad, including in the USA. The level of data protection there may differ from Switzerland. The providers are responsible for applying suitable safeguards.</span><span class="fr">Nous ne transmettons pas vos données à des fins publicitaires et ne les vendons pas. Les services cités (GitHub, Google, Web3Forms) peuvent traiter des données sur des serveurs à l'étranger, y compris aux États-Unis. Un niveau de protection des données différent de celui de la Suisse peut s'y appliquer. Les fournisseurs sont responsables du respect de garanties appropriées.</span></p>
+      <h3><span class="de">7. Wie lange speichern wir Daten?</span><span class="en">7. How long do we keep data?</span><span class="fr">7. Combien de temps conservons-nous les données ?</span></h3>
+      <p><span class="de">Anfragen und E-Mails bewahren wir so lange auf, wie es für die Beantwortung und die Abwicklung eines Aufenthalts nötig ist, und danach, soweit wir gesetzlich dazu verpflichtet sind. Danach löschen wir sie. Veröffentlichte Bewertungen bleiben auf der Seite, bis du ihre Entfernung verlangst.</span><span class="en">We keep enquiries and emails for as long as needed to answer them and to handle a stay, and afterwards as far as the law requires. Then we delete them. Published reviews stay on the page until you ask for their removal.</span><span class="fr">Nous conservons les demandes et les e-mails aussi longtemps que nécessaire pour y répondre et pour gérer un séjour, puis dans la mesure où la loi nous y oblige. Ensuite, nous les supprimons. Les avis publiés restent sur la page jusqu'à ce que vous demandiez leur suppression.</span></p>
+      <h3><span class="de">8. Deine Rechte</span><span class="en">8. Your rights</span><span class="fr">8. Vos droits</span></h3>
+      <p><span class="de">Du hast das Recht auf Auskunft über deine Daten, auf Berichtigung, auf Löschung, auf Einschränkung der Bearbeitung, auf Herausgabe deiner Daten und auf Widerspruch gegen die Bearbeitung. Schreibe uns dafür an <a href="mailto:ferienwohnungbruelisauer@gmail.com">ferienwohnungbruelisauer@gmail.com</a>. Du kannst dich ausserdem beim Eidgenössischen Datenschutz- und Öffentlichkeitsbeauftragten (EDÖB, <a href="https://www.edoeb.admin.ch" target="_blank" rel="noopener">edoeb.admin.ch</a>) beschweren.</span><span class="en">You have the right to information about your data, to correction, deletion, restriction of processing, to data portability and to object to processing. Write to us at <a href="mailto:ferienwohnungbruelisauer@gmail.com">ferienwohnungbruelisauer@gmail.com</a>. You can also lodge a complaint with the Federal Data Protection and Information Commissioner (FDPIC, <a href="https://www.edoeb.admin.ch" target="_blank" rel="noopener">edoeb.admin.ch</a>).</span><span class="fr">Vous avez le droit d'accéder à vos données, de les faire rectifier, de les faire effacer, de limiter leur traitement, de les récupérer et de vous opposer à leur traitement. Écrivez-nous à cet effet à <a href="mailto:ferienwohnungbruelisauer@gmail.com">ferienwohnungbruelisauer@gmail.com</a>. Vous pouvez également déposer une plainte auprès du Préposé fédéral à la protection des données et à la transparence (PFPDT, <a href="https://www.edoeb.admin.ch" target="_blank" rel="noopener">edoeb.admin.ch</a>).</span></p>
+      <p><span class="de">Stand: Oktober 2026. Wir passen diese Erklärung an, wenn sich die Website ändert.</span><span class="en">As of October 2026. We update this notice when the website changes.</span><span class="fr">État : octobre 2026. Nous adaptons cette déclaration lorsque le site change.</span></p>
     </div>
   </section>
   </div>
@@ -1038,18 +1044,18 @@ footer a:hover { text-decoration-color: var(--gold); }
     <div class="foot-grid">
       <div>
         <h3>Ferienwohnung Brülisauer</h3>
-        <p><span class="de">Brülisau, Appenzell Innerrhoden</span><span class="en">Brülisau, Appenzell Innerrhoden</span><br>ferienwohnungbruelisauer@gmail.com</p>
+        <p><span class="de">Brülisau, Appenzell Innerrhoden</span><span class="en">Brülisau, Appenzell Innerrhoden</span><span class="fr">Brülisau, Appenzell Rhodes-Intérieures</span><br>ferienwohnungbruelisauer@gmail.com</p>
       </div>
     </div>
-    <div class="copy">© <span id="year"></span> Ferienwohnung Brülisauer<span class="flinks"><a href="#impressum">Impressum</a><a href="#datenschutz"><span class="de">Datenschutz</span><span class="en">Privacy</span></a></span></div>
+    <div class="copy">© <span id="year"></span> Ferienwohnung Brülisauer<span class="flinks"><a href="#impressum">Impressum</a><a href="#datenschutz"><span class="de">Datenschutz</span><span class="en">Privacy</span><span class="fr">Protection des données</span></a></span></div>
   </div>
 </footer>
 
 <div class="dp" id="dp" hidden role="dialog" aria-modal="true" aria-label="Datum wählen / Select dates">
   <div class="dp-box">
-    <div class="dp-head"><strong><span class="de">Anreise und Abreise wählen</span><span class="en">Choose arrival and departure</span></strong><button type="button" id="dpClose" aria-label="Schliessen / Close"><svg class="ic"><use href="#i-close"/></svg></button></div>
+    <div class="dp-head"><strong><span class="de">Anreise und Abreise wählen</span><span class="en">Choose arrival and departure</span><span class="fr">Choisir l'arrivée et le départ</span></strong><button type="button" id="dpClose" aria-label="Schliessen / Close"><svg class="ic"><use href="#i-close"/></svg></button></div>
     <div id="dpBody"></div>
-    <div class="dp-foot"><button class="btn" id="dpDone" type="button"><span class="de">Fertig</span><span class="en">Done</span></button></div>
+    <div class="dp-foot"><button class="btn" id="dpDone" type="button"><span class="de">Fertig</span><span class="en">Done</span><span class="fr">Terminé</span></button></div>
   </div>
 </div>
 
@@ -1066,14 +1072,17 @@ footer a:hover { text-decoration-color: var(--gold); }
   var bookedSet = {};
   var MONTHS = {
     de: ["Januar","Februar","März","April","Mai","Juni","Juli","August","September","Oktober","November","Dezember"],
+    fr: ["Janvier","Février","Mars","Avril","Mai","Juin","Juillet","Août","Septembre","Octobre","Novembre","Décembre"],
     en: ["January","February","March","April","May","June","July","August","September","October","November","December"]
   };
-  var DOW = { de: ["Mo","Di","Mi","Do","Fr","Sa","So"], en: ["Mo","Tu","We","Th","Fr","Sa","Su"] };
-  var lang = ((navigator.language || "de").slice(0, 2) === "en") ? "en" : "de";
+  var DOW = { de: ["Mo","Di","Mi","Do","Fr","Sa","So"], en: ["Mo","Tu","We","Th","Fr","Sa","Su"], fr: ["Lu","Ma","Me","Je","Ve","Sa","Di"] };
+  var nav2 = (navigator.language || "de").slice(0, 2).toLowerCase();
+  var lang = (nav2 === "en" || nav2 === "fr") ? nav2 : "de";
+  function L(de, en, fr) { return lang === "fr" ? fr : (lang === "en" ? en : de); }
 
   function iso(d) { return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0"); }
   function parse(s) { var p = s.split("-"); return new Date(+p[0], +p[1] - 1, +p[2]); }
-  function fmt(k) { return parse(k).toLocaleDateString(lang === "de" ? "de-CH" : "en-GB", { day: "2-digit", month: "2-digit", year: "numeric" }); }
+  function fmt(k) { return parse(k).toLocaleDateString(({ de: "de-CH", en: "en-GB", fr: "fr-CH" })[lang], { day: "2-digit", month: "2-digit", year: "numeric" }); }
 
   function setBooked(list) {
     var set = {}, re = /^\d{4}-\d{2}-\d{2}$/;
@@ -1103,14 +1112,14 @@ footer a:hover { text-decoration-color: var(--gold); }
     return false;
   }
   function updateSummary() {
-    var el = document.getElementById("selText"), de = lang === "de";
+    var el = document.getElementById("selText");
     if (arr && dep) {
       var n = Math.round((parse(dep) - parse(arr)) / 86400000);
-      el.textContent = fmt(arr) + " – " + fmt(dep) + ", " + n + (de ? (n === 1 ? " Nacht" : " Nächte") : (n === 1 ? " night" : " nights"));
+      el.textContent = fmt(arr) + " – " + fmt(dep) + ", " + n + L(n === 1 ? " Nacht" : " Nächte", n === 1 ? " night" : " nights", n === 1 ? " nuit" : " nuits");
     } else if (arr) {
-      el.textContent = (de ? "Anreise " : "Arrival ") + fmt(arr) + (de ? ". Wähle jetzt die Abreise (mindestens " + minFor(arr) + " Nächte)." : ". Now pick your departure (minimum " + minFor(arr) + " nights).");
+      el.textContent = L("Anreise ", "Arrival ", "Arrivée ") + fmt(arr) + L(". Wähle jetzt die Abreise (mindestens " + minFor(arr) + " Nächte).", ". Now pick your departure (minimum " + minFor(arr) + " nights).", ". Choisissez maintenant le départ (minimum " + minFor(arr) + " nuits).");
     } else {
-      el.textContent = de ? "Noch keine Daten gewählt." : "No dates selected yet.";
+      el.textContent = L("Noch keine Daten gewählt.", "No dates selected yet.", "Aucune date choisie pour le moment.");
     }
   }
   function render() {
@@ -1152,7 +1161,7 @@ footer a:hover { text-decoration-color: var(--gold); }
   function getD(id) { return document.getElementById(id).dataset.iso || ""; }
   function dmy(k) { if (!k) return "-"; var p = k.split("-"); return +p[2] + "." + +p[1] + "." + p[0]; }
   function paintDates() {
-    var ph = lang === "de" ? "Datum wählen" : "Select date";
+    var ph = L("Datum wählen", "Select date", "Choisir une date");
     [["f-from", arr], ["c-from", arr], ["f-to", dep], ["c-to", dep]].forEach(function (x) {
       var el = document.getElementById(x[0]); el.dataset.iso = x[1] || ""; el.value = x[1] ? fmt(x[1]) : ""; el.placeholder = ph;
     });
@@ -1204,6 +1213,7 @@ footer a:hover { text-decoration-color: var(--gold); }
     lang = l; document.documentElement.setAttribute("data-lang", l); document.documentElement.lang = l;
     document.querySelectorAll(".lang button").forEach(function (b) { b.setAttribute("aria-pressed", b.dataset.set === l ? "true" : "false"); });
     paintDates();
+    var rw = document.getElementById("r-when"); if (rw) rw.placeholder = L("z. B. August 2026", "e.g. August 2026", "p. ex. août 2026");
     render();
   }
   document.querySelectorAll(".lang button").forEach(function (b) { b.addEventListener("click", function () { setLang(b.dataset.set); }); });
@@ -1255,7 +1265,7 @@ footer a:hover { text-decoration-color: var(--gold); }
   var ACCESS_KEY = "bf3d0fc0-0033-4ac0-8aae-f0dde2a6a1f9";
   var keyReady = ACCESS_KEY.indexOf("HIER_") !== 0;
   if (keyReady) {
-    document.getElementById("submitBtn").innerHTML = '<span class="de">Anfrage senden</span><span class="en">Send enquiry</span>';
+    document.getElementById("submitBtn").innerHTML = '<span class="de">Anfrage senden</span><span class="en">Send enquiry</span><span class="fr">Envoyer la demande</span>';
   }
   function showFallback(text, subject, failed) {
     document.getElementById("outText").textContent = text;
@@ -1271,12 +1281,17 @@ footer a:hover { text-decoration-color: var(--gold); }
     if (!getD("f-from") || !getD("f-to")) { document.getElementById("fDates").hidden = false; openPicker(); return; }
     if (nightsBetween(getD("f-from"), getD("f-to")) < minFor(getD("f-from")) || rangeBooked(getD("f-from"), getD("f-to"))) { checkForm(); return; }
     var v = function (id) { return document.getElementById(id).value.trim(); };
-    var de = lang === "de";
-    var lines = de
-      ? ["Anfrage Ferienwohnung Brülisauer", "", "Name: " + v("f-name"), "E-Mail: " + v("f-mail"), "Telefon: " + (v("f-tel") || "-"), "Anreise: " + dmy(getD("f-from")), "Abreise: " + dmy(getD("f-to")), "Erwachsene: " + v("f-adults") + ", Kinder (6 bis 16): " + v("f-kids") + ", Kinder unter 6: " + v("f-tod")].concat(calcLine(true), ["", v("f-msg")])
-      : ["Enquiry Ferienwohnung Brülisauer", "", "Name: " + v("f-name"), "Email: " + v("f-mail"), "Phone: " + (v("f-tel") || "-"), "Arrival: " + dmy(getD("f-from")), "Departure: " + dmy(getD("f-to")), "Adults: " + v("f-adults") + ", children (6 to 16): " + v("f-kids") + ", children under 6: " + v("f-tod")].concat(calcLine(false), ["", v("f-msg")]);
+    var f = function (id) { return v(id); };
+    var lines;
+    if (lang === "fr") {
+      lines = ["Demande appartement de vacances Brülisauer", "", "Nom : " + v("f-name"), "E-mail : " + v("f-mail"), "Téléphone : " + (v("f-tel") || "-"), "Arrivée : " + dmy(getD("f-from")), "Départ : " + dmy(getD("f-to")), "Adultes : " + v("f-adults") + ", enfants (6 à 16 ans) : " + v("f-kids") + ", enfants de moins de 6 ans : " + v("f-tod")].concat(calcLine("fr"), ["", v("f-msg")]);
+    } else if (lang === "en") {
+      lines = ["Enquiry Ferienwohnung Brülisauer", "", "Name: " + v("f-name"), "Email: " + v("f-mail"), "Phone: " + (v("f-tel") || "-"), "Arrival: " + dmy(getD("f-from")), "Departure: " + dmy(getD("f-to")), "Adults: " + v("f-adults") + ", children (6 to 16): " + v("f-kids") + ", children under 6: " + v("f-tod")].concat(calcLine("en"), ["", v("f-msg")]);
+    } else {
+      lines = ["Anfrage Ferienwohnung Brülisauer", "", "Name: " + v("f-name"), "E-Mail: " + v("f-mail"), "Telefon: " + (v("f-tel") || "-"), "Anreise: " + dmy(getD("f-from")), "Abreise: " + dmy(getD("f-to")), "Erwachsene: " + v("f-adults") + ", Kinder (6 bis 16): " + v("f-kids") + ", Kinder unter 6: " + v("f-tod")].concat(calcLine("de"), ["", v("f-msg")]);
+    }
     var text = lines.join("\n");
-    var subject = de ? "Anfrage Ferienwohnung" : "Enquiry holiday apartment";
+    var subject = L("Anfrage Ferienwohnung", "Enquiry holiday apartment", "Demande appartement de vacances");
     if (!keyReady) { showFallback(text, subject, false); return; }
     var btn = document.getElementById("submitBtn");
     btn.disabled = true;
@@ -1334,7 +1349,7 @@ footer a:hover { text-decoration-color: var(--gold); }
   // Mindestaufenthalt je nach Anreisemonat: April bis Oktober 3 Nächte, November bis März 2 Nächte
   function minFor(a) { var m = parseInt(a.slice(5, 7), 10); return (m >= 4 && m <= 10) ? 3 : 2; }
   function nightsBetween(a, b) { return Math.round((parse(b) - parse(a)) / 86400000); }
-  function t(de, en) { return '<span class="de">' + de + '</span><span class="en">' + en + '</span>'; }
+  function t(de, en, fr) { return '<span class="de">' + de + '</span><span class="en">' + en + '</span><span class="fr">' + (fr || en) + '</span>'; }
   function money(n) { return "CHF " + n.toLocaleString("de-CH", { minimumFractionDigits: 2, maximumFractionDigits: 2 }); }
   function countNights(a, d) {   // zaehlt die Naechte je Jahreszeit (April bis Oktober = Sommer)
     var c = { summer: 0, winter: 0 };
@@ -1377,11 +1392,11 @@ footer a:hover { text-decoration-color: var(--gold); }
     lastCalc = null;
     checkForm();
     if (!a || !d) {
-      out.innerHTML = '<p class="empty">' + t("Wähle Anreise und Abreise, dann siehst du hier den Preis.", "Pick your arrival and departure and the price will appear here.") + '</p>';
+      out.innerHTML = '<p class="empty">' + t("Wähle Anreise und Abreise, dann siehst du hier den Preis.", "Pick your arrival and departure and the price will appear here.", "Choisissez l'arrivée et le départ, vous verrez ici le prix.") + '</p>';
       return;
     }
     if (d <= a) {
-      out.innerHTML = '<p class="warn">' + t("Die Abreise muss nach der Anreise liegen.", "The departure must be after the arrival.") + '</p>';
+      out.innerHTML = '<p class="warn">' + t("Die Abreise muss nach der Anreise liegen.", "The departure must be after the arrival.", "Le départ doit être après l'arrivée.") + '</p>';
       return;
     }
     if (nightsBetween(a, d) < minFor(a)) {
@@ -1389,52 +1404,52 @@ footer a:hover { text-decoration-color: var(--gold); }
       return;
     }
     if (rangeBooked(a, d)) {
-      out.innerHTML = '<p class="warn">' + t("Dieser Zeitraum ist leider belegt. Bitte wähle andere Daten oder frag direkt bei uns an.", "Unfortunately these dates are booked. Please choose other dates or ask us directly.") + '</p>';
+      out.innerHTML = '<p class="warn">' + t("Dieser Zeitraum ist leider belegt. Bitte wähle andere Daten oder frag direkt bei uns an.", "Unfortunately these dates are booked. Please choose other dates or ask us directly.", "Cette période est malheureusement occupée. Veuillez choisir d'autres dates ou nous demander directement.") + '</p>';
       return;
     }
     if (ad < 1) {
-      out.innerHTML = '<p class="warn">' + t("Bitte gib mindestens einen Erwachsenen an.", "Please enter at least one adult.") + '</p>';
+      out.innerHTML = '<p class="warn">' + t("Bitte gib mindestens einen Erwachsenen an.", "Please enter at least one adult.", "Veuillez indiquer au moins un adulte.") + '</p>';
       return;
     }
     var cnt = countNights(a, d), n = cnt.summer + cnt.winter;
     var q = quote(cnt, ad, ch, to);
-    function nightsT(k) { return k + " " + (k === 1 ? t("Nacht", "night") : t("Nächte", "nights")); }
+    function nightsT(k) { return k + " " + (k === 1 ? t("Nacht", "night", "nuit") : t("Nächte", "nights", "nuits")); }
     var nT = nightsT(n);
     function detail(count, key) {
       var parts = [];
-      if (cnt.summer > 0) parts.push(count + " × " + nightsT(cnt.summer) + " × " + money(SEASON.summer[key]) + (cnt.winter > 0 ? " (" + t("April bis Oktober", "April to October") + ")" : ""));
-      if (cnt.winter > 0) parts.push(count + " × " + nightsT(cnt.winter) + " × " + money(SEASON.winter[key]) + (cnt.summer > 0 ? " (" + t("November bis März", "November to March") + ")" : ""));
+      if (cnt.summer > 0) parts.push(count + " × " + nightsT(cnt.summer) + " × " + money(SEASON.summer[key]) + (cnt.winter > 0 ? " (" + t("April bis Oktober", "April to October", "avril à octobre") + ")" : ""));
+      if (cnt.winter > 0) parts.push(count + " × " + nightsT(cnt.winter) + " × " + money(SEASON.winter[key]) + (cnt.summer > 0 ? " (" + t("November bis März", "November to March", "novembre à mars") + ")" : ""));
       return parts.join("<br>");
     }
     var rows = "";
     function row(labelHtml, detailHtml, amountHtml) {
       rows += "<tr><td>" + labelHtml + '<span class="det">' + detailHtml + "</span></td><td>" + amountHtml + "</td></tr>";
     }
-    row(t("Erwachsene", "Adults"), detail(Math.min(ad, 5), "adult"), money(q.adults));
-    if (ad > 5) row(t("Erwachsene auf dem Sofa (ab der 6. Person)", "Adults on the sofa (from the 6th person)"), detail(ad - 5, "sofa"), money(q.sofa));
-    if (ch > 0) row(t("Kinder (6 bis 16 Jahre)", "Children (6 to 16)"), detail(ch, "child"), money(q.kids));
-    if (to > 0) row(t("Kinder unter 6 Jahren", "Children under 6"), to + " × " + nT, P.toddler === 0 ? t("gratis", "free") : money(q.toddlers));
-    row(t("Kurtaxe", "Tourist tax"), ad + " " + t("Erwachsene", "adults") + " × " + nT + " × " + money(P.tax) + "<br>" + t("Kinder bis 16 Jahre sind befreit", "Children up to 16 are exempt"), money(q.tax));
-    row(t("Endreinigung", "Final cleaning"), (ad + ch + to >= P.largeFrom) ? t("einmalig, ab 6 Personen", "one-off, for 6 or more people") : t("einmalig", "one-off"), money(q.cleaning));
+    row(t("Erwachsene", "Adults", "Adultes"), detail(Math.min(ad, 5), "adult"), money(q.adults));
+    if (ad > 5) row(t("Erwachsene auf dem Sofa (ab der 6. Person)", "Adults on the sofa (from the 6th person)", "Adultes sur le canapé (à partir de la 6e personne)"), detail(ad - 5, "sofa"), money(q.sofa));
+    if (ch > 0) row(t("Kinder (6 bis 16 Jahre)", "Children (6 to 16)", "Enfants (6 à 16 ans)"), detail(ch, "child"), money(q.kids));
+    if (to > 0) row(t("Kinder unter 6 Jahren", "Children under 6", "Enfants de moins de 6 ans"), to + " × " + nT, P.toddler === 0 ? t("gratis", "free", "gratuit") : money(q.toddlers));
+    row(t("Kurtaxe", "Tourist tax", "Taxe de séjour"), ad + " " + t("Erwachsene", "adults", "adultes") + " × " + nT + " × " + money(P.tax) + "<br>" + t("Kinder bis 16 Jahre sind befreit", "Children up to 16 are exempt", "Les enfants jusqu'à 16 ans sont exemptés"), money(q.tax));
+    row(t("Endreinigung", "Final cleaning", "Nettoyage final"), (ad + ch + to >= P.largeFrom) ? t("einmalig, ab 6 Personen", "one-off, for 6 or more people", "unique, à partir de 6 personnes") : t("einmalig", "one-off", "unique"), money(q.cleaning));
     var warn = "";
     if (ad + ch > MAX_GUESTS) {
       warn = '<p class="warn">' + t("Die Wohnung bietet Platz für bis zu " + MAX_GUESTS + " Gäste. Schreib uns, wenn ihr mehr seid.", "The apartment sleeps up to " + MAX_GUESTS + " guests. Write to us if you are more.") + "</p>";
     }
     var card = n >= 3
-      ? t("Die Appenzeller Ferienkarte ist bei diesem Aufenthalt gratis dabei.", "The Appenzeller holiday card is included with this stay.")
-      : t("Ab 3 Nächten ist die Appenzeller Ferienkarte gratis dabei.", "From 3 nights the Appenzeller holiday card is included.");
-    out.innerHTML = warn + "<table>" + rows + '<tr class="sum"><td>' + t("Total", "Total") + "</td><td>" + money(q.total) + "</td></tr></table>" +
-      '<p class="note" style="margin:14px 0 0">' + card + ' <a href="#ferienkarte">' + t("Alle Angebote", "All offers") + "</a></p>" +
-      '<p class="note" style="margin:8px 0 0">' + t("Das ist eine unverbindliche Berechnung. Den verbindlichen Preis bestätigen wir dir in unserer Antwort.", "This is a non-binding calculation. We confirm the final price in our reply.") + "</p>" +
-      '<div class="actions"><a class="btn" href="#anfrage" data-ask="1">' + t("Mit diesen Angaben anfragen", "Enquire with these details") + "</a></div>";
+      ? t("Die Appenzeller Ferienkarte ist bei diesem Aufenthalt gratis dabei.", "The Appenzeller holiday card is included with this stay.", "La carte de vacances d'Appenzell est offerte pour ce séjour.")
+      : t("Ab 3 Nächten ist die Appenzeller Ferienkarte gratis dabei.", "From 3 nights the Appenzeller holiday card is included.", "Dès 3 nuits, la carte de vacances d'Appenzell est offerte.");
+    out.innerHTML = warn + "<table>" + rows + '<tr class="sum"><td>' + t("Total", "Total", "Total") + "</td><td>" + money(q.total) + "</td></tr></table>" +
+      '<p class="note" style="margin:14px 0 0">' + card + ' <a href="#ferienkarte">' + t("Alle Angebote", "All offers", "Toutes les offres") + "</a></p>" +
+      '<p class="note" style="margin:8px 0 0">' + t("Das ist eine unverbindliche Berechnung. Den verbindlichen Preis bestätigen wir dir in unserer Antwort.", "This is a non-binding calculation. We confirm the final price in our reply.", "Ceci est un calcul sans engagement. Nous vous confirmons le prix définitif dans notre réponse.") + "</p>" +
+      '<div class="actions"><a class="btn" href="#anfrage" data-ask="1">' + t("Mit diesen Angaben anfragen", "Enquire with these details", "Demander avec ces informations") + "</a></div>";
     lastCalc = { nights: n, adults: ad, kids: ch, toddlers: to, total: q.total };
   }
-  function calcLine(de) {
+  function calcLine(l) {
     if (!lastCalc) return [];
     var c = lastCalc, tot = c.total.toLocaleString("de-CH", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-    return [de
-      ? "Preisrechner: Erwachsene " + c.adults + ", Kinder (6 bis 16) " + c.kids + ", Kinder unter 6 Jahren " + c.toddlers + ", Nächte " + c.nights + ", Preis CHF " + tot
-      : "Price calculator: adults " + c.adults + ", children (6 to 16) " + c.kids + ", children under 6 " + c.toddlers + ", nights " + c.nights + ", price CHF " + tot];
+    if (l === "fr") return ["Calculateur de prix : adultes " + c.adults + ", enfants (6 à 16 ans) " + c.kids + ", enfants de moins de 6 ans " + c.toddlers + ", nuits " + c.nights + ", prix CHF " + tot];
+    if (l === "en") return ["Price calculator: adults " + c.adults + ", children (6 to 16) " + c.kids + ", children under 6 " + c.toddlers + ", nights " + c.nights + ", price CHF " + tot];
+    return ["Preisrechner: Erwachsene " + c.adults + ", Kinder (6 bis 16) " + c.kids + ", Kinder unter 6 Jahren " + c.toddlers + ", Nächte " + c.nights + ", Preis CHF " + tot];
   }
   document.getElementById("calcOut").addEventListener("click", function (e) {
     if (!e.target.closest("[data-ask]") || !lastCalc) return;
@@ -1459,7 +1474,7 @@ footer a:hover { text-decoration-color: var(--gold); }
     var r = Math.round(value * 2) / 2;
     for (var i = 1; i <= 5; i++) { var s = document.createElement("span"); s.className = "st"; s.textContent = "★"; setFill(s, r - (i - 1)); el.appendChild(s); }
   }
-  function fmtNum(n) { return String(n).replace(".", lang === "de" ? "," : "."); }
+  function fmtNum(n) { return String(n).replace(".", lang === "en" ? "." : ","); }
   (function () {
     var box = document.getElementById("starpick"), val = document.createElement("span"); val.className = "pickval";
     var glyphs = [];
@@ -1499,7 +1514,7 @@ footer a:hover { text-decoration-color: var(--gold); }
       d.appendChild(st); d.appendChild(p); d.appendChild(w); wrap.appendChild(d);
     });
     var avg = sum / ok.length;
-    document.getElementById("revAvg").textContent = avg.toFixed(1).replace(".", lang === "de" ? "," : ".");
+    document.getElementById("revAvg").textContent = avg.toFixed(1).replace(".", lang === "en" ? "." : ",");
     starRow(avg, document.getElementById("revStars"));
     document.getElementById("revCount").textContent = "(" + ok.length + ")";
   }
@@ -1512,8 +1527,8 @@ footer a:hover { text-decoration-color: var(--gold); }
   document.getElementById("revForm").addEventListener("submit", function (e) {
     e.preventDefault();
     if (document.getElementById("r-bot").checked) return;
-    var msg = document.getElementById("revMsg"), de = lang === "de";
-    if (!revStars) { msg.textContent = de ? "Bitte wähle zuerst die Sterne." : "Please choose your stars first."; msg.hidden = false; return; }
+    var msg = document.getElementById("revMsg");
+    if (!revStars) { msg.textContent = L("Bitte wähle zuerst die Sterne.", "Please choose your stars first.", "Veuillez d'abord choisir les étoiles."); msg.hidden = false; return; }
     msg.hidden = true;
     var v = function (id) { return document.getElementById(id).value.trim(); };
     var text = ["Bewertung Ferienwohnung Brülisauer", "", "Sterne: " + revStars + " / 5", "Vorname: " + v("r-name"), "Aufenthalt: " + (v("r-when") || "-"), "E-Mail: " + (v("r-mail") || "-"), "", v("r-text")].join("\n");
