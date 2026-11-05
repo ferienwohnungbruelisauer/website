@@ -189,8 +189,12 @@ table.price td:last-child { text-align: right; font-weight: 700; white-space: no
 .day:hover:not(:disabled) { background: color-mix(in srgb, var(--link) 18%, transparent); }
 .day:disabled { cursor: default; opacity: .35; }
 .day.booked { background: var(--booked); color: var(--booked-fg); text-decoration: line-through; opacity: 1; }
+.day.booked.turn { background: linear-gradient(135deg, transparent 50%, var(--booked) 50%); color: var(--fg); text-decoration: none; }
+.day.booked.turn:disabled { opacity: .75; }
+.day.booked.turn:not(:disabled) { cursor: pointer; }
+.day.booked.turn:not(:disabled):hover { background: linear-gradient(135deg, color-mix(in srgb, var(--link) 25%, transparent) 50%, var(--booked) 50%); }
 .day.inrange { background: color-mix(in srgb, var(--link) 24%, transparent); border-radius: 0; }
-.day.edge { background: var(--brand); color: var(--brand-fg); opacity: 1; }
+.day.edge, .day.booked.turn.edge { background: var(--brand); color: var(--brand-fg); opacity: 1; text-decoration: none; }
 .legend { display: flex; gap: 20px; flex-wrap: wrap; margin-top: 16px; font-size: .86rem; color: var(--muted); }
 .legend i { display: inline-block; width: 12px; height: 12px; border-radius: 3px; margin-right: 6px; vertical-align: -1px; }
 .sel { display: flex; justify-content: space-between; align-items: center; gap: 14px; flex-wrap: wrap; margin-top: 20px; padding-top: 18px; border-top: 1px solid var(--line); }
@@ -712,6 +716,7 @@ footer a:hover { text-decoration-color: var(--gold); }
           <ul class="rules">
             <li><svg class="ic"><use href="#i-calendar"/></svg><span class="de">Check-in ab 16.00 Uhr, Check-out bis 11.00 Uhr</span><span class="en">Check-in from 4:00 pm, check-out by 11:00 am</span></li>
             <li><svg class="ic"><use href="#i-cable"/></svg><span class="de">Die Appenzeller Ferienkarte bekommst du automatisch, aber erst ab 3 Nächten in Folge. <a href="#ferienkarte">Alle Angebote ansehen</a></span><span class="en">You get the Appenzeller holiday card automatically, but only from 3 consecutive nights. <a href="#ferienkarte">See all offers</a></span></li>
+            <li><svg class="ic"><use href="#i-sofa"/></svg><span class="de">Ab der 6. erwachsenen Person (Schlafplatz auf dem Sofa) gilt ein reduzierter Preis: 35 CHF pro Nacht im Sommer, 30 CHF im Winter. Die Endreinigung beträgt ab 6 Personen 150 CHF.</span><span class="en">From the 6th adult (sleeping on the sofa) a reduced rate applies: CHF 35 per night in summer, CHF 30 in winter. Final cleaning is CHF 150 for 6 or more people.</span></li>
             <li><svg class="ic"><use href="#i-calendar"/></svg><span class="de">Mindestaufenthalt: 3 Nächte von April bis Oktober, 2 Nächte von November bis März (nach Anreisedatum)</span><span class="en">Minimum stay: 3 nights from April to October, 2 nights from November to March (by arrival date)</span></li>
             <li><svg class="ic"><use href="#i-nosmoke"/></svg><span class="de">Rauchen ist verboten</span><span class="en">Smoking is not allowed</span></li>
             <li><svg class="ic"><use href="#i-paw"/></svg><span class="de">Haustiere sind nicht gestattet</span><span class="en">Pets are not allowed</span></li>
@@ -904,6 +909,7 @@ footer a:hover { text-decoration-color: var(--gold); }
         <div class="months" id="months"></div>
         <div class="legend">
           <span><i style="background:var(--booked)"></i><span class="de">belegt</span><span class="en">booked</span></span>
+          <span><i style="background:linear-gradient(135deg, var(--bg) 50%, var(--booked) 50%); border:1px solid var(--line)"></i><span class="de">Anreise anderer Gäste (als Abreisetag wählbar)</span><span class="en">other guests arrive (can be chosen as departure day)</span></span>
           <span><i style="background:var(--brand)"></i><span class="de">deine Auswahl</span><span class="en">your selection</span></span>
         </div>
         <div class="sel">
@@ -1126,7 +1132,14 @@ footer a:hover { text-decoration-color: var(--gold); }
         var date = new Date(first.getFullYear(), first.getMonth(), d), key = iso(date);
         var b = document.createElement("button"); b.type = "button"; b.className = "day"; b.textContent = d; b.dataset.d = key;
         if (date < today) b.disabled = true;
-        else if (bookedSet[key]) { b.classList.add("booked"); b.disabled = true; }
+        else if (bookedSet[key]) {
+          b.classList.add("booked");
+          var prevKey = iso(new Date(date.getFullYear(), date.getMonth(), d - 1));
+          if (!bookedSet[prevKey]) b.classList.add("turn");   // Anreisetag eines anderen Gastes
+          // als Abreisetag waehlbar, wenn davor alles frei ist und der Mindestaufenthalt stimmt
+          var okDep = arr && !dep && key > arr && !hasBooked(arr, key) && nightsBetween(arr, key) >= minFor(arr);
+          if (!okDep) b.disabled = true;
+        }
         if (arr && !dep && key > arr && nightsBetween(arr, key) < minFor(arr) && !b.disabled) { b.disabled = true; b.classList.add("short"); }
         if (key === arr || key === dep) b.classList.add("edge");
         if (arr && dep && key > arr && key < dep) b.classList.add("inrange");
@@ -1307,13 +1320,15 @@ footer a:hover { text-decoration-color: var(--gold); }
   // ---------- Preise und Preisrechner ----------
   // HIER die Preise anpassen (in Franken). Der Rechner nutzt diese Werte.
   var SEASON = {
-    summer: { adult: 45, child: 15 },   // April bis Oktober, pro Person und Nacht
-    winter: { adult: 40, child: 15 }    // November bis März, pro Person und Nacht
+    summer: { adult: 45, child: 15, sofa: 35 },   // April bis Oktober, pro Person und Nacht
+    winter: { adult: 40, child: 15, sofa: 30 }    // November bis März, pro Person und Nacht
   };
   var P = {
     toddler: 0,     // Kinder unter 6 Jahren, pro Nacht (0 = gratis)
     tax: 2.5,       // Kurtaxe pro Erwachsenem und Nacht (Kinder bis 16 Jahre sind befreit)
-    cleaning: 110   // Endreinigung, einmalig
+    cleaning: 110,        // Endreinigung, einmalig
+    cleaningLarge: 150,   // Endreinigung ab 6 Personen
+    largeFrom: 6          // ab so vielen Personen (inkl. Kinder) gilt die hoehere Endreinigung
   };
   var MAX_GUESTS = 7;
   // Mindestaufenthalt je nach Anreisemonat: April bis Oktober 3 Nächte, November bis März 2 Nächte
@@ -1331,10 +1346,12 @@ footer a:hover { text-decoration-color: var(--gold); }
   }
   function quote(cnt, ad, ch, to) {
     var n = cnt.summer + cnt.winter;
-    var a = ad * (cnt.summer * SEASON.summer.adult + cnt.winter * SEASON.winter.adult);
+    var bed = Math.min(ad, 5), sofa = Math.max(0, ad - 5);   // 6. und 7. Erwachsener schlafen auf dem Sofa
+    var a = bed * (cnt.summer * SEASON.summer.adult + cnt.winter * SEASON.winter.adult);
+    var s = sofa * (cnt.summer * SEASON.summer.sofa + cnt.winter * SEASON.winter.sofa);
     var c = ch * (cnt.summer * SEASON.summer.child + cnt.winter * SEASON.winter.child);
-    var k = to * n * P.toddler, tax = ad * n * P.tax, cl = P.cleaning;
-    return { adults: a, kids: c, toddlers: k, tax: tax, cleaning: cl, total: a + c + k + tax + cl };
+    var k = to * n * P.toddler, tax = ad * n * P.tax, cl = (ad + ch + to >= P.largeFrom) ? P.cleaningLarge : P.cleaning;
+    return { adults: a, sofa: s, kids: c, toddlers: k, tax: tax, cleaning: cl, total: a + s + c + k + tax + cl };
   }
   function num(id) { var n = parseInt(document.getElementById(id).value, 10); return isNaN(n) || n < 0 ? 0 : n; }
   var lastCalc = null;
@@ -1393,11 +1410,12 @@ footer a:hover { text-decoration-color: var(--gold); }
     function row(labelHtml, detailHtml, amountHtml) {
       rows += "<tr><td>" + labelHtml + '<span class="det">' + detailHtml + "</span></td><td>" + amountHtml + "</td></tr>";
     }
-    row(t("Erwachsene", "Adults"), detail(ad, "adult"), money(q.adults));
+    row(t("Erwachsene", "Adults"), detail(Math.min(ad, 5), "adult"), money(q.adults));
+    if (ad > 5) row(t("Erwachsene auf dem Sofa (ab der 6. Person)", "Adults on the sofa (from the 6th person)"), detail(ad - 5, "sofa"), money(q.sofa));
     if (ch > 0) row(t("Kinder (6 bis 16 Jahre)", "Children (6 to 16)"), detail(ch, "child"), money(q.kids));
     if (to > 0) row(t("Kinder unter 6 Jahren", "Children under 6"), to + " × " + nT, P.toddler === 0 ? t("gratis", "free") : money(q.toddlers));
     row(t("Kurtaxe", "Tourist tax"), ad + " " + t("Erwachsene", "adults") + " × " + nT + " × " + money(P.tax) + "<br>" + t("Kinder bis 16 Jahre sind befreit", "Children up to 16 are exempt"), money(q.tax));
-    row(t("Endreinigung", "Final cleaning"), t("einmalig", "one-off"), money(q.cleaning));
+    row(t("Endreinigung", "Final cleaning"), (ad + ch + to >= P.largeFrom) ? t("einmalig, ab 6 Personen", "one-off, for 6 or more people") : t("einmalig", "one-off"), money(q.cleaning));
     var warn = "";
     if (ad + ch > MAX_GUESTS) {
       warn = '<p class="warn">' + t("Die Wohnung bietet Platz für bis zu " + MAX_GUESTS + " Gäste. Schreib uns, wenn ihr mehr seid.", "The apartment sleeps up to " + MAX_GUESTS + " guests. Write to us if you are more.") + "</p>";
