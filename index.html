@@ -690,6 +690,7 @@ html[data-lang="fr"] .nav .btn { padding: 8px 14px; }
           <label><span><span class="de">Kinder <small>6 bis 16 Jahre</small></span><span class="en">Children <small>aged 6 to 16</small></span><span class="fr">Enfants <small>6 à 16 ans</small></span></span><input id="c-kids" type="number" inputmode="numeric" min="0" max="6" value="0"></label>
           <label><span><span class="de">Kinder <small>2 bis 5 Jahre</small></span><span class="en">Children <small>aged 2 to 5</small></span><span class="fr">Enfants <small>2 à 5 ans</small></span></span><input id="c-tod" type="number" inputmode="numeric" min="0" max="4" value="0"></label>
           <label><span><span class="de">Kinder unter 2 Jahren <small>gratis</small></span><span class="en">Children under 2 <small>free</small></span><span class="fr">Enfants de moins de 2 ans <small>gratuit</small></span></span><input id="c-bab" type="number" inputmode="numeric" min="0" max="4" value="0"></label>
+          <p class="note full" style="margin:-4px 0 0"><span class="de">Maximal 7 Personen insgesamt.</span><span class="en">Maximum of 7 people in total.</span><span class="fr">Maximum 7 personnes au total.</span></p>
         </div>
         <div class="calc-out" id="calcOut" aria-live="polite"></div>
       </div>
@@ -944,6 +945,7 @@ html[data-lang="fr"] .nav .btn { padding: 8px 14px; }
           <label><span><span class="de">Kinder <small>6 bis 16 Jahre</small></span><span class="en">Children <small>aged 6 to 16</small></span><span class="fr">Enfants <small>6 à 16 ans</small></span></span><input id="f-kids" type="number" inputmode="numeric" min="0" max="6" value="0"></label>
           <label><span><span class="de">Kinder <small>2 bis 5 Jahre</small></span><span class="en">Children <small>aged 2 to 5</small></span><span class="fr">Enfants <small>2 à 5 ans</small></span></span><input id="f-tod" type="number" inputmode="numeric" min="0" max="4" value="0"></label>
           <label><span><span class="de">Kinder unter 2 Jahren <small>gratis</small></span><span class="en">Children under 2 <small>free</small></span><span class="fr">Enfants de moins de 2 ans <small>gratuit</small></span></span><input id="f-bab" type="number" inputmode="numeric" min="0" max="4" value="0"></label>
+          <p class="note full" style="margin:-4px 0 0"><span class="de">Maximal 7 Personen insgesamt.</span><span class="en">Maximum of 7 people in total.</span><span class="fr">Maximum 7 personnes au total.</span></p>
           <label class="full"><span><span class="de">Telefon (optional)</span><span class="en">Phone (optional)</span><span class="fr">Téléphone (facultatif)</span></span><input id="f-tel" type="tel" autocomplete="tel"></label>
           <label class="full"><span><span class="de">Nachricht</span><span class="en">Message</span><span class="fr">Message</span></span><textarea id="f-msg"></textarea></label>
           <div class="full calc-out" id="formPrice" aria-live="polite" hidden></div>
@@ -1427,7 +1429,7 @@ html[data-lang="fr"] .nav .btn { padding: 8px 14px; }
     row(t("Kurtaxe", "Tourist tax", "Taxe de séjour"), ad + " " + t("Erwachsene", "adults", "adultes") + " × " + nT + " × " + money(P.tax) + "<br>" + t("Kinder bis 16 Jahre sind befreit", "Children up to 16 are exempt", "Les enfants jusqu'à 16 ans sont exemptés"), money(q.tax));
     row(t("Endreinigung", "Final cleaning", "Nettoyage final"), (ad + ch + to + ba >= P.largeFrom) ? t("einmalig, ab 6 Personen", "one-off, for 6 or more people", "unique, à partir de 6 personnes") : t("einmalig", "one-off", "unique"), money(q.cleaning));
     var warn = "";
-    if (ad + ch > MAX_GUESTS) {
+    if (ad + ch + to + ba > MAX_GUESTS) {
       warn = '<p class="warn">' + t("Die Wohnung bietet Platz für bis zu " + MAX_GUESTS + " Gäste. Schreib uns, wenn ihr mehr seid.", "The apartment sleeps up to " + MAX_GUESTS + " guests. Write to us if you are more.") + "</p>";
     }
     var card = n >= 3
@@ -1449,15 +1451,34 @@ html[data-lang="fr"] .nav .btn { padding: 8px 14px; }
   document.getElementById("calcOut").addEventListener("click", function (e) {
     if (!e.target.closest("[data-ask]") || !lastCalc) return;
   });
-  ["adults", "kids", "tod", "bab"].forEach(function (k) {
+  var GUEST_KEYS = ["adults", "kids", "tod", "bab"];
+  // Hoechstens MAX_GUESTS Personen ueber alle Kategorien: begrenzt die Eingabe und die Pfeile (max-Wert)
+  function limitGuests(pre, key) {
+    var vals = {}; GUEST_KEYS.forEach(function (k) { vals[k] = num(pre + k); });
+    if (key) {
+      var el = document.getElementById(pre + key), cur = parseInt(el.value, 10);
+      var others = 0; GUEST_KEYS.forEach(function (k) { if (k !== key) others += vals[k]; });
+      var allowed = Math.max(0, MAX_GUESTS - others);
+      if (!isNaN(cur) && cur > allowed) { el.value = allowed; vals[key] = allowed; }
+      else if (!isNaN(cur) && cur < 0) { el.value = 0; vals[key] = 0; }
+    }
+    var sum = 0; GUEST_KEYS.forEach(function (k) { sum += vals[k]; });
+    ["c-", "f-"].forEach(function (p) {
+      GUEST_KEYS.forEach(function (k) { document.getElementById(p + k).max = Math.max(0, MAX_GUESTS - (sum - vals[k])); });
+    });
+  }
+  GUEST_KEYS.forEach(function (k) {
     ["c-", "f-"].forEach(function (pre, i) {
       var other = ["f-", "c-"][i];
       document.getElementById(pre + k).addEventListener("input", function () {
+        limitGuests(pre, k);
         document.getElementById(other + k).value = this.value;
+        limitGuests(pre);
         calc();
       });
     });
   });
+  limitGuests("c-");
   calc();
 
 
